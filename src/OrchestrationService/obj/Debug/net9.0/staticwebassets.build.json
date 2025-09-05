@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "oFsa+d1vVx9dEDFgPlAPmz6ye2qUQIRWbYAdkM1MJYg=",
+  "Source": "OrchestrationService",
+  "BasePath": "_content/OrchestrationService",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

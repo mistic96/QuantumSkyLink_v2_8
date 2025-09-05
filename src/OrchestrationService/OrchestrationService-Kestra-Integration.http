@@ -1,0 +1,319 @@
+### QuantumSkyLink v2 - OrchestrationService with Kestra Integration
+### Complete API test scenarios for workflow orchestration
+
+@baseUrl = http://localhost:5000
+@kestraUrl = http://localhost:8080
+
+### Health Check - OrchestrationService
+GET {{baseUrl}}/health
+
+### Health Check - Kestra (Direct)
+GET {{kestraUrl}}/health
+
+### 1. Get Available Workflow Definitions
+GET {{baseUrl}}/api/orchestration/workflows
+
+### 2. Validate Payment Workflow Inputs
+POST {{baseUrl}}/api/orchestration/workflows/payment-processing-zero-trust/validate
+Content-Type: application/json
+
+{
+  "workflowId": "payment-processing-zero-trust",
+  "inputs": {
+    "paymentRequest": {
+      "paymentId": "pay_test_001",
+      "amount": 100.50,
+      "fromAccountId": "acc_user_001",
+      "toAccountId": "acc_merchant_001",
+      "userId": "user_001",
+      "nonce": "nonce_12345",
+      "sequenceNumber": 1,
+      "timestamp": "2025-06-04T21:48:00Z",
+      "signature": "test_signature_dilithium",
+      "algorithm": "dilithium"
+    }
+  }
+}
+
+### 3. Execute Payment Processing Workflow (Zero-Trust)
+POST {{baseUrl}}/api/orchestration/workflows/execute
+Content-Type: application/json
+
+{
+  "workflowId": "payment-processing-zero-trust",
+  "inputs": {
+    "paymentRequest": {
+      "paymentId": "pay_test_001",
+      "amount": 100.50,
+      "fromAccountId": "acc_user_001",
+      "toAccountId": "acc_merchant_001",
+      "userId": "user_001",
+      "nonce": "nonce_12345",
+      "sequenceNumber": 1,
+      "timestamp": "2025-06-04T21:48:00Z",
+      "signature": "test_signature_dilithium",
+      "algorithm": "dilithium"
+    }
+  },
+  "context": {
+    "requestId": "req_001",
+    "clientIp": "192.168.1.100",
+    "userAgent": "QuantumSkyLink-Mobile/1.0"
+  },
+  "triggeredBy": "mobile_app"
+}
+
+### 4. Execute User Onboarding Workflow
+POST {{baseUrl}}/api/orchestration/workflows/execute
+Content-Type: application/json
+
+{
+  "workflowId": "user-onboarding-optimized",
+  "inputs": {
+    "userRegistration": {
+      "userId": "user_new_001",
+      "email": "newuser@example.com",
+      "firstName": "John",
+      "lastName": "Doe",
+      "phoneNumber": "+1234567890",
+      "country": "US",
+      "dateOfBirth": "1990-01-01",
+      "kycRequired": true,
+      "accountType": "premium",
+      "referralCode": "REF123"
+    }
+  },
+  "context": {
+    "requestId": "req_002",
+    "registrationSource": "web_portal"
+  },
+  "triggeredBy": "registration_system"
+}
+
+### 5. Execute Treasury Operations Workflow (High Security)
+POST {{baseUrl}}/api/orchestration/workflows/execute
+Content-Type: application/json
+
+{
+  "workflowId": "treasury-operations-secure",
+  "inputs": {
+    "treasuryOperation": {
+      "operationId": "treasury_op_001",
+      "operationType": "TRANSFER",
+      "amount": 50000.00,
+      "currency": "USD",
+      "fromAccount": "treasury_main",
+      "toAccount": "treasury_reserve",
+      "purpose": "Reserve allocation",
+      "requestedBy": "treasury_manager_001",
+      "approvalLevel": "HIGH",
+      "signatures": [
+        {
+          "signerId": "treasury_manager_001",
+          "signature": "sig_tm_001",
+          "algorithm": "dilithium",
+          "timestamp": "2025-06-04T21:48:00Z"
+        },
+        {
+          "signerId": "cfo_001",
+          "signature": "sig_cfo_001",
+          "algorithm": "falcon",
+          "timestamp": "2025-06-04T21:48:30Z"
+        }
+      ],
+      "businessJustification": "Monthly reserve allocation as per treasury policy",
+      "riskAssessment": "LOW"
+    }
+  },
+  "context": {
+    "requestId": "req_003",
+    "approvalChain": ["treasury_manager_001", "cfo_001"]
+  },
+  "triggeredBy": "treasury_system"
+}
+
+### 6. Get Workflow Execution Status
+# Replace {executionId} with actual execution ID from previous requests
+GET {{baseUrl}}/api/orchestration/workflows/executions/{executionId}/status
+
+### 7. Get Workflow Execution Highlights
+# Replace {executionId} with actual execution ID
+GET {{baseUrl}}/api/orchestration/workflows/executions/{executionId}/highlights
+
+### 8. Direct Kestra API Tests (for debugging)
+
+### Get Kestra Flow Definitions
+GET {{kestraUrl}}/api/v1/flows
+
+### Get Specific Kestra Flow
+GET {{kestraUrl}}/api/v1/flows/quantumskylink/payment-processing-zero-trust
+
+### Execute Workflow Directly via Kestra API
+POST {{kestraUrl}}/api/v1/executions
+Content-Type: application/json
+
+{
+  "namespace": "quantumskylink",
+  "flowId": "payment-processing-zero-trust",
+  "inputs": {
+    "paymentRequest": {
+      "paymentId": "pay_direct_001",
+      "amount": 75.25,
+      "fromAccountId": "acc_user_002",
+      "toAccountId": "acc_merchant_002",
+      "userId": "user_002",
+      "nonce": "nonce_67890",
+      "sequenceNumber": 2,
+      "timestamp": "2025-06-04T21:50:00Z",
+      "signature": "test_signature_falcon",
+      "algorithm": "falcon"
+    }
+  }
+}
+
+### Get Kestra Execution Status
+# Replace {executionId} with Kestra execution ID
+GET {{kestraUrl}}/api/v1/executions/{executionId}
+
+### Get Kestra Execution Logs
+# Replace {executionId} with Kestra execution ID
+GET {{kestraUrl}}/api/v1/executions/{executionId}/logs
+
+### 9. Performance Testing Scenarios
+
+### Rapid Payment Processing (Performance Test)
+POST {{baseUrl}}/api/orchestration/workflows/execute
+Content-Type: application/json
+
+{
+  "workflowId": "payment-processing-zero-trust",
+  "inputs": {
+    "paymentRequest": {
+      "paymentId": "pay_perf_{{$randomUuid}}",
+      "amount": {{$randomInt}},
+      "fromAccountId": "acc_perf_001",
+      "toAccountId": "acc_perf_002",
+      "userId": "user_perf_001",
+      "nonce": "nonce_{{$timestamp}}",
+      "sequenceNumber": {{$randomInt}},
+      "timestamp": "{{$isoTimestamp}}",
+      "signature": "perf_test_signature",
+      "algorithm": "dilithium"
+    }
+  },
+  "context": {
+    "requestId": "perf_{{$randomUuid}}",
+    "performanceTest": true
+  },
+  "triggeredBy": "performance_test"
+}
+
+### Concurrent User Onboarding (Load Test)
+POST {{baseUrl}}/api/orchestration/workflows/execute
+Content-Type: application/json
+
+{
+  "workflowId": "user-onboarding-optimized",
+  "inputs": {
+    "userRegistration": {
+      "userId": "user_load_{{$randomUuid}}",
+      "email": "loadtest{{$randomInt}}@example.com",
+      "firstName": "Load",
+      "lastName": "Test{{$randomInt}}",
+      "phoneNumber": "+1{{$randomInt}}",
+      "country": "US",
+      "dateOfBirth": "1990-01-01",
+      "kycRequired": false,
+      "accountType": "standard",
+      "referralCode": ""
+    }
+  },
+  "context": {
+    "requestId": "load_{{$randomUuid}}",
+    "loadTest": true
+  },
+  "triggeredBy": "load_test"
+}
+
+### 10. Error Handling Tests
+
+### Invalid Workflow ID
+POST {{baseUrl}}/api/orchestration/workflows/execute
+Content-Type: application/json
+
+{
+  "workflowId": "non-existent-workflow",
+  "inputs": {},
+  "triggeredBy": "error_test"
+}
+
+### Missing Required Inputs
+POST {{baseUrl}}/api/orchestration/workflows/execute
+Content-Type: application/json
+
+{
+  "workflowId": "payment-processing-zero-trust",
+  "inputs": {
+    "paymentRequest": {
+      "paymentId": "pay_error_001"
+      // Missing required fields
+    }
+  },
+  "triggeredBy": "error_test"
+}
+
+### Invalid Signature Algorithm
+POST {{baseUrl}}/api/orchestration/workflows/execute
+Content-Type: application/json
+
+{
+  "workflowId": "payment-processing-zero-trust",
+  "inputs": {
+    "paymentRequest": {
+      "paymentId": "pay_error_002",
+      "amount": 100.00,
+      "fromAccountId": "acc_user_001",
+      "toAccountId": "acc_merchant_001",
+      "userId": "user_001",
+      "nonce": "nonce_error",
+      "sequenceNumber": 1,
+      "timestamp": "2025-06-04T21:48:00Z",
+      "signature": "invalid_signature",
+      "algorithm": "invalid_algorithm"
+    }
+  },
+  "triggeredBy": "error_test"
+}
+
+### 11. Monitoring and Metrics
+
+### Get Workflow Performance Metrics
+GET {{baseUrl}}/api/orchestration/metrics/workflows
+
+### Get Service Health Status
+GET {{baseUrl}}/api/orchestration/health/detailed
+
+### Get Active Workflow Executions
+GET {{baseUrl}}/api/orchestration/workflows/executions/active
+
+### 12. Integration Verification
+
+### Verify SignatureService Integration
+GET {{baseUrl}}/api/orchestration/integrations/signature-service/health
+
+### Verify Kestra Integration
+GET {{baseUrl}}/api/orchestration/integrations/kestra/health
+
+### Verify All Service Dependencies
+GET {{baseUrl}}/api/orchestration/integrations/health-check
+
+###
+### Notes:
+### 1. Replace localhost:5000 with actual OrchestrationService URL
+### 2. Replace localhost:8080 with actual Kestra URL
+### 3. Replace {executionId} with actual execution IDs from responses
+### 4. Performance tests should be run with appropriate load testing tools
+### 5. All workflows integrate with SignatureService for zero-trust validation
+### 6. Kestra workflows are defined in YAML files in kestra-docker/workflows/
+### 7. Monitor execution times to ensure ≤5 second payment workflows
+###

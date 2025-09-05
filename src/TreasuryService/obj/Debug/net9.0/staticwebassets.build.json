@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "x+O5mxF8skV8BG8IzRqZOHufyYIns3Ibq91KqQ3W//E=",
+  "Source": "TreasuryService",
+  "BasePath": "_content/TreasuryService",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

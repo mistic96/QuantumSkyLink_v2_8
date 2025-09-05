@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BouncyCastle.Cryptography" Version="2.6.2">
+      <Aliases>BC</Aliases>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.8" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.8" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\QuantumLedger.Cryptography\QuantumLedger.Cryptography.csproj">
+      <ExcludeAssets>runtime;native;build;buildTransitive;contentFiles</ExcludeAssets>
+    </ProjectReference>
+    <ProjectReference Include="..\LiquidStorageCloud.Backup.Core\LiquidStorageCloud.Backup.Core.csproj" />
+    <ProjectReference Include="..\LiquidStorageCloud.Core\LiquidStorageCloud.Core.csproj" />
+    <ProjectReference Include="..\LiquidStorageCloud.DataManagement.EntityFramework\LiquidStorageCloud.DataManagement.EntityFramework.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Remove="BouncyCastle" />
+    <PackageReference Remove="BouncyCastle.NetCore" />
+    <PackageReference Remove="Portable.BouncyCastle" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<Title>LiquidStorageCloud Backup Core</Title>
+		<Description>Manages the functions to back up surrealdb and sql to the cloud</Description>
+		<Authors>Quantum CDS</Authors>
+		<Version>1.0.1</Version>
+		<!--<PackageReadmeFile>README.md</PackageReadmeFile>-->
+		<PackageTags>surrealdb;sql;s3</PackageTags>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	</PropertyGroup>
+
+
+	<ItemGroup>
+		<PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="4.0.2.1" />
+		<PackageReference Include="AWSSDK.S3" Version="4.0.6.7" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.8" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.8" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.8" />
+		<PackageReference Include="SurrealDB.NET" Version="0.9.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\LiquidStorageCloud.DataManagement.EntityFramework\LiquidStorageCloud.DataManagement.EntityFramework.csproj" />
+	</ItemGroup>
+</Project>

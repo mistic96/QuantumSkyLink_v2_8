@@ -1,0 +1,15 @@
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/RefitClient/bin/Release/net9.0/RefitClient.deps.json
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/RefitClient/bin/Release/net9.0/RefitClient.dll
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/RefitClient/bin/Release/net9.0/RefitClient.pdb
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/RefitClient/bin/Release/net9.0/RefitClient.xml
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/RefitClient/obj/Release/net9.0/RefitClient.csproj.AssemblyReference.cache
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/RefitClient/obj/Release/net9.0/RefitClient.GeneratedMSBuildEditorConfig.editorconfig
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/RefitClient/obj/Release/net9.0/RefitClient.AssemblyInfoInputs.cache
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/RefitClient/obj/Release/net9.0/RefitClient.AssemblyInfo.cs
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/RefitClient/obj/Release/net9.0/RefitClient.csproj.CoreCompileInputs.cache
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/RefitClient/obj/Release/net9.0/RefitClient.sourcelink.json
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/RefitClient/obj/Release/net9.0/RefitClient.dll
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/RefitClient/obj/Release/net9.0/refint/RefitClient.dll
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/RefitClient/obj/Release/net9.0/RefitClient.xml
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/RefitClient/obj/Release/net9.0/RefitClient.pdb
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/RefitClient/obj/Release/net9.0/ref/RefitClient.dll

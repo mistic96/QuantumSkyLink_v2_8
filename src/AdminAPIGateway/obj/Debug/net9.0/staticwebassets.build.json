@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "Dke37UYu/1ekasj3jFvu6wwOi/qBClVN5P47UczZOS0=",
+  "Source": "AdminAPIGateway",
+  "BasePath": "_content/AdminAPIGateway",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

@@ -1,0 +1,8 @@
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/MobileAPIGateway/obj/Release/net9.0/MobileAPIGateway.csproj.AssemblyReference.cache
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/MobileAPIGateway/obj/Release/net9.0/MobileAPIGateway.GeneratedMSBuildEditorConfig.editorconfig
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/MobileAPIGateway/obj/Release/net9.0/MobileAPIGateway.AssemblyInfoInputs.cache
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/MobileAPIGateway/obj/Release/net9.0/MobileAPIGateway.AssemblyInfo.cs
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/MobileAPIGateway/obj/Release/net9.0/MobileAPIGateway.csproj.CoreCompileInputs.cache
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/MobileAPIGateway/obj/Release/net9.0/MobileAPIGateway.MvcApplicationPartsAssemblyInfo.cs
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/MobileAPIGateway/obj/Release/net9.0/MobileAPIGateway.MvcApplicationPartsAssemblyInfo.cache
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/MobileAPIGateway/obj/Release/net9.0/MobileAPIGateway.sourcelink.json

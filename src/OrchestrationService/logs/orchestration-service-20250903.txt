@@ -1,0 +1,11 @@
+2025-09-03 08:55:36.983 -05:00 [INF] Initializing AWS services for event integration
+2025-09-03 08:55:37.484 -05:00 [INF] Registering service clients for workflow orchestration
+2025-09-03 08:55:40.047 -05:00 [INF] OrchestrationService starting up - Workflow orchestration with zero-trust security
+2025-09-03 08:55:40.049 -05:00 [INF] Integrated services: SignatureService, PaymentGatewayService, QuantumLedger.Hub, and 5 additional services
+2025-09-03 08:55:40.050 -05:00 [INF] Performance targets: ≤5s payment workflows, ≤10s user onboarding, ≤15s treasury operations
+2025-09-03 08:55:41.948 -05:00 [INF] Now listening on: https://localhost:54631
+2025-09-03 08:55:41.951 -05:00 [INF] Now listening on: http://localhost:54636
+2025-09-03 08:55:41.967 -05:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2025-09-03 08:56:33.981 -05:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-09-03 08:56:33.982 -05:00 [INF] Hosting environment: Development
+2025-09-03 08:56:33.982 -05:00 [INF] Content root path: C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\OrchestrationService

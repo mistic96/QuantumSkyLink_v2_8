@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	  <Title>LiquidStorageCloud Entity Framework Core</Title>
+	  <Description>For managing automated messages between SQS, SurrealDb and SQL.</Description>
+	  <Authors>Quantum CDS</Authors>
+	  <Version>1.0.1</Version>
+	  <!--<PackageReadmeFile>README.md</PackageReadmeFile>-->
+	  <PackageTags>sqs;sns;masstransit;surrealdb;middleware;ecc</PackageTags>
+	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.8" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.8" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.8">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\LiquidStorageCloud.Core\LiquidStorageCloud.Core.csproj" />
+	</ItemGroup>
+
+</Project>

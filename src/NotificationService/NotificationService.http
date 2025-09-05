@@ -1,0 +1,146 @@
+### NotificationService API Testing
+### This file contains HTTP requests that can be used to test the NotificationService API
+
+@NotificationService_HostAddress = http://localhost:5236
+@jwt_token = your-jwt-token-here
+
+### Health Check
+GET {{NotificationService_HostAddress}}/health
+Accept: application/json
+
+###
+
+### Get OpenAPI Documentation
+GET {{NotificationService_HostAddress}}/openapi/v1.json
+Accept: application/json
+
+###
+
+### Send Single Notification (Phase 2 - TODO)
+# POST {{NotificationService_HostAddress}}/api/notifications/send
+# Content-Type: application/json
+# Authorization: Bearer {{jwt_token}}
+# 
+# {
+#   "userId": "123e4567-e89b-12d3-a456-426614174000",
+#   "type": "Email",
+#   "subject": "Test Notification",
+#   "body": "This is a test notification",
+#   "priority": "Normal"
+# }
+
+###
+
+### Send Bulk Notification (Phase 2 - TODO)
+# POST {{NotificationService_HostAddress}}/api/notifications/send-bulk
+# Content-Type: application/json
+# Authorization: Bearer {{jwt_token}}
+# 
+# {
+#   "userIds": [
+#     "123e4567-e89b-12d3-a456-426614174000",
+#     "123e4567-e89b-12d3-a456-426614174001"
+#   ],
+#   "type": "Email",
+#   "subject": "Bulk Test Notification",
+#   "body": "This is a bulk test notification",
+#   "priority": "Normal"
+# }
+
+###
+
+### Get Notifications (Phase 2 - TODO)
+# GET {{NotificationService_HostAddress}}/api/notifications?page=1&pageSize=20
+# Authorization: Bearer {{jwt_token}}
+# Accept: application/json
+
+###
+
+### Get Notification by ID (Phase 2 - TODO)
+# GET {{NotificationService_HostAddress}}/api/notifications/123e4567-e89b-12d3-a456-426614174000
+# Authorization: Bearer {{jwt_token}}
+# Accept: application/json
+
+###
+
+### Mark Notification as Read (Phase 2 - TODO)
+# PUT {{NotificationService_HostAddress}}/api/notifications/123e4567-e89b-12d3-a456-426614174000/read
+# Content-Type: application/json
+# Authorization: Bearer {{jwt_token}}
+# 
+# {
+#   "notificationId": "123e4567-e89b-12d3-a456-426614174000",
+#   "userId": "123e4567-e89b-12d3-a456-426614174000"
+# }
+
+###
+
+### Create Notification Template (Phase 2 - TODO)
+# POST {{NotificationService_HostAddress}}/api/templates
+# Content-Type: application/json
+# Authorization: Bearer {{jwt_token}}
+# 
+# {
+#   "name": "WelcomeEmail",
+#   "type": "Email",
+#   "subject": "Welcome to QuantumSkyLink, {{userName}}!",
+#   "body": "Hello {{userName}}, welcome to our platform!",
+#   "variables": ["userName"],
+#   "category": "Onboarding",
+#   "priority": "Normal"
+# }
+
+###
+
+### Get Templates (Phase 2 - TODO)
+# GET {{NotificationService_HostAddress}}/api/templates?page=1&pageSize=20
+# Authorization: Bearer {{jwt_token}}
+# Accept: application/json
+
+###
+
+### Update User Notification Preferences (Phase 2 - TODO)
+# PUT {{NotificationService_HostAddress}}/api/preferences
+# Content-Type: application/json
+# Authorization: Bearer {{jwt_token}}
+# 
+# {
+#   "userId": "123e4567-e89b-12d3-a456-426614174000",
+#   "preferences": [
+#     {
+#       "notificationType": "Security",
+#       "channel": "Email",
+#       "isEnabled": true,
+#       "frequency": "Immediate"
+#     },
+#     {
+#       "notificationType": "Transaction",
+#       "channel": "SMS",
+#       "isEnabled": true,
+#       "frequency": "Immediate"
+#     }
+#   ]
+# }
+
+###
+
+### Get User Notification Preferences (Phase 2 - TODO)
+# GET {{NotificationService_HostAddress}}/api/preferences?userId=123e4567-e89b-12d3-a456-426614174000
+# Authorization: Bearer {{jwt_token}}
+# Accept: application/json
+
+###
+
+### Get Notification Stats (Phase 2 - TODO)
+# GET {{NotificationService_HostAddress}}/api/notifications/stats
+# Authorization: Bearer {{jwt_token}}
+# Accept: application/json
+
+###
+
+### Get Queue Status (Phase 2 - TODO)
+# GET {{NotificationService_HostAddress}}/api/queue/status?page=1&pageSize=20
+# Authorization: Bearer {{jwt_token}}
+# Accept: application/json
+
+###

@@ -1,0 +1,1891 @@
+[
+  {
+    "ContainingType": "QuantumLedger.Hub.Endpoints.AccountEndpoints",
+    "Method": "CreateAccountAsync",
+    "RelativePath": "api/accounts/",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "QuantumLedger.Hub.Endpoints.CreateAccountRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.CreateAccountResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 201
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Accounts"
+    ],
+    "EndpointName": "CreateAccount",
+    "Description": "Creates a new account with external owner ID mapping and multi-algorithm key generation",
+    "Summary": "Create a new account with multi-cloud key storage"
+  },
+  {
+    "ContainingType": "QuantumLedger.Hub.Endpoints.AccountEndpoints",
+    "Method": "ListAccountsAsync",
+    "RelativePath": "api/accounts/",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "status",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "vendorSystem",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ListAccountsResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Accounts"
+    ],
+    "EndpointName": "ListAccounts",
+    "Description": "Retrieves a paginated list of accounts with optional filtering",
+    "Summary": "List accounts with pagination"
+  },
+  {
+    "ContainingType": "QuantumLedger.Hub.Endpoints.AccountEndpoints",
+    "Method": "GetAccountAsync",
+    "RelativePath": "api/accounts/{accountId:guid}",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "accountId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.AccountResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Accounts"
+    ],
+    "EndpointName": "GetAccount",
+    "Description": "Retrieves account information including public keys and metadata",
+    "Summary": "Get account details by ID"
+  },
+  {
+    "ContainingType": "QuantumLedger.Hub.Endpoints.AccountEndpoints",
+    "Method": "GetAccountKeysAsync",
+    "RelativePath": "api/accounts/{accountId:guid}/keys",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "accountId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.AccountKeysResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Accounts"
+    ],
+    "EndpointName": "GetAccountKeys",
+    "Description": "Retrieves public keys and key metadata for an account",
+    "Summary": "Get account cryptographic keys"
+  },
+  {
+    "ContainingType": "QuantumLedger.Hub.Endpoints.AccountEndpoints",
+    "Method": "RotateAccountKeysAsync",
+    "RelativePath": "api/accounts/{accountId:guid}/keys/rotate",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "accountId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "QuantumLedger.Hub.Endpoints.RotateKeysRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.RotateKeysResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Accounts"
+    ],
+    "EndpointName": "RotateAccountKeys",
+    "Description": "Generates new keys for an account and updates the public key registry",
+    "Summary": "Rotate account cryptographic keys"
+  },
+  {
+    "ContainingType": "QuantumLedger.Hub.Endpoints.AccountEndpoints",
+    "Method": "GetAccountStatsAsync",
+    "RelativePath": "api/accounts/{accountId:guid}/stats",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "accountId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "days",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.AccountStatsResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Accounts"
+    ],
+    "EndpointName": "GetAccountStats",
+    "Description": "Retrieves usage statistics and metrics for an account",
+    "Summary": "Get account usage statistics"
+  },
+  {
+    "ContainingType": "QuantumLedger.Hub.Endpoints.AccountEndpoints",
+    "Method": "UpdateAccountStatusAsync",
+    "RelativePath": "api/accounts/{accountId:guid}/status",
+    "HttpMethod": "PUT",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "accountId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "QuantumLedger.Hub.Endpoints.UpdateAccountStatusRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.AccountResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Accounts"
+    ],
+    "EndpointName": "UpdateAccountStatus",
+    "Description": "Updates the status of an account (Active, Suspended, Closed)",
+    "Summary": "Update account status"
+  },
+  {
+    "ContainingType": "QuantumLedger.Hub.Endpoints.AccountEndpoints",
+    "Method": "VerifyAccountSignatureAsync",
+    "RelativePath": "api/accounts/{accountId:guid}/verify",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "accountId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "QuantumLedger.Hub.Endpoints.VerifySignatureRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.SignatureVerificationResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Accounts"
+    ],
+    "EndpointName": "VerifyAccountSignature",
+    "Description": "Verifies a digital signature using the account\u0027s public keys",
+    "Summary": "Verify a signature for an account"
+  },
+  {
+    "ContainingType": "QuantumLedger.Hub.Endpoints.AccountEndpoints",
+    "Method": "GetAccountByExternalOwnerIdAsync",
+    "RelativePath": "api/accounts/external/{externalOwnerId}",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "externalOwnerId",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "vendorSystem",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.AccountResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Accounts"
+    ],
+    "EndpointName": "GetAccountByExternalOwnerId",
+    "Description": "Retrieves account information using external owner ID and vendor system",
+    "Summary": "Get account by external owner ID"
+  },
+  {
+    "ContainingType": "QuantumLedger.Hub.Endpoints.BalanceEndpoints",
+    "Method": "GetAccountBalanceAsync",
+    "RelativePath": "api/balances/{accountId:guid}",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "accountId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "currency",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "QuantumLedger.Hub.Models.BalanceResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Balances"
+    ],
+    "EndpointName": "GetAccountBalanceByGuid",
+    "Description": "Retrieves the current balance for an account",
+    "Summary": "Get account balance"
+  },
+  {
+    "ContainingType": "QuantumLedger.Hub.Endpoints.BalanceEndpoints",
+    "Method": "AdjustBalanceAsync",
+    "RelativePath": "api/balances/{accountId:guid}/adjust",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "accountId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "QuantumLedger.Hub.Models.BalanceAdjustmentRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "QuantumLedger.Hub.Models.BalanceAdjustmentResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 401
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 403
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Balances"
+    ],
+    "EndpointName": "AdjustBalance",
+    "Description": "Performs administrative balance adjustments",
+    "Summary": "Adjust account balance"
+  },
+  {
+    "ContainingType": "QuantumLedger.Hub.Endpoints.BalanceEndpoints",
+    "Method": "GetPendingTransactionsAsync",
+    "RelativePath": "api/balances/{accountId:guid}/pending",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "accountId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "QuantumLedger.Hub.Models.PendingTransactionsResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Balances"
+    ],
+    "EndpointName": "GetPendingTransactions",
+    "Description": "Retrieves pending transactions for an account",
+    "Summary": "Get pending transactions"
+  },
+  {
+    "ContainingType": "QuantumLedger.Hub.Endpoints.BalanceEndpoints",
+    "Method": "GetTransactionHistoryAsync",
+    "RelativePath": "api/balances/{accountId:guid}/transactions",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "accountId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "type",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "status",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "fromDate",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "toDate",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "QuantumLedger.Hub.Models.TransactionHistoryResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Balances"
+    ],
+    "EndpointName": "GetTransactionHistory",
+    "Description": "Retrieves transaction history for an account with pagination",
+    "Summary": "Get transaction history"
+  },
+  {
+    "ContainingType": "QuantumLedger.Hub.Endpoints.CacheManagementEndpoints",
+    "Method": "ClearCache",
+    "RelativePath": "api/cache/clear",
+    "HttpMethod": "DELETE",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ClearCacheResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Cache Management"
+    ],
+    "EndpointName": "ClearCache",
+    "Description": "Clears all cached public keys - use with caution in production",
+    "Summary": "Clear all cached public keys"
+  },
+  {
+    "ContainingType": "QuantumLedger.Hub.Endpoints.CacheManagementEndpoints",
+    "Method": "ClearSpecificKey",
+    "RelativePath": "api/cache/clear/{keyHash}",
+    "HttpMethod": "DELETE",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "keyHash",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ClearKeyResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Cache Management"
+    ],
+    "EndpointName": "ClearSpecificKey",
+    "Description": "Removes a specific public key from cache by its hash",
+    "Summary": "Clear a specific cached public key"
+  },
+  {
+    "ContainingType": "QuantumLedger.Hub.Endpoints.CacheManagementEndpoints",
+    "Method": "ClearAccountKeys",
+    "RelativePath": "api/cache/clear/account/{accountId:guid}",
+    "HttpMethod": "DELETE",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "accountId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ClearAccountKeysResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Cache Management"
+    ],
+    "EndpointName": "ClearAccountKeys",
+    "Description": "Removes all cached public keys associated with a specific account",
+    "Summary": "Clear all cached keys for an account"
+  },
+  {
+    "ContainingType": "QuantumLedger.Hub.Endpoints.CacheManagementEndpoints",
+    "Method": "GetCacheHealth",
+    "RelativePath": "api/cache/health",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.CacheHealthResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Cache Management"
+    ],
+    "EndpointName": "GetCacheHealth",
+    "Description": "Checks cache health and provides performance recommendations",
+    "Summary": "Get cache health status"
+  },
+  {
+    "ContainingType": "QuantumLedger.Hub.Endpoints.CacheManagementEndpoints",
+    "Method": "GetCacheStatistics",
+    "RelativePath": "api/cache/statistics",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.CacheStatisticsResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Cache Management"
+    ],
+    "EndpointName": "GetCacheStatistics",
+    "Description": "Retrieves detailed cache performance metrics including hit ratio, response times, and request counts",
+    "Summary": "Get cache performance statistics"
+  },
+  {
+    "ContainingType": "QuantumLedger.Hub.Endpoints.CacheManagementEndpoints",
+    "Method": "WarmupCache",
+    "RelativePath": "api/cache/warmup",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.WarmupCacheResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Cache Management"
+    ],
+    "EndpointName": "WarmupCache",
+    "Description": "Pre-loads frequently accessed public keys into cache",
+    "Summary": "Warm up the cache"
+  },
+  {
+    "ContainingType": "QuantumLedger.Hub.Endpoints.SubstitutionKeyEndpoints",
+    "Method": "RotateSubstitutionKeyAsync",
+    "RelativePath": "api/substitution-keys/{address}/rotate",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "address",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "QuantumLedger.Hub.Endpoints.RotateSubstitutionKeyRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.RotateSubstitutionKeyResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.SubstitutionKeyErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.SubstitutionKeyErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.SubstitutionKeyErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Substitution Keys"
+    ],
+    "EndpointName": "RotateSubstitutionKey",
+    "Description": "Creates a new substitution key and marks the old one as deprecated",
+    "Summary": "Rotate a substitution key"
+  },
+  {
+    "ContainingType": "QuantumLedger.Hub.Endpoints.SubstitutionKeyEndpoints",
+    "Method": "GetSubstitutionKeyInfoAsync",
+    "RelativePath": "api/substitution-keys/{substitutionKeyId}",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "substitutionKeyId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.SubstitutionKeyInfoResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.SubstitutionKeyErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.SubstitutionKeyErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Substitution Keys"
+    ],
+    "EndpointName": "GetSubstitutionKeyInfo",
+    "Description": "Retrieves public information about a substitution key",
+    "Summary": "Get substitution key information"
+  },
+  {
+    "ContainingType": "QuantumLedger.Hub.Endpoints.SubstitutionKeyEndpoints",
+    "Method": "RevokeSubstitutionKeyAsync",
+    "RelativePath": "api/substitution-keys/{substitutionKeyId}/revoke",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "substitutionKeyId",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "QuantumLedger.Hub.Endpoints.RevokeSubstitutionKeyRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.RevokeSubstitutionKeyResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.SubstitutionKeyErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.SubstitutionKeyErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.SubstitutionKeyErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Substitution Keys"
+    ],
+    "EndpointName": "RevokeSubstitutionKey",
+    "Description": "Revokes a substitution key, making it invalid for future use",
+    "Summary": "Revoke a substitution key"
+  },
+  {
+    "ContainingType": "QuantumLedger.Hub.Endpoints.SubstitutionKeyEndpoints",
+    "Method": "GetSubstitutionKeyStatsAsync",
+    "RelativePath": "api/substitution-keys/{substitutionKeyId}/stats",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "substitutionKeyId",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "days",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.SubstitutionKeyStatsResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.SubstitutionKeyErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.SubstitutionKeyErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Substitution Keys"
+    ],
+    "EndpointName": "GetSubstitutionKeyStats",
+    "Description": "Retrieves usage statistics and metrics for a substitution key",
+    "Summary": "Get substitution key usage statistics"
+  },
+  {
+    "ContainingType": "QuantumLedger.Hub.Endpoints.SubstitutionKeyEndpoints",
+    "Method": "ListAccountSubstitutionKeysAsync",
+    "RelativePath": "api/substitution-keys/account/{address}",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "address",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "status",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ListSubstitutionKeysResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.SubstitutionKeyErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.SubstitutionKeyErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Substitution Keys"
+    ],
+    "EndpointName": "ListAccountSubstitutionKeys",
+    "Description": "Retrieves all substitution keys associated with an account address",
+    "Summary": "List substitution keys for an account"
+  },
+  {
+    "ContainingType": "QuantumLedger.Hub.Endpoints.SubstitutionKeyEndpoints",
+    "Method": "GenerateSubstitutionKeyAsync",
+    "RelativePath": "api/substitution-keys/generate",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "QuantumLedger.Hub.Endpoints.GenerateSubstitutionKeyRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.GenerateSubstitutionKeyResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 201
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.SubstitutionKeyErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.SubstitutionKeyErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Substitution Keys"
+    ],
+    "EndpointName": "GenerateSubstitutionKey",
+    "Description": "Creates a new substitution key pair for user-controlled delegation",
+    "Summary": "Generate a new substitution key pair"
+  },
+  {
+    "ContainingType": "QuantumLedger.Hub.Endpoints.SubstitutionKeyEndpoints",
+    "Method": "ValidateSubstitutionKeyAsync",
+    "RelativePath": "api/substitution-keys/validate",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "QuantumLedger.Hub.Endpoints.ValidateSubstitutionKeyRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ValidateSubstitutionKeyResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.SubstitutionKeyErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.SubstitutionKeyErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.SubstitutionKeyErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Substitution Keys"
+    ],
+    "EndpointName": "ValidateSubstitutionKey",
+    "Description": "Validates that a substitution key is active and not expired",
+    "Summary": "Validate a substitution key"
+  },
+  {
+    "ContainingType": "QuantumLedger.Hub.Endpoints.SubstitutionKeyEndpoints",
+    "Method": "VerifySubstitutionKeySignatureAsync",
+    "RelativePath": "api/substitution-keys/verify-signature",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "QuantumLedger.Hub.Endpoints.VerifySubstitutionKeySignatureRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.SubstitutionKeySignatureVerificationResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.SubstitutionKeyErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.SubstitutionKeyErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.SubstitutionKeyErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Substitution Keys"
+    ],
+    "EndpointName": "VerifySubstitutionKeySignature",
+    "Description": "Verifies a digital signature using a substitution key",
+    "Summary": "Verify a signature made with a substitution key"
+  },
+  {
+    "ContainingType": "QuantumLedger.Hub.Endpoints.TransactionEndpoints",
+    "Method": "SubmitTransactionAsync",
+    "RelativePath": "api/transactions/",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "QuantumLedger.Hub.Models.LegacyTransactionRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "QuantumLedger.Hub.Models.TransactionResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 201
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Transactions"
+    ],
+    "EndpointName": "SubmitTransactionLegacy",
+    "Description": "Submits a transaction using the existing CQRS infrastructure",
+    "Summary": "Submit a new transaction"
+  },
+  {
+    "ContainingType": "QuantumLedger.Hub.Endpoints.TransactionEndpoints",
+    "Method": "GetTransactionAsync",
+    "RelativePath": "api/transactions/{transactionId}",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "transactionId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "QuantumLedger.Hub.Models.TransactionResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Transactions"
+    ],
+    "EndpointName": "GetTransactionDetails",
+    "Description": "Retrieves details for a specific transaction using CQRS",
+    "Summary": "Get transaction details"
+  },
+  {
+    "ContainingType": "QuantumLedger.Hub.Endpoints.TransactionEndpoints",
+    "Method": "CancelTransactionAsync",
+    "RelativePath": "api/transactions/{transactionId}",
+    "HttpMethod": "DELETE",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "transactionId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "reason",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "QuantumLedger.Hub.Models.CancelTransactionResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Transactions"
+    ],
+    "EndpointName": "CancelTransaction",
+    "Description": "Cancels a pending transaction if possible",
+    "Summary": "Cancel a pending transaction"
+  },
+  {
+    "ContainingType": "QuantumLedger.Hub.Endpoints.TransactionEndpoints",
+    "Method": "CreateTransactionAsync",
+    "RelativePath": "api/transactions/create",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "QuantumLedger.Hub.Models.CreateTransactionRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "QuantumLedger.Hub.Models.TransactionResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 201
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 401
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Transactions"
+    ],
+    "EndpointName": "CreateTransaction",
+    "Description": "Creates a new transaction with modern request structure",
+    "Summary": "Create a new transaction"
+  },
+  {
+    "ContainingType": "QuantumLedger.Hub.Endpoints.TransactionEndpoints",
+    "Method": "ValidateTransactionAsync",
+    "RelativePath": "api/transactions/validate",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "QuantumLedger.Hub.Models.ValidateTransactionRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "QuantumLedger.Hub.Models.ValidationResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Transactions"
+    ],
+    "EndpointName": "ValidateTransaction",
+    "Description": "Validates a transaction without executing it",
+    "Summary": "Validate a transaction"
+  },
+  {
+    "ContainingType": "QuantumLedger.Hub.Endpoints.TransferEndpoints",
+    "Method": "TransferFundsAsync",
+    "RelativePath": "api/transfers/",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "QuantumLedger.Hub.Models.TransferRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "QuantumLedger.Hub.Models.TransferResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 401
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Transfers"
+    ],
+    "EndpointName": "TransferFunds",
+    "Description": "Transfers funds from one account to another with signature verification",
+    "Summary": "Transfer funds between accounts"
+  },
+  {
+    "ContainingType": "QuantumLedger.Hub.Endpoints.TransferEndpoints",
+    "Method": "GetTransferStatusAsync",
+    "RelativePath": "api/transfers/{transferId:guid}",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "transferId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "QuantumLedger.Hub.Models.TransferResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Transfers"
+    ],
+    "EndpointName": "GetTransferStatus",
+    "Description": "Retrieves the current status of a transfer operation",
+    "Summary": "Get transfer status"
+  },
+  {
+    "ContainingType": "QuantumLedger.Hub.Endpoints.TransferEndpoints",
+    "Method": "CancelTransferAsync",
+    "RelativePath": "api/transfers/{transferId:guid}",
+    "HttpMethod": "DELETE",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "transferId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "reason",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "QuantumLedger.Hub.Models.TransferResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Transfers"
+    ],
+    "EndpointName": "CancelTransfer",
+    "Description": "Cancels a pending transfer if possible",
+    "Summary": "Cancel a pending transfer"
+  },
+  {
+    "ContainingType": "QuantumLedger.Hub.Endpoints.TransferEndpoints",
+    "Method": "BatchTransferAsync",
+    "RelativePath": "api/transfers/batch",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "QuantumLedger.Hub.Models.BatchTransferRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "QuantumLedger.Hub.Models.BatchTransferResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 401
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Transfers"
+    ],
+    "EndpointName": "BatchTransfer",
+    "Description": "Executes multiple transfers in a single atomic operation",
+    "Summary": "Execute batch transfers"
+  },
+  {
+    "ContainingType": "QuantumLedger.Hub.Endpoints.LedgerEndpoints",
+    "Method": "GetAccountBalanceAsync",
+    "RelativePath": "api/v1/ledger/accounts/{address}",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "address",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "QuantumLedger.Hub.Features.Accounts.Queries.GetAccountBalanceResult",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Ledger"
+    ],
+    "EndpointName": "GetAccountBalance",
+    "Description": "Retrieves account balance using blockchain address",
+    "Summary": "Get account balance by blockchain address"
+  },
+  {
+    "ContainingType": "QuantumLedger.Hub.Endpoints.LedgerEndpoints",
+    "Method": "SubmitTransactionAsync",
+    "RelativePath": "api/v1/ledger/transactions",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "QuantumLedger.Models.Request",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "QuantumLedger.Hub.Features.Transactions.Commands.ProcessTransactionResult",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 201
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Ledger"
+    ],
+    "EndpointName": "SubmitTransaction",
+    "Description": "Processes a new transaction request using CQRS pattern",
+    "Summary": "Submit a new transaction"
+  },
+  {
+    "ContainingType": "QuantumLedger.Hub.Endpoints.LedgerEndpoints",
+    "Method": "GetTransactionAsync",
+    "RelativePath": "api/v1/ledger/transactions/{id}",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "QuantumLedger.Hub.Features.Transactions.Queries.GetTransactionResult",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 404
+      },
+      {
+        "Type": "QuantumLedger.Hub.Endpoints.ErrorResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Ledger"
+    ],
+    "EndpointName": "GetTransaction",
+    "Description": "Retrieves transaction details by transaction ID",
+    "Summary": "Get transaction by ID"
+  }
+]

@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: qsl-eventbridge-config
+  namespace: default
+data:
+  # Name of the EventBridge bus to target (CloudFormation output recommended)
+  EVENTBRIDGE_BUS_NAME: "qsl-event-bus"
+  # AWS region where the EventBridge bus exists
+  EVENTBRIDGE_REGION: "us-east-1"
+  # Controls publisher mode: "false" | "shadow" | "dual" | "parallel" | "eventbridge-only" | "rabbit-only"
+  # Recommended default for initial rollout: "false" (preserve existing behavior)
+  USE_EVENTBRIDGE: "false"
+  # Default shadow percentage when USE_EVENTBRIDGE=shadow (0..100)
+  DEFAULT_SHADOW_PERCENTAGE: "10"
+  # Queue prefix used for existing SQS/Rabbit consumers (keeps existing naming consistent)
+  AWS_QUEUE_PREFIX: "LiquidStorageCloud"
+  # Feature flags (service-specific toggles can be templated/replaced in CI)
+  FEATURE_FLAG_EventBridge_UserService: "false"
+  FEATURE_FLAG_EventBridge_AccountService: "false"
+  FEATURE_FLAG_EventBridge_PaymentGatewayService: "false"
+  FEATURE_FLAG_EventBridge_NotificationService: "false"
+---
+# Note:
+# - Do NOT put AWS credentials in this ConfigMap for production. Use IRSA (IAM Role for Service Account) in EKS or inject short-lived credentials via SecretsManager / external secret controller.
+# - Replace FEATURE_FLAG_* values with appropriate defaults per service during rollout.
+# - To enable shadow mode for a service, set USE_EVENTBRIDGE=shadow and the service's FEATURE_FLAG_EventBridge_{ServiceName}=true or configure per-deployment env var overrides.

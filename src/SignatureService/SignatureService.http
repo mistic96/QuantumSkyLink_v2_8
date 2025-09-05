@@ -1,0 +1,172 @@
+### SignatureService API Test File
+### Test the zero-trust signature validation endpoints
+
+@baseUrl = https://localhost:7000
+@signatureServiceUrl = {{baseUrl}}
+
+### Health Check
+GET {{signatureServiceUrl}}/health
+
+### Service Metrics
+GET {{signatureServiceUrl}}/metrics
+
+### Service Health (Signature-specific)
+GET {{signatureServiceUrl}}/api/v1/signatures/health
+
+### Universal Signature Validation (QuantumSkyLink v2 example)
+POST {{signatureServiceUrl}}/api/v1/signatures/validate
+Content-Type: application/json
+
+{
+  "systemId": "QuantumSkyLink_v2",
+  "serviceId": "PaymentGatewayService",
+  "accountId": "user123",
+  "operation": "transfer",
+  "operationData": {
+    "from": "account1",
+    "to": "account2",
+    "amount": 100.50,
+    "currency": "USD"
+  },
+  "nonce": "unique-nonce-12345",
+  "sequenceNumber": 1,
+  "timestamp": "2025-06-04T17:00:00Z",
+  "signature": "dGVzdC1zaWduYXR1cmUtZGF0YQ==",
+  "algorithm": "Dilithium",
+  "metadata": {
+    "client_version": "1.0.0",
+    "request_id": "req-12345"
+  }
+}
+
+### Dual Signature Validation (QuantumLedger example)
+POST {{signatureServiceUrl}}/api/v1/signatures/validate-dual
+Content-Type: application/json
+
+{
+  "accountId": "ql-account-456",
+  "operation": "ledger_entry",
+  "operationData": "dGVzdC1vcGVyYXRpb24tZGF0YQ==",
+  "signature": {
+    "classicSignature": "Y2xhc3NpYy1zaWduYXR1cmU=",
+    "quantumSignature": "cXVhbnR1bS1zaWduYXR1cmU=",
+    "classicKeyId": "classic-key-123",
+    "quantumKeyId": "quantum-key-456",
+    "createdAt": "2025-06-04T17:00:00Z"
+  },
+  "timestamp": "2025-06-04T17:00:00Z",
+  "nonce": "ql-nonce-789",
+  "sequenceNumber": 5,
+  "metadata": {
+    "ledger_version": "2.0.0"
+  }
+}
+
+### Nonce Validation Only
+POST {{signatureServiceUrl}}/api/v1/signatures/validate-nonce
+Content-Type: application/json
+
+{
+  "accountId": "user123",
+  "nonce": "test-nonce-999",
+  "sequenceNumber": 10,
+  "timestamp": "2025-06-04T17:00:00Z"
+}
+
+### Transaction Confirmation
+POST {{signatureServiceUrl}}/api/v1/signatures/confirm
+Content-Type: application/json
+
+{
+  "systemId": "QuantumSkyLink_v2",
+  "originalValidationId": "validation-id-from-previous-request",
+  "transactionData": {
+    "transaction_id": "tx-12345",
+    "status": "completed",
+    "block_hash": "0x123456789abcdef"
+  },
+  "resultSignature": "cmVzdWx0LXNpZ25hdHVyZQ==",
+  "metadata": {
+    "confirmation_time": "2025-06-04T17:01:00Z"
+  }
+}
+
+### Performance Test - Multiple Rapid Requests
+### (Uncomment to test performance under load)
+
+# POST {{signatureServiceUrl}}/api/v1/signatures/validate
+# Content-Type: application/json
+# 
+# {
+#   "systemId": "QuantumSkyLink_v2",
+#   "serviceId": "PaymentGatewayService", 
+#   "accountId": "perf-test-user",
+#   "operation": "micro_payment",
+#   "operationData": {"amount": 0.01},
+#   "nonce": "perf-nonce-{{$randomInt}}",
+#   "sequenceNumber": {{$randomInt}},
+#   "timestamp": "{{$datetime iso8601}}",
+#   "signature": "cGVyZi10ZXN0LXNpZ25hdHVyZQ==",
+#   "algorithm": "Dilithium"
+# }
+
+### Error Testing - Invalid Signature
+POST {{signatureServiceUrl}}/api/v1/signatures/validate
+Content-Type: application/json
+
+{
+  "systemId": "QuantumSkyLink_v2",
+  "serviceId": "PaymentGatewayService",
+  "accountId": "user123",
+  "operation": "transfer",
+  "operationData": {"amount": 100},
+  "nonce": "error-test-nonce",
+  "sequenceNumber": 999,
+  "timestamp": "2025-06-04T17:00:00Z",
+  "signature": "invalid-signature-data",
+  "algorithm": "Dilithium"
+}
+
+### Error Testing - Missing Required Fields
+POST {{signatureServiceUrl}}/api/v1/signatures/validate
+Content-Type: application/json
+
+{
+  "systemId": "QuantumSkyLink_v2",
+  "operation": "transfer",
+  "signature": "dGVzdC1zaWduYXR1cmU="
+}
+
+### Error Testing - Replay Attack (Duplicate Nonce)
+POST {{signatureServiceUrl}}/api/v1/signatures/validate
+Content-Type: application/json
+
+{
+  "systemId": "QuantumSkyLink_v2",
+  "serviceId": "PaymentGatewayService",
+  "accountId": "user123",
+  "operation": "transfer",
+  "operationData": {"amount": 100},
+  "nonce": "duplicate-nonce-test",
+  "sequenceNumber": 1,
+  "timestamp": "2025-06-04T17:00:00Z",
+  "signature": "dGVzdC1zaWduYXR1cmU=",
+  "algorithm": "Dilithium"
+}
+
+### Run the same request again to test replay protection
+POST {{signatureServiceUrl}}/api/v1/signatures/validate
+Content-Type: application/json
+
+{
+  "systemId": "QuantumSkyLink_v2",
+  "serviceId": "PaymentGatewayService",
+  "accountId": "user123",
+  "operation": "transfer",
+  "operationData": {"amount": 100},
+  "nonce": "duplicate-nonce-test",
+  "sequenceNumber": 1,
+  "timestamp": "2025-06-04T17:00:00Z",
+  "signature": "dGVzdC1zaWduYXR1cmU=",
+  "algorithm": "Dilithium"
+}

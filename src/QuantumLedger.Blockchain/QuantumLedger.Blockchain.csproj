@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsAspireProjectResource>false</IsAspireProjectResource>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="9.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\QuantumLedger.Models\QuantumLedger.Models.csproj" />
+    <ProjectReference Include="..\LiquidStorageCloud.Core\LiquidStorageCloud.Core.csproj" />
+    <ProjectReference Include="..\LiquidStorageCloud.DataManagement.EntityFramework\LiquidStorageCloud.DataManagement.EntityFramework.csproj" />
+    <ProjectReference Include="..\QuantumSkyLink.Shared\QuantumSkyLink.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

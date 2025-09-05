@@ -1,0 +1,499 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "QuantumSkyLink v2 EventBridge Messaging Infrastructure - Replaces RabbitMQ",
+  
+  "Parameters": {
+    "Environment": {
+      "Type": "String",
+      "Default": "staging",
+      "AllowedValues": ["development", "staging", "production"],
+      "Description": "Deployment environment"
+    },
+    "ProjectName": {
+      "Type": "String",
+      "Default": "qsl",
+      "Description": "Project prefix for resource naming"
+    }
+  },
+  
+  "Mappings": {
+    "EnvironmentConfig": {
+      "development": {
+        "RetentionDays": "1",
+        "DLQMaxReceive": "3"
+      },
+      "staging": {
+        "RetentionDays": "7",
+        "DLQMaxReceive": "5"
+      },
+      "production": {
+        "RetentionDays": "14",
+        "DLQMaxReceive": "10"
+      }
+    }
+  },
+  
+  "Resources": {
+    "CoreEventBus": {
+      "Type": "AWS::Events::EventBus",
+      "Properties": {
+        "Name": {"Fn::Sub": "${ProjectName}-${Environment}-core"},
+        "Description": "Core business events bus",
+        "Tags": [
+          {"Key": "Project", "Value": {"Ref": "ProjectName"}},
+          {"Key": "Environment", "Value": {"Ref": "Environment"}},
+          {"Key": "Purpose", "Value": "Core Events"}
+        ]
+      }
+    },
+    
+    "FinancialEventBus": {
+      "Type": "AWS::Events::EventBus",
+      "Properties": {
+        "Name": {"Fn::Sub": "${ProjectName}-${Environment}-financial"},
+        "Description": "Financial and ledger events bus",
+        "Tags": [
+          {"Key": "Project", "Value": {"Ref": "ProjectName"}},
+          {"Key": "Environment", "Value": {"Ref": "Environment"}},
+          {"Key": "Purpose", "Value": "Financial Events"}
+        ]
+      }
+    },
+    
+    "BlockchainEventBus": {
+      "Type": "AWS::Events::EventBus",
+      "Properties": {
+        "Name": {"Fn::Sub": "${ProjectName}-${Environment}-blockchain"},
+        "Description": "Blockchain and crypto events bus",
+        "Tags": [
+          {"Key": "Project", "Value": {"Ref": "ProjectName"}},
+          {"Key": "Environment", "Value": {"Ref": "Environment"}},
+          {"Key": "Purpose", "Value": "Blockchain Events"}
+        ]
+      }
+    },
+    
+    "BusinessEventBus": {
+      "Type": "AWS::Events::EventBus",
+      "Properties": {
+        "Name": {"Fn::Sub": "${ProjectName}-${Environment}-business"},
+        "Description": "Business operations events bus",
+        "Tags": [
+          {"Key": "Project", "Value": {"Ref": "ProjectName"}},
+          {"Key": "Environment", "Value": {"Ref": "Environment"}},
+          {"Key": "Purpose", "Value": "Business Events"}
+        ]
+      }
+    },
+    
+    "SystemEventBus": {
+      "Type": "AWS::Events::EventBus",
+      "Properties": {
+        "Name": {"Fn::Sub": "${ProjectName}-${Environment}-system"},
+        "Description": "System monitoring and audit events bus",
+        "Tags": [
+          {"Key": "Project", "Value": {"Ref": "ProjectName"}},
+          {"Key": "Environment", "Value": {"Ref": "Environment"}},
+          {"Key": "Purpose", "Value": "System Events"}
+        ]
+      }
+    },
+    
+    "ComplianceServiceQueue": {
+      "Type": "AWS::SQS::Queue",
+      "Properties": {
+        "QueueName": {"Fn::Sub": "${ProjectName}-${Environment}-compliance-inbox"},
+        "MessageRetentionPeriod": 345600,
+        "VisibilityTimeout": 30,
+        "RedrivePolicy": {
+          "deadLetterTargetArn": {"Fn::GetAtt": ["ComplianceServiceDLQ", "Arn"]},
+          "maxReceiveCount": {"Fn::FindInMap": ["EnvironmentConfig", {"Ref": "Environment"}, "DLQMaxReceive"]}
+        },
+        "Tags": [
+          {"Key": "Service", "Value": "ComplianceService"},
+          {"Key": "Environment", "Value": {"Ref": "Environment"}}
+        ]
+      }
+    },
+    
+    "ComplianceServiceDLQ": {
+      "Type": "AWS::SQS::Queue",
+      "Properties": {
+        "QueueName": {"Fn::Sub": "${ProjectName}-${Environment}-compliance-dlq"},
+        "MessageRetentionPeriod": 1209600
+      }
+    },
+    
+    "GovernanceServiceQueue": {
+      "Type": "AWS::SQS::Queue",
+      "Properties": {
+        "QueueName": {"Fn::Sub": "${ProjectName}-${Environment}-governance-inbox"},
+        "MessageRetentionPeriod": 345600,
+        "VisibilityTimeout": 30,
+        "RedrivePolicy": {
+          "deadLetterTargetArn": {"Fn::GetAtt": ["GovernanceServiceDLQ", "Arn"]},
+          "maxReceiveCount": {"Fn::FindInMap": ["EnvironmentConfig", {"Ref": "Environment"}, "DLQMaxReceive"]}
+        },
+        "Tags": [
+          {"Key": "Service", "Value": "GovernanceService"},
+          {"Key": "Environment", "Value": {"Ref": "Environment"}}
+        ]
+      }
+    },
+    
+    "GovernanceServiceDLQ": {
+      "Type": "AWS::SQS::Queue",
+      "Properties": {
+        "QueueName": {"Fn::Sub": "${ProjectName}-${Environment}-governance-dlq"},
+        "MessageRetentionPeriod": 1209600
+      }
+    },
+    
+    "PaymentGatewayServiceQueue": {
+      "Type": "AWS::SQS::Queue",
+      "Properties": {
+        "QueueName": {"Fn::Sub": "${ProjectName}-${Environment}-payment-gateway-inbox.fifo"},
+        "FifoQueue": true,
+        "ContentBasedDeduplication": true,
+        "MessageRetentionPeriod": 345600,
+        "VisibilityTimeout": 30,
+        "RedrivePolicy": {
+          "deadLetterTargetArn": {"Fn::GetAtt": ["PaymentGatewayServiceDLQ", "Arn"]},
+          "maxReceiveCount": {"Fn::FindInMap": ["EnvironmentConfig", {"Ref": "Environment"}, "DLQMaxReceive"]}
+        },
+        "Tags": [
+          {"Key": "Service", "Value": "PaymentGatewayService"},
+          {"Key": "Environment", "Value": {"Ref": "Environment"}}
+        ]
+      }
+    },
+    
+    "PaymentGatewayServiceDLQ": {
+      "Type": "AWS::SQS::Queue",
+      "Properties": {
+        "QueueName": {"Fn::Sub": "${ProjectName}-${Environment}-payment-gateway-dlq.fifo"},
+        "FifoQueue": true,
+        "MessageRetentionPeriod": 1209600
+      }
+    },
+    
+    "TreasuryServiceQueue": {
+      "Type": "AWS::SQS::Queue",
+      "Properties": {
+        "QueueName": {"Fn::Sub": "${ProjectName}-${Environment}-treasury-inbox.fifo"},
+        "FifoQueue": true,
+        "ContentBasedDeduplication": true,
+        "MessageRetentionPeriod": 345600,
+        "VisibilityTimeout": 30,
+        "RedrivePolicy": {
+          "deadLetterTargetArn": {"Fn::GetAtt": ["TreasuryServiceDLQ", "Arn"]},
+          "maxReceiveCount": {"Fn::FindInMap": ["EnvironmentConfig", {"Ref": "Environment"}, "DLQMaxReceive"]}
+        },
+        "Tags": [
+          {"Key": "Service", "Value": "TreasuryService"},
+          {"Key": "Environment", "Value": {"Ref": "Environment"}}
+        ]
+      }
+    },
+    
+    "TreasuryServiceDLQ": {
+      "Type": "AWS::SQS::Queue",
+      "Properties": {
+        "QueueName": {"Fn::Sub": "${ProjectName}-${Environment}-treasury-dlq.fifo"},
+        "FifoQueue": true,
+        "MessageRetentionPeriod": 1209600
+      }
+    },
+    
+    "LiquidationServiceQueue": {
+      "Type": "AWS::SQS::Queue",
+      "Properties": {
+        "QueueName": {"Fn::Sub": "${ProjectName}-${Environment}-liquidation-inbox"},
+        "MessageRetentionPeriod": 345600,
+        "VisibilityTimeout": 30,
+        "RedrivePolicy": {
+          "deadLetterTargetArn": {"Fn::GetAtt": ["LiquidationServiceDLQ", "Arn"]},
+          "maxReceiveCount": {"Fn::FindInMap": ["EnvironmentConfig", {"Ref": "Environment"}, "DLQMaxReceive"]}
+        },
+        "Tags": [
+          {"Key": "Service", "Value": "LiquidationService"},
+          {"Key": "Environment", "Value": {"Ref": "Environment"}}
+        ]
+      }
+    },
+    
+    "LiquidationServiceDLQ": {
+      "Type": "AWS::SQS::Queue",
+      "Properties": {
+        "QueueName": {"Fn::Sub": "${ProjectName}-${Environment}-liquidation-dlq"},
+        "MessageRetentionPeriod": 1209600
+      }
+    },
+    
+    "AIReviewServiceQueue": {
+      "Type": "AWS::SQS::Queue",
+      "Properties": {
+        "QueueName": {"Fn::Sub": "${ProjectName}-${Environment}-aireview-inbox"},
+        "MessageRetentionPeriod": 345600,
+        "VisibilityTimeout": 60,
+        "RedrivePolicy": {
+          "deadLetterTargetArn": {"Fn::GetAtt": ["AIReviewServiceDLQ", "Arn"]},
+          "maxReceiveCount": {"Fn::FindInMap": ["EnvironmentConfig", {"Ref": "Environment"}, "DLQMaxReceive"]}
+        },
+        "Tags": [
+          {"Key": "Service", "Value": "AIReviewService"},
+          {"Key": "Environment", "Value": {"Ref": "Environment"}}
+        ]
+      }
+    },
+    
+    "AIReviewServiceDLQ": {
+      "Type": "AWS::SQS::Queue",
+      "Properties": {
+        "QueueName": {"Fn::Sub": "${ProjectName}-${Environment}-aireview-dlq"},
+        "MessageRetentionPeriod": 1209600
+      }
+    },
+    
+    "NotificationServiceQueue": {
+      "Type": "AWS::SQS::Queue",
+      "Properties": {
+        "QueueName": {"Fn::Sub": "${ProjectName}-${Environment}-notification-inbox"},
+        "MessageRetentionPeriod": 345600,
+        "VisibilityTimeout": 30,
+        "RedrivePolicy": {
+          "deadLetterTargetArn": {"Fn::GetAtt": ["NotificationServiceDLQ", "Arn"]},
+          "maxReceiveCount": {"Fn::FindInMap": ["EnvironmentConfig", {"Ref": "Environment"}, "DLQMaxReceive"]}
+        },
+        "Tags": [
+          {"Key": "Service", "Value": "NotificationService"},
+          {"Key": "Environment", "Value": {"Ref": "Environment"}}
+        ]
+      }
+    },
+    
+    "NotificationServiceDLQ": {
+      "Type": "AWS::SQS::Queue",
+      "Properties": {
+        "QueueName": {"Fn::Sub": "${ProjectName}-${Environment}-notification-dlq"},
+        "MessageRetentionPeriod": 1209600
+      }
+    },
+    
+    "QuantumLedgerQueue": {
+      "Type": "AWS::SQS::Queue",
+      "Properties": {
+        "QueueName": {"Fn::Sub": "${ProjectName}-${Environment}-ledger-inbox.fifo"},
+        "FifoQueue": true,
+        "ContentBasedDeduplication": true,
+        "MessageRetentionPeriod": 345600,
+        "VisibilityTimeout": 30,
+        "RedrivePolicy": {
+          "deadLetterTargetArn": {"Fn::GetAtt": ["QuantumLedgerDLQ", "Arn"]},
+          "maxReceiveCount": {"Fn::FindInMap": ["EnvironmentConfig", {"Ref": "Environment"}, "DLQMaxReceive"]}
+        },
+        "Tags": [
+          {"Key": "Service", "Value": "QuantumLedger.Hub"},
+          {"Key": "Environment", "Value": {"Ref": "Environment"}}
+        ]
+      }
+    },
+    
+    "QuantumLedgerDLQ": {
+      "Type": "AWS::SQS::Queue",
+      "Properties": {
+        "QueueName": {"Fn::Sub": "${ProjectName}-${Environment}-ledger-dlq.fifo"},
+        "FifoQueue": true,
+        "MessageRetentionPeriod": 1209600
+      }
+    },
+    
+    "ComplianceEventRule": {
+      "Type": "AWS::Events::Rule",
+      "Properties": {
+        "Name": {"Fn::Sub": "${ProjectName}-${Environment}-compliance-events"},
+        "Description": "Routes compliance-related events to ComplianceService",
+        "EventBusName": {"Ref": "CoreEventBus"},
+        "EventPattern": {
+          "source": ["qsl.user", "qsl.transaction", "qsl.identity"],
+          "detail-type": [
+            "User.Created",
+            "User.Updated", 
+            "Transaction.Initiated",
+            "Identity.VerificationRequested"
+          ]
+        },
+        "State": "ENABLED",
+        "Targets": [
+          {
+            "Arn": {"Fn::GetAtt": ["ComplianceServiceQueue", "Arn"]},
+            "Id": "ComplianceServiceTarget"
+          }
+        ]
+      }
+    },
+    
+    "PaymentEventRule": {
+      "Type": "AWS::Events::Rule",
+      "Properties": {
+        "Name": {"Fn::Sub": "${ProjectName}-${Environment}-payment-events"},
+        "Description": "Routes payment events to PaymentGatewayService",
+        "EventBusName": {"Ref": "FinancialEventBus"},
+        "EventPattern": {
+          "source": ["qsl.payment", "qsl.order", "qsl.wallet"],
+          "detail-type": [
+            "Payment.Requested",
+            "Order.Created",
+            "Wallet.Funded"
+          ]
+        },
+        "State": "ENABLED",
+        "Targets": [
+          {
+            "Arn": {"Fn::GetAtt": ["PaymentGatewayServiceQueue", "Arn"]},
+            "Id": "PaymentServiceTarget",
+            "SqsParameters": {
+              "MessageGroupId": "payment-processing"
+            }
+          }
+        ]
+      }
+    },
+    
+    "NotificationEventRule": {
+      "Type": "AWS::Events::Rule",
+      "Properties": {
+        "Name": {"Fn::Sub": "${ProjectName}-${Environment}-notification-events"},
+        "Description": "Routes notification events to NotificationService",
+        "EventBusName": {"Ref": "CoreEventBus"},
+        "EventPattern": {
+          "source": ["qsl.system", "qsl.user", "qsl.payment"],
+          "detail-type": [
+            "Notification.Send",
+            "User.Welcome",
+            "Payment.Confirmed",
+            "System.Alert"
+          ]
+        },
+        "State": "ENABLED",
+        "Targets": [
+          {
+            "Arn": {"Fn::GetAtt": ["NotificationServiceQueue", "Arn"]},
+            "Id": "NotificationServiceTarget"
+          }
+        ]
+      }
+    },
+    
+    "EventBridgeToSQSPolicy": {
+      "Type": "AWS::SQS::QueuePolicy",
+      "Properties": {
+        "Queues": [
+          {"Ref": "ComplianceServiceQueue"},
+          {"Ref": "GovernanceServiceQueue"},
+          {"Ref": "PaymentGatewayServiceQueue"},
+          {"Ref": "TreasuryServiceQueue"},
+          {"Ref": "LiquidationServiceQueue"},
+          {"Ref": "AIReviewServiceQueue"},
+          {"Ref": "NotificationServiceQueue"},
+          {"Ref": "QuantumLedgerQueue"}
+        ],
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "events.amazonaws.com"
+              },
+              "Action": "sqs:SendMessage",
+              "Resource": "*"
+            }
+          ]
+        }
+      }
+    },
+    
+    "SystemAlertsTopic": {
+      "Type": "AWS::SNS::Topic",
+      "Properties": {
+        "TopicName": {"Fn::Sub": "${ProjectName}-${Environment}-system-alerts"},
+        "DisplayName": "System Alerts",
+        "Tags": [
+          {"Key": "Environment", "Value": {"Ref": "Environment"}},
+          {"Key": "Purpose", "Value": "System Monitoring"}
+        ]
+      }
+    },
+    
+    "PaymentEventsTopic": {
+      "Type": "AWS::SNS::Topic",
+      "Properties": {
+        "TopicName": {"Fn::Sub": "${ProjectName}-${Environment}-payment-events"},
+        "DisplayName": "Payment Events",
+        "Tags": [
+          {"Key": "Environment", "Value": {"Ref": "Environment"}},
+          {"Key": "Purpose", "Value": "Payment Notifications"}
+        ]
+      }
+    }
+  },
+  
+  "Outputs": {
+    "CoreEventBusArn": {
+      "Description": "Core Event Bus ARN",
+      "Value": {"Fn::GetAtt": ["CoreEventBus", "Arn"]},
+      "Export": {"Name": {"Fn::Sub": "${AWS::StackName}-CoreEventBusArn"}}
+    },
+    "FinancialEventBusArn": {
+      "Description": "Financial Event Bus ARN",
+      "Value": {"Fn::GetAtt": ["FinancialEventBus", "Arn"]},
+      "Export": {"Name": {"Fn::Sub": "${AWS::StackName}-FinancialEventBusArn"}}
+    },
+    "BlockchainEventBusArn": {
+      "Description": "Blockchain Event Bus ARN",
+      "Value": {"Fn::GetAtt": ["BlockchainEventBus", "Arn"]},
+      "Export": {"Name": {"Fn::Sub": "${AWS::StackName}-BlockchainEventBusArn"}}
+    },
+    "ComplianceQueueUrl": {
+      "Description": "Compliance Service Queue URL",
+      "Value": {"Ref": "ComplianceServiceQueue"},
+      "Export": {"Name": {"Fn::Sub": "${AWS::StackName}-ComplianceQueueUrl"}}
+    },
+    "PaymentQueueUrl": {
+      "Description": "Payment Gateway Queue URL",
+      "Value": {"Ref": "PaymentGatewayServiceQueue"},
+      "Export": {"Name": {"Fn::Sub": "${AWS::StackName}-PaymentQueueUrl"}}
+    },
+    "NotificationQueueUrl": {
+      "Description": "Notification Service Queue URL",
+      "Value": {"Ref": "NotificationServiceQueue"},
+      "Export": {"Name": {"Fn::Sub": "${AWS::StackName}-NotificationQueueUrl"}}
+    },
+    "TreasuryQueueUrl": {
+      "Description": "Treasury Service Queue URL",
+      "Value": {"Ref": "TreasuryServiceQueue"},
+      "Export": {"Name": {"Fn::Sub": "${AWS::StackName}-TreasuryQueueUrl"}}
+    },
+    "LiquidationQueueUrl": {
+      "Description": "Liquidation Service Queue URL",
+      "Value": {"Ref": "LiquidationServiceQueue"},
+      "Export": {"Name": {"Fn::Sub": "${AWS::StackName}-LiquidationQueueUrl"}}
+    },
+    "AIReviewQueueUrl": {
+      "Description": "AI Review Service Queue URL",
+      "Value": {"Ref": "AIReviewServiceQueue"},
+      "Export": {"Name": {"Fn::Sub": "${AWS::StackName}-AIReviewQueueUrl"}}
+    },
+    "GovernanceQueueUrl": {
+      "Description": "Governance Service Queue URL", 
+      "Value": {"Ref": "GovernanceServiceQueue"},
+      "Export": {"Name": {"Fn::Sub": "${AWS::StackName}-GovernanceQueueUrl"}}
+    },
+    "QuantumLedgerQueueUrl": {
+      "Description": "QuantumLedger Hub Queue URL",
+      "Value": {"Ref": "QuantumLedgerQueue"},
+      "Export": {"Name": {"Fn::Sub": "${AWS::StackName}-QuantumLedgerQueueUrl"}}
+    }
+  }
+}

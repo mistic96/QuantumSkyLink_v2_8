@@ -1,0 +1,12 @@
+2025-09-02 19:09:02.770 -05:00 [INF] Initializing Multi-Cloud Key Vault System with 99.9994% cost savings!
+2025-09-02 19:09:02.958 -05:00 [INF] Initializing Production Delegation Key System with database integration!
+2025-09-02 19:09:02.959 -05:00 [INF] Initializing High-Performance Public Key Caching System!
+2025-09-02 19:09:03.153 -05:00 [INF] Initializing API Rate Limiting Protection!
+2025-09-02 19:09:03.155 -05:00 [INF] Initializing Security Audit Logging Service for SOC2 compliance!
+2025-09-02 19:09:03.156 -05:00 [INF] Initializing Zero Trust SignatureService communication
+2025-09-02 19:09:07.050 -05:00 [INF] Now listening on: https://localhost:50996
+2025-09-02 19:09:07.054 -05:00 [INF] Now listening on: http://localhost:50998
+2025-09-02 19:09:07.182 -05:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2025-09-02 19:09:08.363 -05:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-09-02 19:09:08.363 -05:00 [INF] Hosting environment: Development
+2025-09-02 19:09:08.363 -05:00 [INF] Content root path: C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\QuantumLedger.Hub

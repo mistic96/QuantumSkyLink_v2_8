@@ -1,0 +1,292 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>QuantumLedger.Cryptography.PQC</name>
+    </assembly>
+    <members>
+        <member name="T:QuantumLedger.Cryptography.PQC.Algorithms.Base.IPQCAlgorithm">
+            <summary>
+            Interface for post-quantum cryptography algorithms
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.PQC.Algorithms.Base.IPQCAlgorithm.Name">
+            <summary>
+            Gets the name of the algorithm
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.PQC.Algorithms.Base.IPQCAlgorithm.SecurityLevel">
+            <summary>
+            Gets the security level of the algorithm
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.PQC.Algorithms.Base.IPQCAlgorithm.GenerateKeyPair">
+            <summary>
+            Generates a new key pair
+            </summary>
+            <returns>A tuple containing the public and private keys</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.PQC.Algorithms.Base.IPQCAlgorithm.Sign(System.Byte[],System.Byte[])">
+            <summary>
+            Signs a message using the private key
+            </summary>
+            <param name="message">The message to sign</param>
+            <param name="privateKey">The private key to use for signing</param>
+            <returns>The signature bytes</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.PQC.Algorithms.Base.IPQCAlgorithm.Verify(System.Byte[],System.Byte[],System.Byte[])">
+            <summary>
+            Verifies a signature using the public key
+            </summary>
+            <param name="message">The original message</param>
+            <param name="signature">The signature to verify</param>
+            <param name="publicKey">The public key to use for verification</param>
+            <returns>True if the signature is valid, false otherwise</returns>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.PQC.Algorithms.Base.IPQCAlgorithm.PublicKeySize">
+            <summary>
+            Gets the size of the public key in bytes
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.PQC.Algorithms.Base.IPQCAlgorithm.PrivateKeySize">
+            <summary>
+            Gets the size of the private key in bytes
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.PQC.Algorithms.Base.IPQCAlgorithm.SignatureSize">
+            <summary>
+            Gets the size of signatures in bytes
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.PQC.Algorithms.Dilithium.DilithiumAlgorithm">
+            <summary>
+            Implementation of the Dilithium post-quantum signature algorithm using BouncyCastle
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.PQC.Algorithms.Dilithium.DilithiumAlgorithm.Name">
+            <summary>
+            Gets the name of the algorithm
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.PQC.Algorithms.Dilithium.DilithiumAlgorithm.SecurityLevel">
+            <summary>
+            Gets the security level of this instance
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.PQC.Algorithms.Dilithium.DilithiumAlgorithm.PublicKeySize">
+            <summary>
+            Gets the size of public keys in bytes
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.PQC.Algorithms.Dilithium.DilithiumAlgorithm.PrivateKeySize">
+            <summary>
+            Gets the size of private keys in bytes
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.PQC.Algorithms.Dilithium.DilithiumAlgorithm.SignatureSize">
+            <summary>
+            Gets the size of signatures in bytes
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.PQC.Algorithms.Dilithium.DilithiumAlgorithm.#ctor(System.Int32)">
+            <summary>
+            Creates a new instance of DilithiumAlgorithm
+            </summary>
+            <param name="securityLevel">NIST security level (2, 3, or 5)</param>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.PQC.Algorithms.Dilithium.DilithiumAlgorithm.GenerateKeyPair">
+            <inheritdoc/>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.PQC.Algorithms.Dilithium.DilithiumAlgorithm.Sign(System.Byte[],System.Byte[])">
+            <inheritdoc/>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.PQC.Algorithms.Dilithium.DilithiumAlgorithm.Verify(System.Byte[],System.Byte[],System.Byte[])">
+            <inheritdoc/>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.PQC.Algorithms.Dilithium.DilithiumParameters">
+            <summary>
+            Parameters for the Dilithium post-quantum signature algorithm
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.PQC.Algorithms.Dilithium.DilithiumParameters.SecurityLevel">
+            <summary>
+            Gets the security level
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.PQC.Algorithms.Dilithium.DilithiumParameters.K">
+            <summary>
+            Gets the K parameter
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.PQC.Algorithms.Dilithium.DilithiumParameters.L">
+            <summary>
+            Gets the L parameter
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.PQC.Algorithms.Dilithium.DilithiumParameters.GetBySecurityLevel(System.Int32)">
+            <summary>
+            Gets the parameters for a given security level
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.PQC.Algorithms.Falcon.FalconAlgorithm">
+            <summary>
+            Implementation of the Falcon post-quantum signature algorithm
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.PQC.Algorithms.Falcon.FalconAlgorithm.Name">
+            <summary>
+            Gets the name of the algorithm
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.PQC.Algorithms.Falcon.FalconAlgorithm.SecurityLevel">
+            <summary>
+            Gets the security level of this instance
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.PQC.Algorithms.Falcon.FalconAlgorithm.PublicKeySize">
+            <summary>
+            Gets the size of public keys in bytes
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.PQC.Algorithms.Falcon.FalconAlgorithm.PrivateKeySize">
+            <summary>
+            Gets the size of private keys in bytes
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.PQC.Algorithms.Falcon.FalconAlgorithm.SignatureSize">
+            <summary>
+            Gets the size of signatures in bytes
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.PQC.Algorithms.Falcon.FalconAlgorithm.#ctor(System.Int32)">
+            <summary>
+            Creates a new instance of FalconAlgorithm
+            </summary>
+            <param name="treeHeight">Height of the Falcon tree (8, 9, or 10)</param>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.PQC.Algorithms.Falcon.FalconAlgorithm.GenerateKeyPair">
+            <inheritdoc/>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.PQC.Algorithms.Falcon.FalconAlgorithm.Sign(System.Byte[],System.Byte[])">
+            <inheritdoc/>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.PQC.Algorithms.Falcon.FalconAlgorithm.Verify(System.Byte[],System.Byte[],System.Byte[])">
+            <inheritdoc/>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.PQC.Algorithms.Falcon.FalconParameters">
+            <summary>
+            Parameters for the Falcon post-quantum signature algorithm
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.PQC.Algorithms.Falcon.FalconParameters.N">
+            <summary>
+            Degree of polynomials (n = 2^LogN)
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.PQC.Algorithms.Falcon.FalconParameters.LogN">
+            <summary>
+            Log2 of degree (height of the tree)
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.PQC.Algorithms.Falcon.FalconParameters.SignatureBits">
+            <summary>
+            Signature compression level in bits
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.PQC.Algorithms.Falcon.FalconParameters.NonceSize">
+            <summary>
+            Size of the nonce in bytes
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.PQC.Algorithms.Falcon.FalconParameters.SecurityLevel">
+            <summary>
+            Security level based on tree height
+            </summary>
+        </member>
+        <member name="F:QuantumLedger.Cryptography.PQC.Algorithms.Falcon.FalconParameters.Height8">
+            <summary>
+            Height 8 parameters (~123-bit classical security)
+            </summary>
+        </member>
+        <member name="F:QuantumLedger.Cryptography.PQC.Algorithms.Falcon.FalconParameters.Height9">
+            <summary>
+            Height 9 parameters (~147-bit classical security)
+            </summary>
+        </member>
+        <member name="F:QuantumLedger.Cryptography.PQC.Algorithms.Falcon.FalconParameters.Height10">
+            <summary>
+            Height 10 parameters (~172-bit classical security)
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.PQC.Algorithms.Falcon.FalconParameters.GetByHeight(System.Int32)">
+            <summary>
+            Gets parameters for a specific tree height
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.PQC.Algorithms.Falcon.FalconParameters.PublicKeySize">
+            <summary>
+            Gets the size of public keys in bytes for this parameter set
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.PQC.Algorithms.Falcon.FalconParameters.PrivateKeySize">
+            <summary>
+            Gets the size of private keys in bytes for this parameter set
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.PQC.Algorithms.Falcon.FalconParameters.MaxSignatureSize">
+            <summary>
+            Gets the maximum size of signatures in bytes for this parameter set
+            </summary>
+        </member>
+        <member name="F:QuantumLedger.Cryptography.PQC.Algorithms.Falcon.FalconParameters.Q">
+            <summary>
+            Gets the modulus used in Falcon (q = 12289)
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.PQC.Providers.DilithiumProvider">
+            <summary>
+            Provides Dilithium signature operations implementing the ISignatureProvider interface
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.PQC.Providers.DilithiumProvider.Algorithm">
+            <summary>
+            Gets the name of the signature algorithm
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.PQC.Providers.DilithiumProvider.#ctor(System.Int32,Microsoft.Extensions.Logging.ILogger{QuantumLedger.Cryptography.PQC.Providers.DilithiumProvider})">
+            <summary>
+            Creates a new instance of DilithiumProvider
+            </summary>
+            <param name="securityLevel">NIST security level (2, 3, or 5)</param>
+            <param name="logger">Logger instance</param>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.PQC.Providers.DilithiumProvider.SignAsync(System.Byte[],System.Byte[])">
+            <inheritdoc/>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.PQC.Providers.DilithiumProvider.VerifyAsync(System.Byte[],System.Byte[],System.Byte[])">
+            <inheritdoc/>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.PQC.Providers.FalconProvider">
+            <summary>
+            Provides Falcon signature operations implementing the ISignatureProvider interface
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.PQC.Providers.FalconProvider.Algorithm">
+            <summary>
+            Gets the name of the signature algorithm
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.PQC.Providers.FalconProvider.#ctor(System.Int32,Microsoft.Extensions.Logging.ILogger{QuantumLedger.Cryptography.PQC.Providers.FalconProvider})">
+            <summary>
+            Creates a new instance of FalconProvider
+            </summary>
+            <param name="treeHeight">Height of the Falcon tree (8, 9, or 10)</param>
+            <param name="logger">Logger instance</param>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.PQC.Providers.FalconProvider.SignAsync(System.Byte[],System.Byte[])">
+            <inheritdoc/>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.PQC.Providers.FalconProvider.VerifyAsync(System.Byte[],System.Byte[],System.Byte[])">
+            <inheritdoc/>
+        </member>
+    </members>
+</doc>

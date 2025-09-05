@@ -1,0 +1,78 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Sdk Name="Aspire.AppHost.Sdk" Version="9.4.1" />
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UserSecretsId>a969786d-fdcf-4d9b-b543-1ef954d023fa</UserSecretsId>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.AppHost" Version="9.4.1" />
+    <PackageReference Include="Aspire.Hosting.Redis" Version="9.4.1" />
+    <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="9.4.1" />
+    <PackageReference Include="Aspire.Hosting.RabbitMQ" Version="9.4.1" />
+    <PackageReference Include="Aspire.Hosting.NodeJs" Version="9.4.1" />
+    <!-- AWS Integration Packages -->
+    <PackageReference Include="Aspire.Hosting.AWS" Version="9.2.6" />
+    <PackageReference Include="Amazon.CDK.Lib" Version="2.194.0" />
+    <PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="4.0.2.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.8">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Core Business Services -->
+    <ProjectReference Include="..\src\UserService\UserService.csproj" />
+    <ProjectReference Include="..\src\AccountService\AccountService.csproj" />
+    <ProjectReference Include="..\src\ComplianceService\ComplianceService.csproj" />
+    <ProjectReference Include="..\src\FeeService\FeeService.csproj" />
+    <ProjectReference Include="..\src\SecurityService\SecurityService.csproj" />
+    <ProjectReference Include="..\src\TokenService\TokenService.csproj" />
+    <ProjectReference Include="..\src\GovernanceService\GovernanceService.csproj" />
+    <ProjectReference Include="..\src\TreasuryService\TreasuryService.csproj" />
+    <ProjectReference Include="..\src\PaymentGatewayService\PaymentGatewayService.csproj" />
+    <ProjectReference Include="..\src\LiquidationService\LiquidationService.csproj" />
+    <ProjectReference Include="..\src\InfrastructureService\InfrastructureService.csproj" />
+    <ProjectReference Include="..\src\IdentityVerificationService\IdentityVerificationService.csproj" />
+    <ProjectReference Include="..\src\AIReviewService\AIReviewService.csproj" />
+    <ProjectReference Include="..\src\NotificationService\NotificationService.csproj" />
+    <ProjectReference Include="..\src\MarketplaceService\MarketplaceService.csproj" />
+    <ProjectReference Include="..\src\SignatureService\SignatureService.csproj" />
+    <ProjectReference Include="..\src\OrchestrationService\OrchestrationService.csproj" />
+    
+    <!-- API Gateways -->
+    <ProjectReference Include="..\src\WebAPIGateway\WebAPIGateway.csproj" />
+    <ProjectReference Include="..\src\AdminAPIGateway\AdminAPIGateway.csproj" />
+    <ProjectReference Include="..\src\MobileAPIGateway\MobileAPIGateway.csproj" />
+    
+    <!-- QuantumLedger Components -->
+    <ProjectReference Include="..\src\QuantumLedger.Hub\QuantumLedger.Hub.csproj" />
+    <ProjectReference Include="..\src\QuantumLedger.Blockchain\QuantumLedger.Blockchain.csproj" />
+    <ProjectReference Include="..\src\QuantumLedger.Cryptography\QuantumLedger.Cryptography.csproj" />
+    <ProjectReference Include="..\src\QuantumLedger.Cryptography.PQC\QuantumLedger.Cryptography.PQC.csproj" />
+    <ProjectReference Include="..\src\QuantumLedger.Data\QuantumLedger.Data.csproj" />
+    <ProjectReference Include="..\src\QuantumLedger.Models\QuantumLedger.Models.csproj" />
+    
+    <!-- Shared Components -->
+    <ProjectReference Include="..\src\QuantumSkyLink.Shared\QuantumSkyLink.Shared.csproj" />
+    <ProjectReference Include="..\src\RefitClient\RefitClient.csproj" />
+    
+    <!-- LiquidStorageCloud Components -->
+    <ProjectReference Include="..\src\LiquidStorageCloud.Core\LiquidStorageCloud.Core.csproj" />
+    <ProjectReference Include="..\src\LiquidStorageCloud.Backup.Core\LiquidStorageCloud.Backup.Core.csproj" />
+    <ProjectReference Include="..\src\LiquidStorageCloud.DataManagement.Core\LiquidStorageCloud.DataManagement.Core.csproj" />
+    <ProjectReference Include="..\src\LiquidStorageCloud.DataManagement.EntityFramework\LiquidStorageCloud.DataManagement.EntityFramework.csproj" />
+    <ProjectReference Include="..\src\LiquidStorageCloud.Services.EventConsumers.Core\LiquidStorageCloud.Services.EventConsumers.csproj" />
+    <ProjectReference Include="..\src\LiquidStorageCloud.Services.EventPublishing\LiquidStorageCloud.Services.EventPublishing.csproj" />
+    
+    <!-- Note: BlockchainAddressGenerator project does not exist in src directory - removed from references -->
+  </ItemGroup>
+
+</Project>

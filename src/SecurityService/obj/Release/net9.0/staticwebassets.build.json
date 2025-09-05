@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "8A4dY5cbeOlMSv1f0u/o0MbgItlnMAkLgc3bQ4RrnRU=",
+  "Source": "SecurityService",
+  "BasePath": "_content/SecurityService",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

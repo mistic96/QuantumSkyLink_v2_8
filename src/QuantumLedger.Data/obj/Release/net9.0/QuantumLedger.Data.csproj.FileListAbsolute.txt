@@ -1,0 +1,6 @@
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/QuantumLedger.Data/obj/Release/net9.0/QuantumLedger.Data.csproj.AssemblyReference.cache
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/QuantumLedger.Data/obj/Release/net9.0/QuantumLedger.Data.GeneratedMSBuildEditorConfig.editorconfig
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/QuantumLedger.Data/obj/Release/net9.0/QuantumLedger.Data.AssemblyInfoInputs.cache
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/QuantumLedger.Data/obj/Release/net9.0/QuantumLedger.Data.AssemblyInfo.cs
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/QuantumLedger.Data/obj/Release/net9.0/QuantumLedger.Data.csproj.CoreCompileInputs.cache
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/QuantumLedger.Data/obj/Release/net9.0/QuantumLedger.Data.sourcelink.json

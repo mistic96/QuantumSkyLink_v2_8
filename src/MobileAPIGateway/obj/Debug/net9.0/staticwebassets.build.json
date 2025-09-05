@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "39FFQ8BInFnrUevdnSTbn8ZlygMfeME//GN+MXTMYUg=",
+  "Source": "MobileAPIGateway",
+  "BasePath": "_content/MobileAPIGateway",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

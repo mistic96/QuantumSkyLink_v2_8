@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "TonejnMVLqQLs8Muda7sL23SQ+23fB6eBNix2ezKrqU=",
+  "Source": "InfrastructureService",
+  "BasePath": "_content/InfrastructureService",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

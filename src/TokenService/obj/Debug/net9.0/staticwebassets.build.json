@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "n7pc9JmdlUMlOlhUT5ZTrRM4Npvk46vSsELN2S8OYZI=",
+  "Source": "TokenService",
+  "BasePath": "_content/TokenService",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

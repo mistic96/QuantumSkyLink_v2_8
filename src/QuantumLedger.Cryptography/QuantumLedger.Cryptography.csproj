@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="AWSSDK.S3" Version="4.0.6.7" />
+    <PackageReference Include="BouncyCastle.Cryptography" Version="2.6.2">
+      <Aliases>BC</Aliases>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.8" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.8" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.8" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LiquidStorageCloud.Backup.Core\LiquidStorageCloud.Backup.Core.csproj" />
+    <ProjectReference Include="..\LiquidStorageCloud.Core\LiquidStorageCloud.Core.csproj" />
+    <ProjectReference Include="..\LiquidStorageCloud.DataManagement.Core\LiquidStorageCloud.DataManagement.Core.csproj" />
+    <ProjectReference Include="..\LiquidStorageCloud.DataManagement.EntityFramework\LiquidStorageCloud.DataManagement.EntityFramework.csproj" />
+    <ProjectReference Include="..\QuantumLedger.Data\QuantumLedger.Data.csproj" />
+    <ProjectReference Include="..\QuantumLedger.Models\QuantumLedger.Models.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Remove="BouncyCastle" />
+    <PackageReference Remove="BouncyCastle.NetCore" />
+    <PackageReference Remove="Portable.BouncyCastle" />
+  </ItemGroup>
+</Project>

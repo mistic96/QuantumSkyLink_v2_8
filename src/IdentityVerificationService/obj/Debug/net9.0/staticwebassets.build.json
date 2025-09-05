@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "bzt1xxDFEnVzIe1905Wk4yltoVR4cJQrl2T/6Kzzb1Y=",
+  "Source": "IdentityVerificationService",
+  "BasePath": "_content/IdentityVerificationService",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

@@ -1,0 +1,8 @@
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/PaymentGatewayService/obj/Release/net9.0/PaymentGatewayService.csproj.AssemblyReference.cache
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/PaymentGatewayService/obj/Release/net9.0/PaymentGatewayService.GeneratedMSBuildEditorConfig.editorconfig
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/PaymentGatewayService/obj/Release/net9.0/PaymentGatewayService.AssemblyInfoInputs.cache
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/PaymentGatewayService/obj/Release/net9.0/PaymentGatewayService.AssemblyInfo.cs
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/PaymentGatewayService/obj/Release/net9.0/PaymentGatewayService.csproj.CoreCompileInputs.cache
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/PaymentGatewayService/obj/Release/net9.0/PaymentGatewayService.MvcApplicationPartsAssemblyInfo.cs
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/PaymentGatewayService/obj/Release/net9.0/PaymentGatewayService.MvcApplicationPartsAssemblyInfo.cache
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/PaymentGatewayService/obj/Release/net9.0/PaymentGatewayService.sourcelink.json

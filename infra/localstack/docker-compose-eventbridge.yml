@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  localstack:
+    image: localstack/localstack:latest
+    container_name: localstack-eventbridge
+    environment:
+      - SERVICES=events,sqs,iam,cloudwatch
+      - DEBUG=1
+      - DATA_DIR=/tmp/localstack/data
+      - HOST_TMP_FOLDER=/tmp/localstack
+    ports:
+      - "4566:4566"    # Edge port
+      - "4510-4559:4510-4559"
+    volumes:
+      - ./localstack:/tmp/localstack
+      - /var/run/docker.sock:/var/run/docker.sock
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4566/_localstack/health || exit 1"]
+      interval: 5s
+      timeout: 10s
+      retries: 12
+    restart: unless-stopped
+
+# Usage notes:
+# 1. Start LocalStack: docker compose -f infra/localstack/docker-compose-eventbridge.yml up -d
+# 2. Create an Event Bus: aws --endpoint-url=http://localhost:4566 events create-event-bus --name qsl-event-bus
+# 3. Use AWS CLI with --endpoint-url http://localhost:4566 or configure AWS SDK to point at localstack.
+# 4. This compose file enables EventBridge (events), SQS, IAM and CloudWatch so integration tests can run locally.

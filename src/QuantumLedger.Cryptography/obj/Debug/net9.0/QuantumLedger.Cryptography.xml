@@ -1,0 +1,3072 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>QuantumLedger.Cryptography</name>
+    </assembly>
+    <members>
+        <member name="T:QuantumLedger.Cryptography.Constants.CryptoConstants">
+            <summary>
+            Constants used throughout the cryptography implementation
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Constants.CryptoConstants.Algorithms">
+            <summary>
+            Algorithm names
+            </summary>
+        </member>
+        <member name="F:QuantumLedger.Cryptography.Constants.CryptoConstants.Algorithms.EC256">
+            <summary>
+            ECDSA with P-256 curve and SHA-256
+            </summary>
+        </member>
+        <member name="F:QuantumLedger.Cryptography.Constants.CryptoConstants.Algorithms.Dilithium">
+            <summary>
+            Dilithium quantum-resistant signature algorithm
+            </summary>
+        </member>
+        <member name="F:QuantumLedger.Cryptography.Constants.CryptoConstants.Algorithms.Falcon">
+            <summary>
+            Falcon quantum-resistant signature algorithm
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Constants.CryptoConstants.Curves">
+            <summary>
+            Curve parameters
+            </summary>
+        </member>
+        <member name="F:QuantumLedger.Cryptography.Constants.CryptoConstants.Curves.P256">
+            <summary>
+            NIST P-256 curve name
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Constants.CryptoConstants.HashAlgorithms">
+            <summary>
+            Hash algorithms
+            </summary>
+        </member>
+        <member name="F:QuantumLedger.Cryptography.Constants.CryptoConstants.HashAlgorithms.SHA256">
+            <summary>
+            SHA-256 hash algorithm
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Constants.CryptoConstants.KeyOperations">
+            <summary>
+            Key operation names
+            </summary>
+        </member>
+        <member name="F:QuantumLedger.Cryptography.Constants.CryptoConstants.KeyOperations.Generate">
+            <summary>
+            Key generation operation
+            </summary>
+        </member>
+        <member name="F:QuantumLedger.Cryptography.Constants.CryptoConstants.KeyOperations.Validate">
+            <summary>
+            Key validation operation
+            </summary>
+        </member>
+        <member name="F:QuantumLedger.Cryptography.Constants.CryptoConstants.KeyOperations.Retrieve">
+            <summary>
+            Key retrieval operation
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Constants.CryptoConstants.SignatureOperations">
+            <summary>
+            Signature operations
+            </summary>
+        </member>
+        <member name="F:QuantumLedger.Cryptography.Constants.CryptoConstants.SignatureOperations.Sign">
+            <summary>
+            Signature creation operation
+            </summary>
+        </member>
+        <member name="F:QuantumLedger.Cryptography.Constants.CryptoConstants.SignatureOperations.Verify">
+            <summary>
+            Signature verification operation
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Exceptions.CryptographicException">
+            <summary>
+            Base exception for cryptographic operations in the Quantum Ledger system
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Exceptions.CryptographicException.Operation">
+            <summary>
+            Gets the operation that failed
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Exceptions.CryptographicException.Algorithm">
+            <summary>
+            Gets the algorithm that was being used
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Exceptions.CryptographicException.#ctor(System.String,System.String,System.String,System.Exception)">
+            <summary>
+            Creates a new instance of CryptographicException
+            </summary>
+            <param name="message">The error message</param>
+            <param name="operation">The operation that failed</param>
+            <param name="algorithm">The algorithm that was being used</param>
+            <param name="innerException">The inner exception</param>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Exceptions.CryptographicException.#ctor(System.String,System.String,System.Exception)">
+            <summary>
+            Creates a new instance of CryptographicException
+            </summary>
+            <param name="message">The error message</param>
+            <param name="operation">The operation that failed</param>
+            <param name="innerException">The inner exception</param>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Exceptions.SignatureVerificationException">
+            <summary>
+            Exception thrown when a signature verification fails
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Exceptions.SignatureVerificationException.#ctor(System.String,System.Exception)">
+            <summary>
+            Creates a new instance of SignatureVerificationException
+            </summary>
+            <param name="algorithm">The algorithm that was being used</param>
+            <param name="innerException">The inner exception</param>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Exceptions.SigningException">
+            <summary>
+            Exception thrown when a signing operation fails
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Exceptions.SigningException.#ctor(System.String,System.Exception)">
+            <summary>
+            Creates a new instance of SigningException
+            </summary>
+            <param name="algorithm">The algorithm that was being used</param>
+            <param name="innerException">The inner exception</param>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Exceptions.KeyOperationException">
+            <summary>
+            Exception thrown when a key operation fails
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Exceptions.KeyOperationException.#ctor(System.String,System.String,System.Exception)">
+            <summary>
+            Creates a new instance of KeyOperationException
+            </summary>
+            <param name="operation">The key operation that failed</param>
+            <param name="algorithm">The algorithm that was being used</param>
+            <param name="innerException">The inner exception</param>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Extensions.KeyGenerationHelperExtensions.GenerateEC256KeyPairAsBase64">
+            <summary>
+            Generates a new EC-256 key pair and returns them as Base64 encoded strings
+            </summary>
+            <returns>A tuple containing the Base64 encoded private and public keys</returns>
+            <exception cref="T:QuantumLedger.Cryptography.Exceptions.KeyOperationException">Thrown when key generation fails</exception>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Extensions.KeyGenerationHelperExtensions.ValidateKeyPairBase64(System.String,System.String,System.String)">
+            <summary>
+            Validates that a Base64 encoded private key and public key form a valid key pair
+            </summary>
+            <param name="privateKeyBase64">The Base64 encoded private key</param>
+            <param name="publicKeyBase64">The Base64 encoded public key</param>
+            <param name="algorithm">The algorithm the keys are for</param>
+            <returns>True if the keys form a valid pair, false otherwise</returns>
+            <exception cref="T:QuantumLedger.Cryptography.Exceptions.KeyOperationException">Thrown when validation fails due to an error</exception>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Extensions.S3ServiceExtensions">
+            <summary>
+            Extension methods for IAmazonS3 service
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Extensions.S3ServiceExtensions.GetObjectAsync(Amazon.S3.IAmazonS3,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets an object from S3 asynchronously
+            </summary>
+            <param name="s3Client">The S3 client</param>
+            <param name="bucketName">Name of the bucket</param>
+            <param name="key">Object key</param>
+            <param name="cancellationToken">Optional cancellation token</param>
+            <returns>The object data as a stream</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Extensions.S3ServiceExtensions.DeleteObjectAsync(Amazon.S3.IAmazonS3,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Deletes an object from S3 asynchronously
+            </summary>
+            <param name="s3Client">The S3 client</param>
+            <param name="bucketName">Name of the bucket</param>
+            <param name="key">Object key</param>
+            <param name="cancellationToken">Optional cancellation token</param>
+            <returns>A task representing the asynchronous operation</returns>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Interfaces.ICloudKeyVaultFactory">
+            <summary>
+            Factory interface for creating and managing cloud key vault providers.
+            Supports cost optimization by automatically selecting the cheapest provider.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.ICloudKeyVaultFactory.GetOptimalProvider">
+            <summary>
+            Gets the optimal provider based on cost optimization.
+            Returns Google Cloud KMS for 99.9994% cost savings ($18.50/month vs $3M/month).
+            </summary>
+            <returns>The most cost-effective key vault provider.</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.ICloudKeyVaultFactory.GetProvider(QuantumLedger.Cryptography.Interfaces.CloudProvider)">
+            <summary>
+            Gets a specific cloud provider by type.
+            </summary>
+            <param name="provider">The cloud provider type.</param>
+            <returns>The requested key vault provider.</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.ICloudKeyVaultFactory.GetHealthiestProviderAsync">
+            <summary>
+            Gets the healthiest available provider based on response times and availability.
+            </summary>
+            <returns>The healthiest key vault provider.</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.ICloudKeyVaultFactory.GetAllProvidersHealthAsync">
+            <summary>
+            Gets all available providers with their health status.
+            </summary>
+            <returns>Dictionary of providers and their health status.</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.ICloudKeyVaultFactory.GetCostComparison">
+            <summary>
+            Gets cost comparison for all providers.
+            </summary>
+            <returns>Dictionary of providers and their monthly costs.</returns>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Interfaces.CloudProvider">
+            <summary>
+            Enumeration of supported cloud providers.
+            </summary>
+        </member>
+        <member name="F:QuantumLedger.Cryptography.Interfaces.CloudProvider.GoogleCloud">
+            <summary>
+            Google Cloud KMS - Cheapest option at $18.50/month.
+            </summary>
+        </member>
+        <member name="F:QuantumLedger.Cryptography.Interfaces.CloudProvider.Azure">
+            <summary>
+            Azure Key Vault - Middle option at $19.21/month.
+            </summary>
+        </member>
+        <member name="F:QuantumLedger.Cryptography.Interfaces.CloudProvider.AWS">
+            <summary>
+            AWS KMS - Most expensive but mature option at $21.24/month.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Interfaces.ICloudStorageProvider">
+            <summary>
+            Interface for multi-cloud storage providers for secure private key storage.
+            Supports AWS S3, Azure Blob Storage, and Google Cloud Storage.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.ICloudStorageProvider.ProviderName">
+            <summary>
+            Gets the name of the cloud storage provider.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.ICloudStorageProvider.StorageCostPerGBPerMonth">
+            <summary>
+            Gets the storage cost per GB per month for this provider.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.ICloudStorageProvider.IsAvailable">
+            <summary>
+            Gets whether this provider is currently available and healthy.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.ICloudStorageProvider.StoreAsync(System.Byte[],System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Stores encrypted data in the cloud storage with the specified path.
+            </summary>
+            <param name="data">The encrypted data to store.</param>
+            <param name="accountId">The account identifier for path generation.</param>
+            <param name="algorithm">The cryptographic algorithm for path organization.</param>
+            <param name="metadata">Optional metadata to store with the data.</param>
+            <returns>The storage path/identifier for the stored data.</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.ICloudStorageProvider.RetrieveAsync(System.String)">
+            <summary>
+            Retrieves encrypted data from the cloud storage using the specified path.
+            </summary>
+            <param name="path">The storage path/identifier.</param>
+            <returns>The encrypted data.</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.ICloudStorageProvider.RetrieveWithMetadataAsync(System.String)">
+            <summary>
+            Retrieves encrypted data along with its metadata.
+            </summary>
+            <param name="path">The storage path/identifier.</param>
+            <returns>The encrypted data and metadata.</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.ICloudStorageProvider.DeleteAsync(System.String)">
+            <summary>
+            Deletes data from the cloud storage.
+            </summary>
+            <param name="path">The storage path/identifier.</param>
+            <returns>True if the deletion was successful; otherwise, false.</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.ICloudStorageProvider.ExistsAsync(System.String)">
+            <summary>
+            Checks if data exists at the specified path.
+            </summary>
+            <param name="path">The storage path/identifier.</param>
+            <returns>True if the data exists; otherwise, false.</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.ICloudStorageProvider.ListAccountPathsAsync(System.String)">
+            <summary>
+            Lists all storage paths for a specific account.
+            </summary>
+            <param name="accountId">The account identifier.</param>
+            <returns>A list of storage paths for the account.</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.ICloudStorageProvider.GetMetadataAsync(System.String)">
+            <summary>
+            Gets metadata for stored data without retrieving the data itself.
+            </summary>
+            <param name="path">The storage path/identifier.</param>
+            <returns>The metadata for the stored data.</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.ICloudStorageProvider.UpdateMetadataAsync(System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Updates metadata for stored data.
+            </summary>
+            <param name="path">The storage path/identifier.</param>
+            <param name="metadata">The new metadata.</param>
+            <returns>True if the update was successful; otherwise, false.</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.ICloudStorageProvider.ValidateConnectionAsync">
+            <summary>
+            Validates the connection to the cloud storage provider.
+            </summary>
+            <returns>True if the connection is valid; otherwise, false.</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.ICloudStorageProvider.GetHealthStatusAsync">
+            <summary>
+            Gets the health status of the cloud storage provider.
+            </summary>
+            <returns>The health status information.</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.ICloudStorageProvider.GetUsageStatsAsync">
+            <summary>
+            Gets usage statistics for cost monitoring.
+            </summary>
+            <returns>The usage statistics.</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.ICloudStorageProvider.CreateBackupAsync(System.String,QuantumLedger.Cryptography.Interfaces.BackupOptions)">
+            <summary>
+            Creates a backup of data to a different region or storage class.
+            </summary>
+            <param name="path">The storage path/identifier.</param>
+            <param name="backupOptions">The backup configuration options.</param>
+            <returns>The backup path/identifier.</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.ICloudStorageProvider.RestoreFromBackupAsync(System.String,System.String)">
+            <summary>
+            Restores data from a backup.
+            </summary>
+            <param name="backupPath">The backup path/identifier.</param>
+            <param name="restorePath">The path to restore to.</param>
+            <returns>True if the restore was successful; otherwise, false.</returns>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Interfaces.StorageResult">
+            <summary>
+            Represents the result of a storage retrieval operation with metadata.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.StorageResult.Data">
+            <summary>
+            Gets or sets the retrieved data.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.StorageResult.Metadata">
+            <summary>
+            Gets or sets the metadata associated with the data.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.StorageResult.LastModified">
+            <summary>
+            Gets or sets when the data was last modified.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.StorageResult.SizeBytes">
+            <summary>
+            Gets or sets the size of the data in bytes.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.StorageResult.ContentType">
+            <summary>
+            Gets or sets the content type/MIME type of the data.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.StorageResult.ETag">
+            <summary>
+            Gets or sets the ETag or version identifier.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Interfaces.BackupOptions">
+            <summary>
+            Represents backup configuration options.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.BackupOptions.BackupRegion">
+            <summary>
+            Gets or sets the backup region (for cross-region backup).
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.BackupOptions.StorageClass">
+            <summary>
+            Gets or sets the storage class for the backup.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.BackupOptions.EncryptBackup">
+            <summary>
+            Gets or sets whether to encrypt the backup.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.BackupOptions.RetentionDays">
+            <summary>
+            Gets or sets the retention period for the backup in days.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.BackupOptions.Metadata">
+            <summary>
+            Gets or sets additional backup metadata.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Interfaces.CloudStorageHealthStatus">
+            <summary>
+            Represents the health status of a cloud storage provider.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.CloudStorageHealthStatus.IsHealthy">
+            <summary>
+            Gets or sets whether the provider is healthy.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.CloudStorageHealthStatus.ResponseTimeMs">
+            <summary>
+            Gets or sets the response time in milliseconds.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.CloudStorageHealthStatus.LastChecked">
+            <summary>
+            Gets or sets the last check timestamp.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.CloudStorageHealthStatus.ErrorMessage">
+            <summary>
+            Gets or sets any error message if unhealthy.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.CloudStorageHealthStatus.AvailableCapacityBytes">
+            <summary>
+            Gets or sets the available storage capacity.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.CloudStorageHealthStatus.UsedCapacityBytes">
+            <summary>
+            Gets or sets the used storage capacity.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.CloudStorageHealthStatus.Details">
+            <summary>
+            Gets or sets additional health details.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Interfaces.CloudStorageUsageStats">
+            <summary>
+            Represents usage statistics for a cloud storage provider.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.CloudStorageUsageStats.StorageOperations">
+            <summary>
+            Gets or sets the number of storage operations.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.CloudStorageUsageStats.RetrievalOperations">
+            <summary>
+            Gets or sets the number of retrieval operations.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.CloudStorageUsageStats.DeletionOperations">
+            <summary>
+            Gets or sets the number of deletion operations.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.CloudStorageUsageStats.TotalBytesStored">
+            <summary>
+            Gets or sets the total bytes stored.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.CloudStorageUsageStats.TotalBytesTransferred">
+            <summary>
+            Gets or sets the total bytes transferred.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.CloudStorageUsageStats.EstimatedMonthlyCost">
+            <summary>
+            Gets or sets the estimated monthly cost based on usage.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.CloudStorageUsageStats.PeriodStart">
+            <summary>
+            Gets or sets the period start for these statistics.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.CloudStorageUsageStats.PeriodEnd">
+            <summary>
+            Gets or sets the period end for these statistics.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.CloudStorageUsageStats.Details">
+            <summary>
+            Gets or sets additional usage details.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Interfaces.CloudStorageException">
+            <summary>
+            Exception thrown when cloud storage operations fail.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.CloudStorageException.ProviderName">
+            <summary>
+            Gets the provider name where the error occurred.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.CloudStorageException.Operation">
+            <summary>
+            Gets the operation that failed.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.CloudStorageException.StoragePath">
+            <summary>
+            Gets the storage path involved in the operation.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.CloudStorageException.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the CloudStorageException class.
+            </summary>
+            <param name="providerName">The provider name.</param>
+            <param name="operation">The operation that failed.</param>
+            <param name="message">The error message.</param>
+            <param name="storagePath">The storage path involved.</param>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.CloudStorageException.#ctor(System.String,System.String,System.String,System.Exception,System.String)">
+            <summary>
+            Initializes a new instance of the CloudStorageException class.
+            </summary>
+            <param name="providerName">The provider name.</param>
+            <param name="operation">The operation that failed.</param>
+            <param name="message">The error message.</param>
+            <param name="innerException">The inner exception.</param>
+            <param name="storagePath">The storage path involved.</param>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Interfaces.IHybridSignatureManager">
+            <summary>
+            Manages hybrid signatures combining both classical and quantum-resistant algorithms
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.IHybridSignatureManager.ClassicAlgorithm">
+            <summary>
+            Gets the classical signature algorithm name
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.IHybridSignatureManager.QuantumAlgorithm">
+            <summary>
+            Gets the quantum-resistant signature algorithm name
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.IHybridSignatureManager.SignDualAsync(System.Byte[])">
+            <summary>
+            Signs a message using both classical and quantum-resistant algorithms
+            </summary>
+            <param name="message">The message to sign</param>
+            <returns>A tuple containing both the classical and quantum signatures</returns>
+            <exception cref="!:CryptographicException">Thrown when signing fails</exception>
+            <exception cref="T:System.ArgumentNullException">Thrown when message is null</exception>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.IHybridSignatureManager.VerifyDualAsync(System.Byte[],System.Byte[],System.Byte[])">
+            <summary>
+            Verifies both classical and quantum signatures
+            </summary>
+            <param name="message">The original message</param>
+            <param name="classicSig">The classical signature to verify</param>
+            <param name="quantumSig">The quantum-resistant signature to verify</param>
+            <returns>True if both signatures are valid, false otherwise</returns>
+            <exception cref="!:CryptographicException">Thrown when verification fails due to an error</exception>
+            <exception cref="T:System.ArgumentNullException">Thrown when any parameter is null</exception>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.IHybridSignatureManager.GetKeyStatusAsync">
+            <summary>
+            Gets the current key status for both algorithms
+            </summary>
+            <returns>A tuple indicating if keys are available for both algorithms</returns>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Interfaces.IKeyManager">
+            <summary>
+            Interface for key management operations
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.IKeyManager.GenerateKeyPairAsync(System.String,System.String,QuantumLedger.Cryptography.Models.KeyCategory,System.Nullable{System.Int32})">
+            <summary>
+            Generates a new key pair for an address
+            </summary>
+            <param name="address">The address to generate keys for</param>
+            <param name="algorithm">The algorithm to generate keys for</param>
+            <param name="category">The key category (Traditional or PQC)</param>
+            <param name="version">Optional specific version number</param>
+            <returns>The ID of the generated key pair</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.IKeyManager.GetPublicKeyAsync(System.String)">
+            <summary>
+            Gets the public key for a key pair
+            </summary>
+            <param name="keyId">The key pair ID</param>
+            <returns>The public key bytes</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.IKeyManager.GetPrivateKeyAsync(System.String)">
+            <summary>
+            Gets the private key for a key pair
+            </summary>
+            <param name="keyId">The key pair ID</param>
+            <returns>The private key bytes</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.IKeyManager.GetAlgorithmAsync(System.String)">
+            <summary>
+            Gets the algorithm for a key pair
+            </summary>
+            <param name="keyId">The key pair ID</param>
+            <returns>The algorithm name</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.IKeyManager.GetVersionAsync(System.String)">
+            <summary>
+            Gets the version number for a key pair
+            </summary>
+            <param name="keyId">The key pair ID</param>
+            <returns>The version number</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.IKeyManager.GetLatestVersionAsync(System.String,QuantumLedger.Cryptography.Models.KeyCategory)">
+            <summary>
+            Gets the latest version number for an address and category
+            </summary>
+            <param name="address">The address to check</param>
+            <param name="category">The key category</param>
+            <returns>The latest version number</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.IKeyManager.RotateKeysAsync(System.String,QuantumLedger.Cryptography.Models.KeyCategory)">
+            <summary>
+            Rotates keys for an address
+            </summary>
+            <param name="address">The address to rotate keys for</param>
+            <param name="category">The key category to rotate</param>
+            <returns>The ID of the new key pair</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.IKeyManager.GetLatestKeyPairAsync(System.String,QuantumLedger.Cryptography.Models.KeyCategory)">
+            <summary>
+            Gets the latest key pair ID for an address and category
+            </summary>
+            <param name="address">The address to get the latest key for</param>
+            <param name="category">The key category</param>
+            <returns>The key pair ID, or null if none exist</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.IKeyManager.GetAddressKeysAsync(System.String)">
+            <summary>
+            Gets all active keys for an address
+            </summary>
+            <param name="address">The address to get keys for</param>
+            <returns>Collection of key entities</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.IKeyManager.GetCurrentKeyAsync(System.String,QuantumLedger.Cryptography.Models.KeyCategory)">
+            <summary>
+            Gets the current active key for an address and category
+            </summary>
+            <param name="address">The address to get the key for</param>
+            <param name="category">The key category</param>
+            <returns>The key entity, or null if none exists</returns>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Interfaces.IKeyVaultProvider">
+            <summary>
+            Interface for multi-cloud key vault providers supporting hybrid encryption.
+            Implements cost-optimized key management with single master key per provider.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.IKeyVaultProvider.ProviderName">
+            <summary>
+            Gets the name of the key vault provider.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.IKeyVaultProvider.MonthlyCostPer1MAccounts">
+            <summary>
+            Gets the monthly cost per 1M accounts for this provider.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.IKeyVaultProvider.CostPriority">
+            <summary>
+            Gets the priority order for cost optimization (lower is better).
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.IKeyVaultProvider.IsAvailable">
+            <summary>
+            Gets whether this provider is currently available and healthy.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.IKeyVaultProvider.DeriveEncryptionKeyAsync(System.String,System.String)">
+            <summary>
+            Derives an encryption key for a specific account and algorithm using the master key.
+            This implements the hybrid encryption approach for cost optimization.
+            </summary>
+            <param name="accountId">The account identifier.</param>
+            <param name="algorithm">The cryptographic algorithm.</param>
+            <returns>The derived encryption key.</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.IKeyVaultProvider.EncryptAsync(System.Byte[],System.String,System.String)">
+            <summary>
+            Encrypts data using the provider's master key and account-specific derivation.
+            </summary>
+            <param name="data">The data to encrypt.</param>
+            <param name="accountId">The account identifier for key derivation.</param>
+            <param name="algorithm">The cryptographic algorithm.</param>
+            <returns>The encrypted data.</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.IKeyVaultProvider.DecryptAsync(System.Byte[],System.String,System.String)">
+            <summary>
+            Decrypts data using the provider's master key and account-specific derivation.
+            </summary>
+            <param name="encryptedData">The encrypted data.</param>
+            <param name="accountId">The account identifier for key derivation.</param>
+            <param name="algorithm">The cryptographic algorithm.</param>
+            <returns>The decrypted data.</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.IKeyVaultProvider.ValidateConnectionAsync">
+            <summary>
+            Validates the connection to the key vault provider.
+            </summary>
+            <returns>True if the connection is valid; otherwise, false.</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.IKeyVaultProvider.GetHealthStatusAsync">
+            <summary>
+            Gets the health status of the key vault provider.
+            </summary>
+            <returns>The health status information.</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.IKeyVaultProvider.RotateMasterKeyAsync">
+            <summary>
+            Rotates the master key for this provider (advanced operation).
+            </summary>
+            <returns>True if the rotation was successful; otherwise, false.</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.IKeyVaultProvider.GetUsageStatsAsync">
+            <summary>
+            Gets usage statistics for cost monitoring.
+            </summary>
+            <returns>The usage statistics.</returns>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Interfaces.KeyVaultHealthStatus">
+            <summary>
+            Represents the health status of a key vault provider.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.KeyVaultHealthStatus.IsHealthy">
+            <summary>
+            Gets or sets whether the provider is healthy.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.KeyVaultHealthStatus.ResponseTimeMs">
+            <summary>
+            Gets or sets the response time in milliseconds.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.KeyVaultHealthStatus.LastChecked">
+            <summary>
+            Gets or sets the last check timestamp.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.KeyVaultHealthStatus.ErrorMessage">
+            <summary>
+            Gets or sets any error message if unhealthy.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.KeyVaultHealthStatus.Details">
+            <summary>
+            Gets or sets additional health details.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Interfaces.KeyVaultUsageStats">
+            <summary>
+            Represents usage statistics for a key vault provider.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.KeyVaultUsageStats.EncryptionOperations">
+            <summary>
+            Gets or sets the number of encryption operations.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.KeyVaultUsageStats.DecryptionOperations">
+            <summary>
+            Gets or sets the number of decryption operations.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.KeyVaultUsageStats.KeyDerivationOperations">
+            <summary>
+            Gets or sets the number of key derivation operations.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.KeyVaultUsageStats.EstimatedMonthlyCost">
+            <summary>
+            Gets or sets the estimated monthly cost based on usage.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.KeyVaultUsageStats.PeriodStart">
+            <summary>
+            Gets or sets the period start for these statistics.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.KeyVaultUsageStats.PeriodEnd">
+            <summary>
+            Gets or sets the period end for these statistics.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.KeyVaultUsageStats.Details">
+            <summary>
+            Gets or sets additional usage details.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Interfaces.KeyVaultException">
+            <summary>
+            Exception thrown when key vault operations fail.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.KeyVaultException.ProviderName">
+            <summary>
+            Gets the provider name where the error occurred.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.KeyVaultException.Operation">
+            <summary>
+            Gets the operation that failed.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.KeyVaultException.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the KeyVaultException class.
+            </summary>
+            <param name="providerName">The provider name.</param>
+            <param name="operation">The operation that failed.</param>
+            <param name="message">The error message.</param>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.KeyVaultException.#ctor(System.String,System.String,System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the KeyVaultException class.
+            </summary>
+            <param name="providerName">The provider name.</param>
+            <param name="operation">The operation that failed.</param>
+            <param name="message">The error message.</param>
+            <param name="innerException">The inner exception.</param>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Interfaces.ISignatureProvider">
+            <summary>
+            Provides cryptographic signature operations for a specific algorithm
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Interfaces.ISignatureProvider.Algorithm">
+            <summary>
+            Gets the name of the signature algorithm
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.ISignatureProvider.SignAsync(System.Byte[],System.Byte[])">
+            <summary>
+            Signs a message using the specified private key
+            </summary>
+            <param name="message">The message to sign</param>
+            <param name="privateKey">The private key to use for signing</param>
+            <returns>The signature bytes</returns>
+            <exception cref="T:System.Security.Cryptography.CryptographicException">Thrown when signing fails</exception>
+            <exception cref="T:System.ArgumentNullException">Thrown when message or privateKey is null</exception>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.ISignatureProvider.VerifyAsync(System.Byte[],System.Byte[],System.Byte[])">
+            <summary>
+            Verifies a signature using the specified public key
+            </summary>
+            <param name="message">The original message</param>
+            <param name="signature">The signature to verify</param>
+            <param name="publicKey">The public key to use for verification</param>
+            <returns>True if the signature is valid, false otherwise</returns>
+            <exception cref="T:System.Security.Cryptography.CryptographicException">Thrown when verification fails due to an error</exception>
+            <exception cref="T:System.ArgumentNullException">Thrown when any parameter is null</exception>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Interfaces.ISubstitutionKeyService">
+            <summary>
+            Interface for managing substitution keys (user-controlled delegation keys)
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.ISubstitutionKeyService.GenerateSubstitutionKeyAsync(System.String,System.Nullable{System.DateTime})">
+            <summary>
+            Generates a new substitution key pair for an address
+            </summary>
+            <param name="address">The address to generate substitution key for</param>
+            <param name="expiresAt">Optional expiration date (defaults to 1 year)</param>
+            <returns>The generated substitution key pair</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.ISubstitutionKeyService.VerifyRequestSignatureAsync(System.Byte[],System.String,System.String)">
+            <summary>
+            Verifies a request signature using a substitution key
+            </summary>
+            <param name="requestData">The request data that was signed</param>
+            <param name="signature">The signature to verify (base64 encoded)</param>
+            <param name="substitutionKeyId">The substitution key ID used for signing</param>
+            <returns>True if the signature is valid</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.ISubstitutionKeyService.VerifyAuthorizationAsync(System.String,System.String)">
+            <summary>
+            Verifies that a substitution key is authorized for a specific address
+            </summary>
+            <param name="substitutionKeyId">The substitution key ID to verify</param>
+            <param name="address">The address to check authorization for</param>
+            <returns>True if the substitution key is authorized for the address</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.ISubstitutionKeyService.GetLinkedAddressAsync(System.String)">
+            <summary>
+            Gets the linked main account address for a substitution key
+            </summary>
+            <param name="substitutionKeyId">The substitution key ID</param>
+            <returns>The linked address, or null if not found</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.ISubstitutionKeyService.RevokeSubstitutionKeyAsync(System.String)">
+            <summary>
+            Revokes a substitution key
+            </summary>
+            <param name="substitutionKeyId">The substitution key ID to revoke</param>
+            <returns>True if the key was successfully revoked</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.ISubstitutionKeyService.RotateSubstitutionKeyAsync(System.String)">
+            <summary>
+            Rotates (creates a new version of) a substitution key for an address
+            </summary>
+            <param name="address">The address to rotate substitution key for</param>
+            <returns>The new substitution key pair</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.ISubstitutionKeyService.GetSubstitutionKeysAsync(System.String,QuantumLedger.Cryptography.Models.SubstitutionKeyCriteria)">
+            <summary>
+            Gets all active substitution keys for an address
+            </summary>
+            <param name="address">The address to get substitution keys for</param>
+            <param name="criteria">Optional criteria for filtering keys</param>
+            <returns>Collection of substitution key pairs</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.ISubstitutionKeyService.GetCurrentSubstitutionKeyAsync(System.String)">
+            <summary>
+            Gets the current active substitution key for an address
+            </summary>
+            <param name="address">The address to get the current substitution key for</param>
+            <returns>The current substitution key pair, or null if none exists</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.ISubstitutionKeyService.VerifySubstitutionKeyRequestAsync(System.Byte[],System.String,System.String,System.String)">
+            <summary>
+            Verifies a complete substitution key request with detailed results
+            </summary>
+            <param name="requestData">The request data that was signed</param>
+            <param name="signature">The signature to verify (base64 encoded)</param>
+            <param name="substitutionKeyId">The substitution key ID used for signing</param>
+            <param name="expectedAddress">The expected address for authorization</param>
+            <returns>Detailed verification result</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.ISubstitutionKeyService.UpdateExpirationAsync(System.String,System.DateTime)">
+            <summary>
+            Updates the expiration date of a substitution key
+            </summary>
+            <param name="substitutionKeyId">The substitution key ID to update</param>
+            <param name="newExpirationDate">The new expiration date</param>
+            <returns>True if the expiration was successfully updated</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.ISubstitutionKeyService.GetSubstitutionPublicKeyAsync(System.String)">
+            <summary>
+            Gets the public key for a substitution key (for verification purposes)
+            </summary>
+            <param name="substitutionKeyId">The substitution key ID</param>
+            <returns>The public key bytes, or null if not found</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.ISubstitutionKeyService.IsSubstitutionKeyActiveAsync(System.String)">
+            <summary>
+            Checks if a substitution key exists and is active
+            </summary>
+            <param name="substitutionKeyId">The substitution key ID to check</param>
+            <returns>True if the key exists and is active</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Interfaces.ISubstitutionKeyService.GetSubstitutionKeyStatsAsync(System.String)">
+            <summary>
+            Gets usage statistics for a substitution key
+            </summary>
+            <param name="substitutionKeyId">The substitution key ID</param>
+            <returns>Dictionary containing usage statistics</returns>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Management.KeyManager">
+            <summary>
+            Manages cryptographic keys including generation, storage, and lifecycle
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Management.KeyManager.#ctor(QuantumLedger.Cryptography.Storage.IKeyStorage,Microsoft.Extensions.Logging.ILogger{QuantumLedger.Cryptography.Management.KeyManager})">
+            <summary>
+            Creates a new instance of KeyManager
+            </summary>
+            <param name="storage">Key storage implementation</param>
+            <param name="logger">Logger instance</param>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Management.KeyManager.GenerateKeyPairAsync(System.String,System.String,QuantumLedger.Cryptography.Models.KeyCategory,System.Nullable{System.Int32})">
+            <inheritdoc/>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Management.KeyManager.GetPublicKeyAsync(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Management.KeyManager.GetPrivateKeyAsync(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Management.KeyManager.GetAlgorithmAsync(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Management.KeyManager.RotateKeysAsync(System.String,QuantumLedger.Cryptography.Models.KeyCategory)">
+            <inheritdoc/>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Management.KeyManager.GetVersionAsync(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Management.KeyManager.GetLatestVersionAsync(System.String,QuantumLedger.Cryptography.Models.KeyCategory)">
+            <inheritdoc/>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Management.KeyManager.GetLatestKeyPairAsync(System.String,QuantumLedger.Cryptography.Models.KeyCategory)">
+            <inheritdoc/>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Management.KeyManager.GetAddressKeysAsync(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Management.KeyManager.GetCurrentKeyAsync(System.String,QuantumLedger.Cryptography.Models.KeyCategory)">
+            <inheritdoc/>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Models.KeyCategory">
+            <summary>
+            Key categories supported by the system
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Models.KeyEntity">
+            <summary>
+            Represents a cryptographic key entity in the system
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.KeyEntity.Id">
+            <summary>
+            Gets or sets the unique identifier for this key
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.KeyEntity.TableName">
+            <summary>
+            Gets the table name for SurrealDB
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.KeyEntity.Namespace">
+            <summary>
+            Gets the namespace for SurrealDB
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.KeyEntity.Address">
+            <summary>
+            Gets or sets the address this key belongs to
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.KeyEntity.Category">
+            <summary>
+            Gets or sets the key category (Traditional, PostQuantum, or Substitution)
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.KeyEntity.Algorithm">
+            <summary>
+            Gets or sets the specific algorithm used (EC-256, DILITHIUM, FALCON, or EC-256 for substitution)
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.KeyEntity.KeyIdentifier">
+            <summary>
+            Gets or sets the key identifier used in cryptographic operations
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.KeyEntity.EncryptedKeyData">
+            <summary>
+            Gets or sets the encrypted key data
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.KeyEntity.S3Reference">
+            <summary>
+            Gets or sets the reference to the encrypted backup in S3
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.KeyEntity.CreatedAt">
+            <summary>
+            Gets or sets when this key was created
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.KeyEntity.RevokedAt">
+            <summary>
+            Gets or sets when this key was revoked (if applicable)
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.KeyEntity.IsActive">
+            <summary>
+            Gets whether this key is currently active
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.KeyEntity.Version">
+            <summary>
+            Gets or sets the version of this key
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.KeyEntity.PreviousVersionId">
+            <summary>
+            Gets or sets the previous version's key identifier (if any)
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.KeyEntity.Metadata">
+            <summary>
+            Gets or sets metadata about the key
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.KeyEntity.LastAccessedAt">
+            <summary>
+            Gets or sets the last time this key was accessed
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.KeyEntity.ExpiresAt">
+            <summary>
+            Gets or sets the expiration date of this key (if any)
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.KeyEntity.IsExpired">
+            <summary>
+            Gets whether this key has expired
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.KeyEntity.KmsKeyId">
+            <summary>
+            Gets or sets the KMS key ID used to encrypt this key
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.KeyEntity.Checksum">
+            <summary>
+            Gets or sets the checksum of the encrypted key data
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.KeyEntity.IsSubstitutionKey">
+            <summary>
+            Gets whether this is a substitution key (user-controlled delegation key)
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.KeyEntity.LinkedMainAddress">
+            <summary>
+            Gets or sets the linked main account address (for substitution keys only)
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Models.DualSignature">
+            <summary>
+            Represents a dual signature with both classical and quantum signatures
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.DualSignature.ClassicSignature">
+            <summary>
+            Gets or sets the classical signature as a base64 string
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.DualSignature.QuantumSignature">
+            <summary>
+            Gets or sets the quantum signature as a base64 string
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.DualSignature.ClassicKeyId">
+            <summary>
+            Gets or sets the ID of the classical key used
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.DualSignature.QuantumKeyId">
+            <summary>
+            Gets or sets the ID of the quantum key used
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.DualSignature.CreatedAt">
+            <summary>
+            Gets or sets when this signature was created
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Models.DualSignature.GetClassicSignatureBytes">
+            <summary>
+            Gets the classical signature as a byte array
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Models.DualSignature.GetQuantumSignatureBytes">
+            <summary>
+            Gets the quantum signature as a byte array
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Models.SignatureResult">
+            <summary>
+            Represents the result of a signature operation
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.SignatureResult.Success">
+            <summary>
+            Gets or sets whether the operation was successful
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.SignatureResult.ErrorMessage">
+            <summary>
+            Gets or sets the error message if unsuccessful
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.SignatureResult.Signature">
+            <summary>
+            Gets or sets the generated signature
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Models.VerificationResult">
+            <summary>
+            Represents the result of a signature verification
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.VerificationResult.Success">
+            <summary>
+            Gets or sets whether both signatures are valid
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.VerificationResult.ClassicValid">
+            <summary>
+            Gets or sets whether the classical signature is valid
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.VerificationResult.QuantumValid">
+            <summary>
+            Gets or sets whether the quantum signature is valid
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.VerificationResult.ErrorMessage">
+            <summary>
+            Gets or sets the error message if unsuccessful
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Models.KeyStatus">
+            <summary>
+            Represents the status of cryptographic keys
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.KeyStatus.ClassicKeysAvailable">
+            <summary>
+            Gets or sets whether classical keys are available
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.KeyStatus.QuantumKeysAvailable">
+            <summary>
+            Gets or sets whether quantum keys are available
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.KeyStatus.ClassicKeyVersion">
+            <summary>
+            Gets or sets the current version of the classical key
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.KeyStatus.QuantumKeyVersion">
+            <summary>
+            Gets or sets the current version of the quantum key
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.KeyStatus.SubstitutionKeysAvailable">
+            <summary>
+            Gets or sets whether substitution keys are available
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.KeyStatus.SubstitutionKeyVersion">
+            <summary>
+            Gets or sets the current version of the substitution key
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Models.SubstitutionKeyPair">
+            <summary>
+            Represents a substitution key pair for user-controlled delegation
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.SubstitutionKeyPair.SubstitutionKeyId">
+            <summary>
+            Gets or sets the substitution key identifier
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.SubstitutionKeyPair.PrivateKey">
+            <summary>
+            Gets or sets the private key (given to user)
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.SubstitutionKeyPair.PublicKey">
+            <summary>
+            Gets or sets the public key (stored by system)
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.SubstitutionKeyPair.LinkedAddress">
+            <summary>
+            Gets or sets the linked main account address
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.SubstitutionKeyPair.CreatedAt">
+            <summary>
+            Gets or sets when this key was created
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.SubstitutionKeyPair.ExpiresAt">
+            <summary>
+            Gets or sets when this key expires
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.SubstitutionKeyPair.IsActive">
+            <summary>
+            Gets or sets whether this key is active
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Models.SubstitutionKeyPair.GetPrivateKeyBase64">
+            <summary>
+            Gets the private key as a base64 string for API responses
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Models.SubstitutionKeyPair.GetPublicKeyBase64">
+            <summary>
+            Gets the public key as a base64 string
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Models.AccountCreationResult">
+            <summary>
+            Represents the result of account creation with substitution keys
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.AccountCreationResult.Address">
+            <summary>
+            Gets or sets the created account address
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.AccountCreationResult.SubstitutionKey">
+            <summary>
+            Gets or sets the substitution key pair (given to user)
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.AccountCreationResult.ClassicKeyId">
+            <summary>
+            Gets or sets the classical key ID (kept by system)
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.AccountCreationResult.QuantumKeyId">
+            <summary>
+            Gets or sets the quantum key ID (kept by system)
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.AccountCreationResult.CreatedAt">
+            <summary>
+            Gets or sets when the account was created
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.AccountCreationResult.Metadata">
+            <summary>
+            Gets or sets additional metadata
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Models.SubstitutionKeyVerificationResult">
+            <summary>
+            Represents the result of substitution key verification
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.SubstitutionKeyVerificationResult.Success">
+            <summary>
+            Gets or sets whether the verification was successful
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.SubstitutionKeyVerificationResult.SignatureValid">
+            <summary>
+            Gets or sets whether the signature is valid
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.SubstitutionKeyVerificationResult.AuthorizedForAddress">
+            <summary>
+            Gets or sets whether the key is authorized for the address
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.SubstitutionKeyVerificationResult.AuthenticatedAddress">
+            <summary>
+            Gets or sets the authenticated address
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.SubstitutionKeyVerificationResult.ErrorMessage">
+            <summary>
+            Gets or sets the error message if unsuccessful
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.SubstitutionKeyVerificationResult.Context">
+            <summary>
+            Gets or sets additional context information
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Models.SubstitutionKeyCriteria">
+            <summary>
+            Represents criteria for substitution key operations
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.SubstitutionKeyCriteria.Address">
+            <summary>
+            Gets or sets the address to filter by
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.SubstitutionKeyCriteria.IncludeExpired">
+            <summary>
+            Gets or sets whether to include expired keys
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.SubstitutionKeyCriteria.IncludeRevoked">
+            <summary>
+            Gets or sets whether to include revoked keys
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.SubstitutionKeyCriteria.MaxAge">
+            <summary>
+            Gets or sets the maximum age of keys to include
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Models.SubstitutionKeyCriteria.MinVersion">
+            <summary>
+            Gets or sets the minimum version to include
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Pipeline.ISignaturePipeline">
+            <summary>
+            Represents a pipeline for signature verification and management
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Pipeline.ISignaturePipeline.SignAsync(System.Byte[],System.String)">
+            <summary>
+            Signs a message using both classical and quantum algorithms
+            </summary>
+            <param name="message">The message to sign</param>
+            <param name="address">The address to use for signing</param>
+            <returns>The signature result containing both signatures</returns>
+            <exception cref="T:QuantumLedger.Cryptography.Exceptions.SigningException">Thrown when signing fails</exception>
+            <exception cref="T:System.ArgumentNullException">Thrown when message is null</exception>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Pipeline.ISignaturePipeline.SignAsync(System.Byte[])">
+            <summary>
+            Signs a message using both classical and quantum algorithms
+            </summary>
+            <param name="message">The message to sign</param>
+            <returns>The signature result containing both signatures</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Pipeline.ISignaturePipeline.VerifyAsync(System.Byte[],QuantumLedger.Cryptography.Pipeline.DualSignature)">
+            <summary>
+            Verifies a dual signature (classical and quantum)
+            </summary>
+            <param name="message">The original message</param>
+            <param name="signature">The signature to verify</param>
+            <returns>The verification result</returns>
+            <exception cref="T:QuantumLedger.Cryptography.Exceptions.SignatureVerificationException">Thrown when verification fails</exception>
+            <exception cref="T:System.ArgumentNullException">Thrown when any parameter is null</exception>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Pipeline.ISignaturePipeline.GetKeyStatusAsync(System.String)">
+            <summary>
+            Gets the current key status for both algorithms
+            </summary>
+            <param name="address">The address to get status for</param>
+            <returns>The key status for both algorithms</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Pipeline.ISignaturePipeline.GetKeyStatusAsync">
+            <summary>
+            Gets the current key status for both algorithms
+            </summary>
+            <returns>The key status for both algorithms</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Pipeline.ISignaturePipeline.RotateKeysAsync(System.String)">
+            <summary>
+            Rotates keys for both algorithms
+            </summary>
+            <param name="address">The address to rotate keys for</param>
+            <returns>The new key IDs for both algorithms</returns>
+            <exception cref="T:QuantumLedger.Cryptography.Exceptions.KeyOperationException">Thrown when rotation fails</exception>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Pipeline.ISignaturePipeline.RotateKeysAsync">
+            <summary>
+            Rotates keys for both algorithms
+            </summary>
+            <returns>The new key IDs for both algorithms</returns>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Pipeline.DualSignature">
+            <summary>
+            Represents a dual signature containing both classical and quantum signatures
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Pipeline.DualSignature.ClassicSignature">
+            <summary>
+            Gets or sets the classical signature as a base64 string
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Pipeline.DualSignature.QuantumSignature">
+            <summary>
+            Gets or sets the quantum-resistant signature as a base64 string
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Pipeline.DualSignature.ClassicKeyId">
+            <summary>
+            Gets or sets the ID of the classical key used
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Pipeline.DualSignature.QuantumKeyId">
+            <summary>
+            Gets or sets the ID of the quantum key used
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Pipeline.DualSignature.CreatedAt">
+            <summary>
+            Gets or sets when this signature was created
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Pipeline.DualSignature.GetClassicSignatureBytes">
+            <summary>
+            Gets the classical signature as a byte array
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Pipeline.DualSignature.GetQuantumSignatureBytes">
+            <summary>
+            Gets the quantum signature as a byte array
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Pipeline.SignatureResult">
+            <summary>
+            Represents the result of a signing operation
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Pipeline.SignatureResult.Success">
+            <summary>
+            Gets or sets whether the signing was successful
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Pipeline.SignatureResult.Signature">
+            <summary>
+            Gets or sets the dual signature if successful
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Pipeline.SignatureResult.ErrorMessage">
+            <summary>
+            Gets or sets the error message if not successful
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Pipeline.VerificationResult">
+            <summary>
+            Represents the result of a verification operation
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Pipeline.VerificationResult.Success">
+            <summary>
+            Gets or sets whether the verification was successful
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Pipeline.VerificationResult.ClassicValid">
+            <summary>
+            Gets or sets whether the classical signature was valid
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Pipeline.VerificationResult.QuantumValid">
+            <summary>
+            Gets or sets whether the quantum signature was valid
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Pipeline.VerificationResult.ErrorMessage">
+            <summary>
+            Gets or sets the error message if not successful
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Pipeline.KeyStatus">
+            <summary>
+            Represents the current status of cryptographic keys
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Pipeline.KeyStatus.ClassicKeysAvailable">
+            <summary>
+            Gets or sets whether classical keys are available
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Pipeline.KeyStatus.QuantumKeysAvailable">
+            <summary>
+            Gets or sets whether quantum keys are available
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Pipeline.KeyStatus.ClassicKeyVersion">
+            <summary>
+            Gets or sets the current classical key version
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Pipeline.KeyStatus.QuantumKeyVersion">
+            <summary>
+            Gets or sets the current quantum key version
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Pipeline.SignaturePipeline">
+            <summary>
+            Implements the signature pipeline for dual signature operations
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Pipeline.SignaturePipeline.#ctor(QuantumLedger.Cryptography.Interfaces.IKeyManager,QuantumLedger.Cryptography.Interfaces.ISignatureProvider,QuantumLedger.Cryptography.Interfaces.ISignatureProvider,Microsoft.Extensions.Logging.ILogger{QuantumLedger.Cryptography.Pipeline.SignaturePipeline})">
+            <summary>
+            Creates a new instance of SignaturePipeline
+            </summary>
+            <param name="keyManager">Key manager instance</param>
+            <param name="classicProvider">Classical signature provider</param>
+            <param name="quantumProvider">Quantum signature provider</param>
+            <param name="logger">Logger instance</param>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Pipeline.SignaturePipeline.SignAsync(System.Byte[],System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Pipeline.SignaturePipeline.VerifyAsync(System.Byte[],QuantumLedger.Cryptography.Pipeline.DualSignature)">
+            <inheritdoc/>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Pipeline.SignaturePipeline.GetKeyStatusAsync(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Pipeline.SignaturePipeline.RotateKeysAsync(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Providers.AWS.AwsKmsProvider">
+            <summary>
+            AWS KMS provider implementation for hybrid encryption with cost optimization.
+            Uses a single master key per provider with account-specific key derivation.
+            Cost: $21.24/month for 1M+ accounts (vs $3M/month with individual keys).
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.AWS.AwsKmsProvider.DeriveEncryptionKeyAsync(System.String,System.String)">
+            <summary>
+            Derives an encryption key for a specific account and algorithm using HKDF.
+            This implements the hybrid encryption approach for massive cost savings.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.AWS.AwsKmsProvider.EncryptAsync(System.Byte[],System.String,System.String)">
+            <summary>
+            Encrypts data using the provider's master key and account-specific derivation.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.AWS.AwsKmsProvider.DecryptAsync(System.Byte[],System.String,System.String)">
+            <summary>
+            Decrypts data using the provider's master key and account-specific derivation.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.AWS.AwsKmsProvider.ValidateConnectionAsync">
+            <summary>
+            Validates the connection to AWS KMS.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.AWS.AwsKmsProvider.GetHealthStatusAsync">
+            <summary>
+            Gets the health status of the AWS KMS provider.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.AWS.AwsKmsProvider.RotateMasterKeyAsync">
+            <summary>
+            Rotates the master key for this provider (advanced operation).
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.AWS.AwsKmsProvider.GetUsageStatsAsync">
+            <summary>
+            Gets usage statistics for cost monitoring.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.AWS.AwsKmsProvider.GetMasterKeyBytesAsync">
+            <summary>
+            Gets the master key bytes (simulated for development).
+            In production, this would derive from AWS KMS.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.AWS.AwsKmsProvider.DeriveKeyUsingHKDF(System.Byte[],System.Byte[],System.Int32)">
+            <summary>
+            Derives a key using HKDF (HMAC-based Key Derivation Function).
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Providers.AWS.AwsS3StorageProvider">
+            <summary>
+            AWS S3 storage provider implementation for secure private key storage.
+            Provides encrypted storage with metadata support and cross-region backup capabilities.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.AWS.AwsS3StorageProvider.StoreAsync(System.Byte[],System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Stores encrypted data in AWS S3 with organized path structure.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.AWS.AwsS3StorageProvider.RetrieveAsync(System.String)">
+            <summary>
+            Retrieves encrypted data from AWS S3.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.AWS.AwsS3StorageProvider.RetrieveWithMetadataAsync(System.String)">
+            <summary>
+            Retrieves encrypted data along with its metadata from AWS S3.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.AWS.AwsS3StorageProvider.DeleteAsync(System.String)">
+            <summary>
+            Deletes data from AWS S3.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.AWS.AwsS3StorageProvider.ExistsAsync(System.String)">
+            <summary>
+            Checks if data exists at the specified path in AWS S3.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.AWS.AwsS3StorageProvider.ListAccountPathsAsync(System.String)">
+            <summary>
+            Lists all storage paths for a specific account.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.AWS.AwsS3StorageProvider.GetMetadataAsync(System.String)">
+            <summary>
+            Gets metadata for stored data without retrieving the data itself.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.AWS.AwsS3StorageProvider.UpdateMetadataAsync(System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Updates metadata for stored data.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.AWS.AwsS3StorageProvider.ValidateConnectionAsync">
+            <summary>
+            Validates the connection to AWS S3.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.AWS.AwsS3StorageProvider.GetHealthStatusAsync">
+            <summary>
+            Gets the health status of the AWS S3 provider.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.AWS.AwsS3StorageProvider.GetUsageStatsAsync">
+            <summary>
+            Gets usage statistics for cost monitoring.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.AWS.AwsS3StorageProvider.CreateBackupAsync(System.String,QuantumLedger.Cryptography.Interfaces.BackupOptions)">
+            <summary>
+            Creates a backup of data to a different region or storage class.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.AWS.AwsS3StorageProvider.RestoreFromBackupAsync(System.String,System.String)">
+            <summary>
+            Restores data from a backup.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Providers.Azure.AzureBlobStorageProvider">
+            <summary>
+            Azure Blob Storage provider implementation for secure private key storage.
+            Provides encrypted storage with metadata support and cross-region backup capabilities.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.Azure.AzureBlobStorageProvider.StoreAsync(System.Byte[],System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Stores encrypted data in Azure Blob Storage with organized path structure.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.Azure.AzureBlobStorageProvider.RetrieveAsync(System.String)">
+            <summary>
+            Retrieves encrypted data from Azure Blob Storage.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.Azure.AzureBlobStorageProvider.RetrieveWithMetadataAsync(System.String)">
+            <summary>
+            Retrieves encrypted data along with its metadata from Azure Blob Storage.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.Azure.AzureBlobStorageProvider.DeleteAsync(System.String)">
+            <summary>
+            Deletes data from Azure Blob Storage.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.Azure.AzureBlobStorageProvider.ExistsAsync(System.String)">
+            <summary>
+            Checks if data exists at the specified path in Azure Blob Storage.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.Azure.AzureBlobStorageProvider.ListAccountPathsAsync(System.String)">
+            <summary>
+            Lists all storage paths for a specific account.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.Azure.AzureBlobStorageProvider.GetMetadataAsync(System.String)">
+            <summary>
+            Gets metadata for stored data without retrieving the data itself.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.Azure.AzureBlobStorageProvider.UpdateMetadataAsync(System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Updates metadata for stored data.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.Azure.AzureBlobStorageProvider.ValidateConnectionAsync">
+            <summary>
+            Validates the connection to Azure Blob Storage.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.Azure.AzureBlobStorageProvider.GetHealthStatusAsync">
+            <summary>
+            Gets the health status of the Azure Blob Storage provider.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.Azure.AzureBlobStorageProvider.GetUsageStatsAsync">
+            <summary>
+            Gets usage statistics for cost monitoring.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.Azure.AzureBlobStorageProvider.CreateBackupAsync(System.String,QuantumLedger.Cryptography.Interfaces.BackupOptions)">
+            <summary>
+            Creates a backup of data to a different region or storage tier.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.Azure.AzureBlobStorageProvider.RestoreFromBackupAsync(System.String,System.String)">
+            <summary>
+            Restores data from a backup.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Providers.Azure.AzureKeyVaultProvider">
+            <summary>
+            Azure Key Vault provider implementation for hybrid encryption with cost optimization.
+            Uses a single master key per provider with account-specific key derivation.
+            Cost: $19.21/month for 1M+ accounts (vs $3M/month with individual keys).
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.Azure.AzureKeyVaultProvider.DeriveEncryptionKeyAsync(System.String,System.String)">
+            <summary>
+            Derives an encryption key for a specific account and algorithm using HKDF.
+            This implements the hybrid encryption approach for massive cost savings.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.Azure.AzureKeyVaultProvider.EncryptAsync(System.Byte[],System.String,System.String)">
+            <summary>
+            Encrypts data using the provider's master key and account-specific derivation.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.Azure.AzureKeyVaultProvider.DecryptAsync(System.Byte[],System.String,System.String)">
+            <summary>
+            Decrypts data using the provider's master key and account-specific derivation.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.Azure.AzureKeyVaultProvider.ValidateConnectionAsync">
+            <summary>
+            Validates the connection to Azure Key Vault.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.Azure.AzureKeyVaultProvider.GetHealthStatusAsync">
+            <summary>
+            Gets the health status of the Azure Key Vault provider.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.Azure.AzureKeyVaultProvider.RotateMasterKeyAsync">
+            <summary>
+            Rotates the master key for this provider (advanced operation).
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.Azure.AzureKeyVaultProvider.GetUsageStatsAsync">
+            <summary>
+            Gets usage statistics for cost monitoring.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.Azure.AzureKeyVaultProvider.GetMasterKeyBytesAsync">
+            <summary>
+            Gets the master key bytes (simulated for development).
+            In production, this would derive from Azure Key Vault.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.Azure.AzureKeyVaultProvider.DeriveKeyUsingHKDF(System.Byte[],System.Byte[],System.Int32)">
+            <summary>
+            Derives a key using HKDF (HMAC-based Key Derivation Function).
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Providers.EC256SignatureProvider">
+            <summary>
+            Provides ECDSA signature operations using the P-256 curve and SHA-256 hash
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Providers.EC256SignatureProvider.Algorithm">
+            <summary>
+            Gets the name of the signature algorithm
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.EC256SignatureProvider.#ctor(Microsoft.Extensions.Logging.ILogger{QuantumLedger.Cryptography.Providers.EC256SignatureProvider})">
+            <summary>
+            Creates a new instance of EC256SignatureProvider
+            </summary>
+            <param name="logger">Logger instance</param>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.EC256SignatureProvider.SignAsync(System.Byte[],System.Byte[])">
+            <inheritdoc/>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.EC256SignatureProvider.VerifyAsync(System.Byte[],System.Byte[],System.Byte[])">
+            <inheritdoc/>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Providers.GoogleCloud.GoogleCloudKmsProvider">
+            <summary>
+            Google Cloud KMS provider implementation for hybrid encryption with cost optimization.
+            Uses a single master key per provider with account-specific key derivation.
+            Cost: $18.50/month for 1M+ accounts (vs $3M/month with individual keys) - CHEAPEST OPTION!
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.GoogleCloud.GoogleCloudKmsProvider.DeriveEncryptionKeyAsync(System.String,System.String)">
+            <summary>
+            Derives an encryption key for a specific account and algorithm using HKDF.
+            This implements the hybrid encryption approach for massive cost savings.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.GoogleCloud.GoogleCloudKmsProvider.EncryptAsync(System.Byte[],System.String,System.String)">
+            <summary>
+            Encrypts data using the provider's master key and account-specific derivation.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.GoogleCloud.GoogleCloudKmsProvider.DecryptAsync(System.Byte[],System.String,System.String)">
+            <summary>
+            Decrypts data using the provider's master key and account-specific derivation.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.GoogleCloud.GoogleCloudKmsProvider.ValidateConnectionAsync">
+            <summary>
+            Validates the connection to Google Cloud KMS.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.GoogleCloud.GoogleCloudKmsProvider.GetHealthStatusAsync">
+            <summary>
+            Gets the health status of the Google Cloud KMS provider.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.GoogleCloud.GoogleCloudKmsProvider.RotateMasterKeyAsync">
+            <summary>
+            Rotates the master key for this provider (advanced operation).
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.GoogleCloud.GoogleCloudKmsProvider.GetUsageStatsAsync">
+            <summary>
+            Gets usage statistics for cost monitoring.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.GoogleCloud.GoogleCloudKmsProvider.GetMasterKeyBytesAsync">
+            <summary>
+            Gets the master key bytes (simulated for development).
+            In production, this would derive from Google Cloud KMS.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.GoogleCloud.GoogleCloudKmsProvider.DeriveKeyUsingHKDF(System.Byte[],System.Byte[],System.Int32)">
+            <summary>
+            Derives a key using HKDF (HMAC-based Key Derivation Function).
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Providers.GoogleCloud.GoogleCloudStorageProvider">
+            <summary>
+            Google Cloud Storage provider implementation for secure private key storage.
+            Provides encrypted storage with metadata support and cross-region backup capabilities.
+            Optimized for cost-effectiveness as part of the cheapest multi-cloud option.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.GoogleCloud.GoogleCloudStorageProvider.StoreAsync(System.Byte[],System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Stores encrypted data in Google Cloud Storage with organized path structure.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.GoogleCloud.GoogleCloudStorageProvider.RetrieveAsync(System.String)">
+            <summary>
+            Retrieves encrypted data from Google Cloud Storage.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.GoogleCloud.GoogleCloudStorageProvider.RetrieveWithMetadataAsync(System.String)">
+            <summary>
+            Retrieves encrypted data along with its metadata from Google Cloud Storage.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.GoogleCloud.GoogleCloudStorageProvider.DeleteAsync(System.String)">
+            <summary>
+            Deletes data from Google Cloud Storage.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.GoogleCloud.GoogleCloudStorageProvider.ExistsAsync(System.String)">
+            <summary>
+            Checks if data exists at the specified path in Google Cloud Storage.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.GoogleCloud.GoogleCloudStorageProvider.ListAccountPathsAsync(System.String)">
+            <summary>
+            Lists all storage paths for a specific account.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.GoogleCloud.GoogleCloudStorageProvider.GetMetadataAsync(System.String)">
+            <summary>
+            Gets metadata for stored data without retrieving the data itself.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.GoogleCloud.GoogleCloudStorageProvider.UpdateMetadataAsync(System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Updates metadata for stored data.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.GoogleCloud.GoogleCloudStorageProvider.ValidateConnectionAsync">
+            <summary>
+            Validates the connection to Google Cloud Storage.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.GoogleCloud.GoogleCloudStorageProvider.GetHealthStatusAsync">
+            <summary>
+            Gets the health status of the Google Cloud Storage provider.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.GoogleCloud.GoogleCloudStorageProvider.GetUsageStatsAsync">
+            <summary>
+            Gets usage statistics for cost monitoring.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.GoogleCloud.GoogleCloudStorageProvider.CreateBackupAsync(System.String,QuantumLedger.Cryptography.Interfaces.BackupOptions)">
+            <summary>
+            Creates a backup of data to a different region or storage class.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Providers.GoogleCloud.GoogleCloudStorageProvider.RestoreFromBackupAsync(System.String,System.String)">
+            <summary>
+            Restores data from a backup.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Services.AccountCreationService">
+            <summary>
+            Service for creating accounts with multi-cloud key management, external owner ID support, and substitution keys.
+            Implements the revolutionary cost optimization strategy with hybrid encryption and delegation key system.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.AccountCreationService.CreateAccountAsync(QuantumLedger.Cryptography.Services.CreateAccountRequest)">
+            <summary>
+            Creates a new account with multi-algorithm key generation, cloud storage, and substitution keys.
+            Supports flexible external owner ID mapping for multi-vendor scenarios.
+            Implements the hybrid security model with custodial main keys and non-custodial substitution keys.
+            </summary>
+            <param name="request">The account creation request.</param>
+            <returns>The created account with key information and substitution key.</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.AccountCreationService.CreateAccountKeyAsync(System.Guid,System.String,System.String)">
+            <summary>
+            Creates a cryptographic key for an account using the specified algorithm.
+            Implements hybrid encryption with cloud storage for cost optimization.
+            </summary>
+            <param name="accountId">The account identifier.</param>
+            <param name="algorithm">The cryptographic algorithm.</param>
+            <param name="address">The account address.</param>
+            <returns>The key creation result.</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.AccountCreationService.GetAccountByExternalOwnerIdAsync(System.String,System.String)">
+            <summary>
+            Retrieves an account by external owner ID and vendor system.
+            </summary>
+            <param name="externalOwnerId">The external owner identifier.</param>
+            <param name="vendorSystem">The vendor system (optional).</param>
+            <returns>The account if found; otherwise, null.</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.AccountCreationService.GetAccountsByVendorSystemAsync(System.String,System.Int32,System.Int32)">
+            <summary>
+            Lists all accounts for a specific vendor system.
+            </summary>
+            <param name="vendorSystem">The vendor system.</param>
+            <param name="pageSize">The page size for pagination.</param>
+            <param name="pageNumber">The page number (1-based).</param>
+            <returns>A paginated list of accounts.</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.AccountCreationService.GenerateKeyPairAsync(System.String)">
+            <summary>
+            Generates a key pair for the specified algorithm.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.AccountCreationService.GenerateULID">
+            <summary>
+            Generates a ULID (Universally Unique Lexicographically Sortable Identifier).
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.AccountCreationService.GenerateAccountAddress">
+            <summary>
+            Generates a unique account address.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Services.CreateAccountRequest">
+            <summary>
+            Request model for creating a new account with substitution key support.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.CreateAccountRequest.ExternalOwnerId">
+            <summary>
+            Gets or sets the external owner identifier.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.CreateAccountRequest.OwnerIdType">
+            <summary>
+            Gets or sets the type of external owner ID.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.CreateAccountRequest.VendorSystem">
+            <summary>
+            Gets or sets the vendor system.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.CreateAccountRequest.OwnerType">
+            <summary>
+            Gets or sets the owner type.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.CreateAccountRequest.Algorithms">
+            <summary>
+            Gets or sets the algorithms to generate keys for.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.CreateAccountRequest.GenerateInternalReferenceId">
+            <summary>
+            Gets or sets whether to generate an internal reference ID (ULID).
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.CreateAccountRequest.GenerateSubstitutionKey">
+            <summary>
+            Gets or sets whether to generate a substitution key for user-controlled delegation.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.CreateAccountRequest.SubstitutionKeyExpiresAt">
+            <summary>
+            Gets or sets the expiration date for the substitution key (defaults to 1 year).
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.CreateAccountRequest.RequestedAddress">
+            <summary>
+            Gets or sets the requested address (optional - will be generated if not provided).
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.CreateAccountRequest.IsValid">
+            <summary>
+            Validates the request.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Services.EnhancedAccountCreationResult">
+            <summary>
+            Enhanced result model for account creation with substitution key support.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.EnhancedAccountCreationResult.Address">
+            <summary>
+            Gets or sets the account address.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.EnhancedAccountCreationResult.SubstitutionKey">
+            <summary>
+            Gets or sets the substitution key pair (given to user for delegation).
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.EnhancedAccountCreationResult.ClassicKeyId">
+            <summary>
+            Gets or sets the classical key ID (kept by system).
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.EnhancedAccountCreationResult.QuantumKeyId">
+            <summary>
+            Gets or sets the quantum key ID (kept by system).
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.EnhancedAccountCreationResult.Metadata">
+            <summary>
+            Gets or sets additional metadata about the account creation.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Services.AccountCreationResult">
+            <summary>
+            Result model for account creation.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.AccountCreationResult.Account">
+            <summary>
+            Gets or sets the created account.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.AccountCreationResult.KeyResults">
+            <summary>
+            Gets or sets the key creation results.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.AccountCreationResult.Success">
+            <summary>
+            Gets or sets whether the creation was successful.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.AccountCreationResult.ErrorMessage">
+            <summary>
+            Gets or sets the error message if creation failed.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.AccountCreationResult.CreatedAt">
+            <summary>
+            Gets or sets when the creation was attempted.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Services.AccountKeyResult">
+            <summary>
+            Result model for account key creation.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.AccountKeyResult.KeyId">
+            <summary>
+            Gets or sets the key identifier.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.AccountKeyResult.Algorithm">
+            <summary>
+            Gets or sets the algorithm.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.AccountKeyResult.PublicKey">
+            <summary>
+            Gets or sets the public key in base64 format.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.AccountKeyResult.StoragePath">
+            <summary>
+            Gets or sets the storage path for the private key.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.AccountKeyResult.CloudProvider">
+            <summary>
+            Gets or sets the cloud provider used.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.AccountKeyResult.Success">
+            <summary>
+            Gets or sets whether the key creation was successful.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.AccountKeyResult.ErrorMessage">
+            <summary>
+            Gets or sets the error message if creation failed.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.AccountKeyResult.CreatedAt">
+            <summary>
+            Gets or sets when the key was created.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Services.PaginatedResult`1">
+            <summary>
+            Generic paginated result model.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.PaginatedResult`1.Items">
+            <summary>
+            Gets or sets the items for the current page.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.PaginatedResult`1.TotalCount">
+            <summary>
+            Gets or sets the total count of items.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.PaginatedResult`1.PageSize">
+            <summary>
+            Gets or sets the page size.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.PaginatedResult`1.PageNumber">
+            <summary>
+            Gets or sets the current page number.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.PaginatedResult`1.TotalPages">
+            <summary>
+            Gets or sets the total number of pages.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.PaginatedResult`1.HasNextPage">
+            <summary>
+            Gets whether there is a next page.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.PaginatedResult`1.HasPreviousPage">
+            <summary>
+            Gets whether there is a previous page.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Services.CloudKeyVaultFactory">
+            <summary>
+            Factory implementation for creating and managing cloud key vault providers.
+            Implements cost optimization strategy achieving 99.9994% savings.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.CloudKeyVaultFactory.GetOptimalProvider">
+            <summary>
+            Gets the optimal provider based on cost optimization.
+            Returns Google Cloud KMS for 99.9994% cost savings.
+            </summary>
+            <returns>The most cost-effective key vault provider.</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.CloudKeyVaultFactory.GetProvider(QuantumLedger.Cryptography.Interfaces.CloudProvider)">
+            <summary>
+            Gets a specific cloud provider by type.
+            </summary>
+            <param name="provider">The cloud provider type.</param>
+            <returns>The requested key vault provider.</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.CloudKeyVaultFactory.GetHealthiestProviderAsync">
+            <summary>
+            Gets the healthiest available provider based on response times and availability.
+            </summary>
+            <returns>The healthiest key vault provider.</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.CloudKeyVaultFactory.GetAllProvidersHealthAsync">
+            <summary>
+            Gets all available providers with their health status.
+            </summary>
+            <returns>Dictionary of providers and their health status.</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.CloudKeyVaultFactory.GetCostComparison">
+            <summary>
+            Gets cost comparison for all providers.
+            </summary>
+            <returns>Dictionary of providers and their monthly costs.</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.CloudKeyVaultFactory.GetDetailedCostAnalysis">
+            <summary>
+            Gets detailed cost analysis with savings calculations.
+            </summary>
+            <returns>Comprehensive cost analysis.</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.CloudKeyVaultFactory.ValidateFactoryAsync">
+            <summary>
+            Validates that all providers are properly configured and cost optimization is working.
+            </summary>
+            <returns>Validation result with details.</returns>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Services.FactoryValidationResult">
+            <summary>
+            Result of factory validation.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.FactoryValidationResult.IsValid">
+            <summary>
+            Gets or sets whether the factory is valid and working correctly.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.FactoryValidationResult.CostOptimizationWorking">
+            <summary>
+            Gets or sets whether cost optimization is working.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.FactoryValidationResult.OptimalProviderAvailable">
+            <summary>
+            Gets or sets whether the optimal provider is available.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.FactoryValidationResult.OptimalProviderName">
+            <summary>
+            Gets or sets the name of the optimal provider.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.FactoryValidationResult.HealthyProviderCount">
+            <summary>
+            Gets or sets the number of healthy providers.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.FactoryValidationResult.TotalProviderCount">
+            <summary>
+            Gets or sets the total number of providers.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.FactoryValidationResult.ProviderHealthResults">
+            <summary>
+            Gets or sets the health results for all providers.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.FactoryValidationResult.ValidationError">
+            <summary>
+            Gets or sets the validation error message if validation failed.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.FactoryValidationResult.ValidationDate">
+            <summary>
+            Gets or sets when the validation was performed.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Services.CostOptimizationService">
+            <summary>
+            Service for optimizing cloud provider costs and achieving revolutionary savings.
+            Implements the 99.9994% cost reduction strategy ($18.50/month vs $3,000,520/month).
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.CostOptimizationService.GetOptimalProvider">
+            <summary>
+            Gets the optimal cloud provider based on cost optimization.
+            Always returns Google Cloud KMS for maximum cost savings.
+            </summary>
+            <returns>The most cost-effective cloud provider.</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.CostOptimizationService.GetOptimalProvider(QuantumLedger.Cryptography.Services.CostOptimizationCriteria)">
+            <summary>
+            Gets the optimal provider with specific requirements.
+            </summary>
+            <param name="criteria">Cost optimization criteria.</param>
+            <returns>The best provider for the given criteria.</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.CostOptimizationService.CalculateMonthlySavings(QuantumLedger.Cryptography.Interfaces.CloudProvider)">
+            <summary>
+            Calculates the monthly savings compared to traditional approach.
+            </summary>
+            <param name="provider">The cloud provider to calculate savings for.</param>
+            <returns>Monthly savings amount.</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.CostOptimizationService.CalculatePercentageSavings(QuantumLedger.Cryptography.Interfaces.CloudProvider)">
+            <summary>
+            Calculates the percentage savings compared to traditional approach.
+            </summary>
+            <param name="provider">The cloud provider to calculate savings for.</param>
+            <returns>Percentage savings (e.g., 99.9994 for 99.9994% savings).</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.CostOptimizationService.GetCostComparison">
+            <summary>
+            Gets cost comparison for all providers.
+            </summary>
+            <returns>Dictionary of providers and their costs.</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.CostOptimizationService.GetDetailedCostAnalysis">
+            <summary>
+            Gets detailed cost analysis for all providers.
+            </summary>
+            <returns>Comprehensive cost analysis.</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.CostOptimizationService.ValidateCostOptimization">
+            <summary>
+            Validates that the cost optimization is working correctly.
+            </summary>
+            <returns>True if cost optimization is achieving expected savings.</returns>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Services.CostOptimizationCriteria">
+            <summary>
+            Criteria for cost optimization decisions.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.CostOptimizationCriteria.RequireAWSCompliance">
+            <summary>
+            Gets or sets whether AWS compliance is required.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.CostOptimizationCriteria.RequireAzureIntegration">
+            <summary>
+            Gets or sets whether Azure integration is required.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.CostOptimizationCriteria.RequireLowestCost">
+            <summary>
+            Gets or sets whether the lowest cost is required.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.CostOptimizationCriteria.MaxMonthlyCost">
+            <summary>
+            Gets or sets the maximum acceptable monthly cost.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.CostOptimizationCriteria.MinSavingsPercentage">
+            <summary>
+            Gets or sets the minimum required savings percentage.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Services.CostAnalysis">
+            <summary>
+            Comprehensive cost analysis result.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.CostAnalysis.OptimalProvider">
+            <summary>
+            Gets or sets the optimal provider.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.CostAnalysis.OptimalMonthlyCost">
+            <summary>
+            Gets or sets the optimal monthly cost.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.CostAnalysis.MaxMonthlySavings">
+            <summary>
+            Gets or sets the maximum monthly savings.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.CostAnalysis.MaxSavingsPercentage">
+            <summary>
+            Gets or sets the maximum savings percentage.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.CostAnalysis.TraditionalMonthlyCost">
+            <summary>
+            Gets or sets the traditional monthly cost for comparison.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.CostAnalysis.ProviderAnalysis">
+            <summary>
+            Gets or sets the analysis for each provider.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.CostAnalysis.AnalysisDate">
+            <summary>
+            Gets or sets when the analysis was performed.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Services.ProviderCostAnalysis">
+            <summary>
+            Cost analysis for a specific provider.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.ProviderCostAnalysis.Provider">
+            <summary>
+            Gets or sets the cloud provider.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.ProviderCostAnalysis.MonthlyCost">
+            <summary>
+            Gets or sets the monthly cost.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.ProviderCostAnalysis.MonthlySavings">
+            <summary>
+            Gets or sets the monthly savings.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.ProviderCostAnalysis.SavingsPercentage">
+            <summary>
+            Gets or sets the savings percentage.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.ProviderCostAnalysis.IsOptimal">
+            <summary>
+            Gets or sets whether this is the optimal provider.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Services.MockSubstitutionKeyService">
+            <summary>
+            Mock implementation of ISubstitutionKeyService for development and testing.
+            This provides basic functionality until the full implementation is complete.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.MockSubstitutionKeyService.GenerateSubstitutionKeyAsync(System.String,System.Nullable{System.DateTime})">
+            <summary>
+            Generates a new substitution key pair for an address
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.MockSubstitutionKeyService.VerifyRequestSignatureAsync(System.Byte[],System.String,System.String)">
+            <summary>
+            Verifies a request signature using a substitution key
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.MockSubstitutionKeyService.VerifyAuthorizationAsync(System.String,System.String)">
+            <summary>
+            Verifies that a substitution key is authorized for a specific address
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.MockSubstitutionKeyService.GetLinkedAddressAsync(System.String)">
+            <summary>
+            Gets the linked main account address for a substitution key
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.MockSubstitutionKeyService.RevokeSubstitutionKeyAsync(System.String)">
+            <summary>
+            Revokes a substitution key
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.MockSubstitutionKeyService.RotateSubstitutionKeyAsync(System.String)">
+            <summary>
+            Rotates (creates a new version of) a substitution key for an address
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.MockSubstitutionKeyService.GetSubstitutionKeysAsync(System.String,QuantumLedger.Cryptography.Models.SubstitutionKeyCriteria)">
+            <summary>
+            Gets all active substitution keys for an address
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.MockSubstitutionKeyService.GetCurrentSubstitutionKeyAsync(System.String)">
+            <summary>
+            Gets the current active substitution key for an address
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.MockSubstitutionKeyService.VerifySubstitutionKeyRequestAsync(System.Byte[],System.String,System.String,System.String)">
+            <summary>
+            Verifies a complete substitution key request with detailed results
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.MockSubstitutionKeyService.UpdateExpirationAsync(System.String,System.DateTime)">
+            <summary>
+            Updates the expiration date of a substitution key
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.MockSubstitutionKeyService.GetSubstitutionPublicKeyAsync(System.String)">
+            <summary>
+            Gets the public key for a substitution key (for verification purposes)
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.MockSubstitutionKeyService.IsSubstitutionKeyActiveAsync(System.String)">
+            <summary>
+            Checks if a substitution key exists and is active
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.MockSubstitutionKeyService.GetSubstitutionKeyStatsAsync(System.String)">
+            <summary>
+            Gets usage statistics for a substitution key
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Services.IPublicKeyCacheService">
+            <summary>
+            High-performance caching service for public key registry entries
+            Provides sub-10ms lookup performance for frequently accessed public keys
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Services.CacheStatistics">
+            <summary>
+            Cache statistics for monitoring and optimization
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Services.PublicKeyCacheService">
+            <summary>
+            Redis-based implementation of public key caching service
+            Optimized for high-performance substitution key lookups
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.PublicKeyCacheService.GetPublicKeyAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Retrieves a public key from cache with performance tracking
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.PublicKeyCacheService.SetPublicKeyAsync(System.String,QuantumLedger.Models.Account.PublicKeyRegistryEntry,System.Nullable{System.TimeSpan},System.Threading.CancellationToken)">
+            <summary>
+            Stores a public key in cache with configurable expiration
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.PublicKeyCacheService.InvalidatePublicKeyAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Invalidates a specific public key from cache
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.PublicKeyCacheService.InvalidateAccountKeysAsync(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+            Invalidates all cached keys for a specific account
+            Used when account keys are rotated or revoked
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.PublicKeyCacheService.GetStatisticsAsync(System.Threading.CancellationToken)">
+            <summary>
+            Retrieves cache performance statistics
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.PublicKeyCacheService.ClearCacheAsync(System.Threading.CancellationToken)">
+            <summary>
+            Clears all cached public keys (use with caution)
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Services.SignatureVerificationService">
+            <summary>
+            Service for verifying digital signatures with multi-algorithm support and replay protection.
+            Implements high-performance signature verification with nonce validation.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.SignatureVerificationService.VerifySignedRequestAsync(QuantumLedger.Cryptography.Services.SignedRequest)">
+            <summary>
+            Verifies a signed request with replay protection and multi-algorithm support.
+            </summary>
+            <param name="request">The signed request to verify.</param>
+            <returns>The verification result.</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.SignatureVerificationService.ValidateRequestStructure(QuantumLedger.Cryptography.Services.SignedRequest)">
+            <summary>
+            Validates the structure of a signed request.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.SignatureVerificationService.CheckReplayProtectionAsync(QuantumLedger.Cryptography.Services.SignedRequest)">
+            <summary>
+            Checks for replay attacks using nonce validation.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.SignatureVerificationService.GetPublicKeyFromRegistryAsync(System.Guid,System.String)">
+            <summary>
+            Retrieves the public key from the registry for signature verification.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.SignatureVerificationService.VerifySignatureAsync(QuantumLedger.Cryptography.Services.SignedRequest,System.String,System.String)">
+            <summary>
+            Verifies the digital signature using the appropriate algorithm provider.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.SignatureVerificationService.RecordNonceAsync(QuantumLedger.Cryptography.Services.SignedRequest)">
+            <summary>
+            Records the nonce to prevent replay attacks.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.SignatureVerificationService.UpdatePublicKeyUsageAsync(System.String)">
+            <summary>
+            Updates public key usage statistics.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.SignatureVerificationService.GenerateNonceHash(System.String)">
+            <summary>
+            Generates a SHA-256 hash of the nonce for storage and lookup.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.SignatureVerificationService.GetVerificationStatsAsync">
+            <summary>
+            Gets verification statistics for monitoring.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.SignatureVerificationService.CleanupExpiredNoncesAsync">
+            <summary>
+            Cleans up expired nonces to maintain database performance.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Services.SignedRequest">
+            <summary>
+            Represents a signed request with payload and signature.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.SignedRequest.Payload">
+            <summary>
+            Gets or sets the request payload.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.SignedRequest.Signature">
+            <summary>
+            Gets or sets the digital signature.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Services.RequestSignature">
+            <summary>
+            Represents a digital signature for a request.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.RequestSignature.AccountId">
+            <summary>
+            Gets or sets the account ID that signed the request.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.RequestSignature.Algorithm">
+            <summary>
+            Gets or sets the cryptographic algorithm used.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.RequestSignature.SignatureValue">
+            <summary>
+            Gets or sets the signature value in base64 format.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.RequestSignature.Nonce">
+            <summary>
+            Gets or sets the nonce for replay protection.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.RequestSignature.Timestamp">
+            <summary>
+            Gets or sets the timestamp when the signature was created.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Services.SignatureVerificationResult">
+            <summary>
+            Represents the result of signature verification.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.SignatureVerificationResult.IsValid">
+            <summary>
+            Gets or sets whether the signature is valid.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.SignatureVerificationResult.AccountId">
+            <summary>
+            Gets or sets the account ID that was verified.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.SignatureVerificationResult.Algorithm">
+            <summary>
+            Gets or sets the algorithm used for verification.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.SignatureVerificationResult.VerifiedAt">
+            <summary>
+            Gets or sets when the verification was performed.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.SignatureVerificationResult.Message">
+            <summary>
+            Gets or sets the success message.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.SignatureVerificationResult.ErrorCode">
+            <summary>
+            Gets or sets the error code if verification failed.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.SignatureVerificationResult.ErrorMessage">
+            <summary>
+            Gets or sets the error message if verification failed.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Services.PublicKeyResult">
+            <summary>
+            Represents the result of public key retrieval.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.PublicKeyResult.IsValid">
+            <summary>
+            Gets or sets whether the public key retrieval was successful.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.PublicKeyResult.PublicKey">
+            <summary>
+            Gets or sets the public key in base64 format.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.PublicKeyResult.Algorithm">
+            <summary>
+            Gets or sets the algorithm.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.PublicKeyResult.PublicKeyHash">
+            <summary>
+            Gets or sets the public key hash.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.PublicKeyResult.ErrorCode">
+            <summary>
+            Gets or sets the error code if retrieval failed.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.PublicKeyResult.ErrorMessage">
+            <summary>
+            Gets or sets the error message if retrieval failed.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Services.VerificationStats">
+            <summary>
+            Represents verification statistics.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.VerificationStats.TotalAttempts">
+            <summary>
+            Gets or sets the total verification attempts.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.VerificationStats.SuccessfulVerifications">
+            <summary>
+            Gets or sets the number of successful verifications.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.VerificationStats.FailedVerifications">
+            <summary>
+            Gets or sets the number of failed verifications.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.VerificationStats.ReplayAttacks">
+            <summary>
+            Gets or sets the number of detected replay attacks.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.VerificationStats.SuccessRate">
+            <summary>
+            Gets or sets the success rate as a percentage.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.VerificationStats.PeriodStart">
+            <summary>
+            Gets or sets the period start.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.VerificationStats.PeriodEnd">
+            <summary>
+            Gets or sets the period end.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Cryptography.Services.VerificationStats.VerificationsPerSecond">
+            <summary>
+            Gets or sets the verifications per second.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Services.SubstitutionKeyService">
+            <summary>
+            Production service for managing substitution keys (user-controlled delegation keys)
+            Integrates with AccountsContext database and multi-cloud key vault infrastructure
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.SubstitutionKeyService.GenerateSubstitutionKeyAsync(System.String,System.Nullable{System.DateTime})">
+            <inheritdoc/>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.SubstitutionKeyService.VerifyRequestSignatureAsync(System.Byte[],System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.SubstitutionKeyService.VerifyAuthorizationAsync(System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.SubstitutionKeyService.GetLinkedAddressAsync(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.SubstitutionKeyService.RevokeSubstitutionKeyAsync(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.SubstitutionKeyService.RotateSubstitutionKeyAsync(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.SubstitutionKeyService.GetSubstitutionKeysAsync(System.String,QuantumLedger.Cryptography.Models.SubstitutionKeyCriteria)">
+            <inheritdoc/>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.SubstitutionKeyService.GetCurrentSubstitutionKeyAsync(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.SubstitutionKeyService.VerifySubstitutionKeyRequestAsync(System.Byte[],System.String,System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.SubstitutionKeyService.UpdateExpirationAsync(System.String,System.DateTime)">
+            <inheritdoc/>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.SubstitutionKeyService.GetSubstitutionPublicKeyAsync(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.SubstitutionKeyService.IsSubstitutionKeyActiveAsync(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.SubstitutionKeyService.GetSubstitutionKeyStatsAsync(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.SubstitutionKeyService.ConvertToSubstitutionKeyPairs(System.Collections.Generic.IEnumerable{QuantumLedger.Models.Account.AccountKey})">
+            <summary>
+            Converts AccountKey entities to SubstitutionKeyPair objects
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.SubstitutionKeyService.ExtractVersionFromStoragePath(System.String)">
+            <summary>
+            Extracts the version number from a substitution key storage path
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.SubstitutionKeyService.ExtractAddressFromStoragePath(System.String)">
+            <summary>
+            Extracts the address from a substitution key storage path
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Services.SubstitutionKeyService.ExtractSubstitutionKeyIdFromStoragePath(System.String)">
+            <summary>
+            Extracts the substitution key ID from a storage path
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Storage.HybridKeyStorage">
+            <summary>
+            Implements hybrid key storage using both SurrealDB and S3
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Storage.HybridKeyStorage.StoreKeyAsync(System.String,System.String,System.Byte[],System.String,QuantumLedger.Cryptography.Models.KeyCategory,System.Nullable{System.DateTime})">
+            <inheritdoc />
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Storage.HybridKeyStorage.RetrieveKeyAsync(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Storage.HybridKeyStorage.RevokeKeyAsync(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Storage.HybridKeyStorage.RotateKeyAsync(System.String,System.Byte[])">
+            <summary>
+            Creates a new version of an existing key
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Storage.HybridKeyStorage.UpdateExpirationAsync(System.String,System.DateTime)">
+            <summary>
+            Updates the expiration date of a key
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Storage.HybridKeyStorage.ListActiveKeysAsync(System.String,System.Nullable{QuantumLedger.Cryptography.Models.KeyCategory})">
+            <summary>
+            Lists all active keys matching the specified criteria
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Storage.IKeyStorage">
+            <summary>
+            Interface for key storage operations
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Storage.IKeyStorage.StoreKeyAsync(System.String,System.String,System.Byte[],System.String,QuantumLedger.Cryptography.Models.KeyCategory,System.Nullable{System.DateTime})">
+            <summary>
+            Stores a key with the given identifier
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Storage.IKeyStorage.RetrieveKeyAsync(System.String)">
+            <summary>
+            Retrieves a key by its identifier
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Storage.IKeyStorage.RevokeKeyAsync(System.String)">
+            <summary>
+            Revokes a key by its identifier
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Storage.IKeyStorage.RotateKeyAsync(System.String,System.Byte[])">
+            <summary>
+            Creates a new version of an existing key
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Storage.IKeyStorage.UpdateExpirationAsync(System.String,System.DateTime)">
+            <summary>
+            Updates the expiration date of a key
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Storage.IKeyStorage.ListActiveKeysAsync(System.String,System.Nullable{QuantumLedger.Cryptography.Models.KeyCategory})">
+            <summary>
+            Lists all active keys of a specific type
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Storage.KeyStorageS3Service">
+            <summary>
+            Specialized S3 service for secure key storage
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Storage.KeyStorageS3Service.StoreKeyAsync(System.String,System.Byte[])">
+            <summary>
+            Stores encrypted key data in S3
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Storage.KeyStorageS3Service.RetrieveKeyAsync(System.String)">
+            <summary>
+            Retrieves encrypted key data from S3
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Storage.KeyStorageS3Service.DeleteKeyAsync(System.String)">
+            <summary>
+            Deletes a key from S3
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Cryptography.Utils.KeyGenerationHelper">
+            <summary>
+            Helper class for cryptographic key generation
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Utils.KeyGenerationHelper.GenerateEC256KeyPair">
+            <summary>
+            Generates a new EC-256 key pair
+            </summary>
+            <returns>A tuple containing the encoded private and public keys</returns>
+            <exception cref="T:QuantumLedger.Cryptography.Exceptions.KeyOperationException">Thrown when key generation fails</exception>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Utils.KeyGenerationHelper.ValidateKeyPair(System.Byte[],System.Byte[],System.String)">
+            <summary>
+            Validates that a private key and public key form a valid key pair
+            </summary>
+            <param name="privateKey">The encoded private key</param>
+            <param name="publicKey">The encoded public key</param>
+            <param name="algorithm">The algorithm the keys are for</param>
+            <returns>True if the keys form a valid pair, false otherwise</returns>
+            <exception cref="T:QuantumLedger.Cryptography.Exceptions.KeyOperationException">Thrown when validation fails due to an error</exception>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Utils.KeyGenerationHelper.GenerateRandomSeed(System.Int32)">
+            <summary>
+            Generates a random seed of the specified length
+            </summary>
+            <param name="length">The length of the seed in bytes</param>
+            <returns>The random seed</returns>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Utils.KeyGenerationHelper.GenerateDilithiumKeyPair">
+            <summary>
+            Generates a new Dilithium key pair
+            </summary>
+            <returns>A tuple containing the encoded private and public keys</returns>
+            <exception cref="T:System.NotImplementedException">Thrown as this is a placeholder for future implementation</exception>
+        </member>
+        <member name="M:QuantumLedger.Cryptography.Utils.KeyGenerationHelper.GenerateFalconKeyPair">
+            <summary>
+            Generates a new Falcon key pair
+            </summary>
+            <returns>A tuple containing the encoded private and public keys</returns>
+            <exception cref="T:System.NotImplementedException">Thrown as this is a placeholder for future implementation</exception>
+        </member>
+    </members>
+</doc>

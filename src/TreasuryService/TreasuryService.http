@@ -1,0 +1,6 @@
+@TreasuryService_HostAddress = http://localhost:5073
+
+GET {{TreasuryService_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

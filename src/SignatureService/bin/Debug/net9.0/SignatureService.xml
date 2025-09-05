@@ -1,0 +1,493 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SignatureService</name>
+    </assembly>
+    <members>
+        <member name="T:SignatureService.Endpoints.SignatureEndpoints">
+            <summary>
+            Core signature validation endpoints using Minimal APIs
+            Follows the same pattern as QuantumLedger's endpoint structure
+            </summary>
+        </member>
+        <member name="M:SignatureService.Endpoints.SignatureEndpoints.MapSignatureEndpoints(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder)">
+            <summary>
+            Maps all signature validation endpoints to the application
+            </summary>
+        </member>
+        <member name="M:SignatureService.Endpoints.SignatureEndpoints.ValidateSignatureAsync(SignatureService.Models.UniversalSignatureValidationRequest,SignatureService.Services.SignatureValidationService,Microsoft.Extensions.Logging.ILogger{System.String},System.Threading.CancellationToken)">
+            <summary>
+            Validates a universal signature request
+            Target: ≤1 second response time
+            </summary>
+        </member>
+        <member name="M:SignatureService.Endpoints.SignatureEndpoints.ValidateDualSignatureAsync(SignatureService.Models.DualSignatureValidationRequest,SignatureService.Services.SignatureValidationService,Microsoft.Extensions.Logging.ILogger{System.String},System.Threading.CancellationToken)">
+            <summary>
+            Validates a dual signature (classic + quantum)
+            Target: ≤1 second response time
+            </summary>
+        </member>
+        <member name="M:SignatureService.Endpoints.SignatureEndpoints.ConfirmTransactionAsync(SignatureService.Models.TransactionConfirmationRequest,Microsoft.Extensions.Logging.ILogger{System.String},System.Threading.CancellationToken)">
+            <summary>
+            Confirms a transaction signature
+            </summary>
+        </member>
+        <member name="M:SignatureService.Endpoints.SignatureEndpoints.ValidateNonceAsync(SignatureService.Models.NonceValidationRequest,SignatureService.Services.NonceTrackingService,Microsoft.Extensions.Logging.ILogger{System.String},System.Threading.CancellationToken)">
+            <summary>
+            Validates a nonce without full signature verification
+            </summary>
+        </member>
+        <member name="M:SignatureService.Endpoints.SignatureEndpoints.GetHealthAsync(Microsoft.Extensions.Logging.ILogger{System.String},System.Threading.CancellationToken)">
+            <summary>
+            Gets health status and performance metrics
+            </summary>
+        </member>
+        <member name="T:SignatureService.Extensions.EndpointExtensions">
+            <summary>
+            Extension methods for registering SignatureService endpoints
+            Follows the same pattern as QuantumLedger's endpoint registration
+            </summary>
+        </member>
+        <member name="M:SignatureService.Extensions.EndpointExtensions.MapSignatureServiceEndpoints(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder)">
+            <summary>
+            Maps all SignatureService endpoints to the application
+            </summary>
+        </member>
+        <member name="M:SignatureService.Extensions.EndpointExtensions.AddSignatureServiceApiDocumentation(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Adds SignatureService API documentation
+            </summary>
+        </member>
+        <member name="M:SignatureService.Extensions.EndpointExtensions.AddSignatureServiceCors(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Configures CORS for SignatureService
+            </summary>
+        </member>
+        <member name="M:SignatureService.Extensions.EndpointExtensions.AddSignatureServiceMetrics(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Adds performance monitoring and metrics
+            </summary>
+        </member>
+        <member name="T:SignatureService.Extensions.IMetricsLogger">
+            <summary>
+            Simple metrics logger interface for performance tracking
+            </summary>
+        </member>
+        <member name="T:SignatureService.Extensions.MetricsLogger">
+            <summary>
+            Basic metrics logger implementation
+            </summary>
+        </member>
+        <member name="T:SignatureService.Models.UniversalSignatureValidationRequest">
+            <summary>
+            Universal signature validation request that works with any system (QuantumSkyLink v2, QuantumLedger, etc.)
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.UniversalSignatureValidationRequest.SystemId">
+            <summary>
+            Gets or sets the system making the request (e.g., "QuantumSkyLink_v2", "QuantumLedger")
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.UniversalSignatureValidationRequest.ServiceId">
+            <summary>
+            Gets or sets the service making the request (e.g., "PaymentGatewayService", "LedgerEndpoints")
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.UniversalSignatureValidationRequest.AccountId">
+            <summary>
+            Gets or sets the account ID associated with this request
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.UniversalSignatureValidationRequest.Operation">
+            <summary>
+            Gets or sets the operation being performed
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.UniversalSignatureValidationRequest.OperationData">
+            <summary>
+            Gets or sets the operation data being signed
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.UniversalSignatureValidationRequest.Nonce">
+            <summary>
+            Gets or sets the unique nonce for replay protection
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.UniversalSignatureValidationRequest.SequenceNumber">
+            <summary>
+            Gets or sets the sequence number for ordering
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.UniversalSignatureValidationRequest.Timestamp">
+            <summary>
+            Gets or sets the timestamp of the request
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.UniversalSignatureValidationRequest.Signature">
+            <summary>
+            Gets or sets the signature to validate
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.UniversalSignatureValidationRequest.Algorithm">
+            <summary>
+            Gets or sets the signature algorithm used
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.UniversalSignatureValidationRequest.Metadata">
+            <summary>
+            Gets or sets additional metadata
+            </summary>
+        </member>
+        <member name="T:SignatureService.Models.DualSignatureValidationRequest">
+            <summary>
+            Dual signature validation request for QuantumLedger's classic + quantum signatures
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.DualSignatureValidationRequest.AccountId">
+            <summary>
+            Gets or sets the account ID associated with this request
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.DualSignatureValidationRequest.Operation">
+            <summary>
+            Gets or sets the operation being performed
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.DualSignatureValidationRequest.OperationData">
+            <summary>
+            Gets or sets the operation data being signed
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.DualSignatureValidationRequest.Signature">
+            <summary>
+            Gets or sets the dual signature (reuses QuantumLedger's DualSignature model)
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.DualSignatureValidationRequest.Timestamp">
+            <summary>
+            Gets or sets the timestamp of the request
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.DualSignatureValidationRequest.Nonce">
+            <summary>
+            Gets or sets the unique nonce for replay protection
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.DualSignatureValidationRequest.SequenceNumber">
+            <summary>
+            Gets or sets the sequence number for ordering
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.DualSignatureValidationRequest.Metadata">
+            <summary>
+            Gets or sets additional metadata
+            </summary>
+        </member>
+        <member name="T:SignatureService.Models.SignatureValidationResult">
+            <summary>
+            Result of signature validation
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.SignatureValidationResult.IsValid">
+            <summary>
+            Gets or sets whether the signature is valid
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.SignatureValidationResult.ValidationId">
+            <summary>
+            Gets or sets the unique validation ID for tracking
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.SignatureValidationResult.Error">
+            <summary>
+            Gets or sets the error message if validation failed
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.SignatureValidationResult.ValidatedAt">
+            <summary>
+            Gets or sets when the validation was performed
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.SignatureValidationResult.ProcessingTime">
+            <summary>
+            Gets or sets how long the validation took
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.SignatureValidationResult.Metadata">
+            <summary>
+            Gets or sets additional validation metadata
+            </summary>
+        </member>
+        <member name="M:SignatureService.Models.SignatureValidationResult.Valid(System.String)">
+            <summary>
+            Creates a successful validation result
+            </summary>
+        </member>
+        <member name="M:SignatureService.Models.SignatureValidationResult.Failed(System.String)">
+            <summary>
+            Creates a failed validation result
+            </summary>
+        </member>
+        <member name="T:SignatureService.Models.DualSignatureValidationResult">
+            <summary>
+            Result of dual signature validation (extends QuantumLedger's VerificationResult)
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.DualSignatureValidationResult.ValidationId">
+            <summary>
+            Gets or sets the unique validation ID for tracking
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.DualSignatureValidationResult.ValidatedAt">
+            <summary>
+            Gets or sets when the validation was performed
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.DualSignatureValidationResult.ProcessingTime">
+            <summary>
+            Gets or sets how long the validation took
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.DualSignatureValidationResult.Metadata">
+            <summary>
+            Gets or sets additional validation metadata
+            </summary>
+        </member>
+        <member name="T:SignatureService.Models.TransactionConfirmationRequest">
+            <summary>
+            Transaction confirmation request
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.TransactionConfirmationRequest.SystemId">
+            <summary>
+            Gets or sets the system confirming the transaction
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.TransactionConfirmationRequest.OriginalValidationId">
+            <summary>
+            Gets or sets the original validation ID
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.TransactionConfirmationRequest.TransactionData">
+            <summary>
+            Gets or sets the transaction data
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.TransactionConfirmationRequest.ResultSignature">
+            <summary>
+            Gets or sets the result signature
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.TransactionConfirmationRequest.Metadata">
+            <summary>
+            Gets or sets additional metadata
+            </summary>
+        </member>
+        <member name="T:SignatureService.Models.TransactionConfirmationResult">
+            <summary>
+            Transaction confirmation result
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.TransactionConfirmationResult.Success">
+            <summary>
+            Gets or sets whether the confirmation was successful
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.TransactionConfirmationResult.ConfirmationId">
+            <summary>
+            Gets or sets the confirmation ID
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.TransactionConfirmationResult.Error">
+            <summary>
+            Gets or sets the error message if confirmation failed
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.TransactionConfirmationResult.ConfirmedAt">
+            <summary>
+            Gets or sets when the confirmation was performed
+            </summary>
+        </member>
+        <member name="T:SignatureService.Models.NonceValidationRequest">
+            <summary>
+            Nonce validation request
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.NonceValidationRequest.AccountId">
+            <summary>
+            Gets or sets the account ID
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.NonceValidationRequest.Nonce">
+            <summary>
+            Gets or sets the nonce to validate
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.NonceValidationRequest.SequenceNumber">
+            <summary>
+            Gets or sets the sequence number
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.NonceValidationRequest.Timestamp">
+            <summary>
+            Gets or sets the timestamp
+            </summary>
+        </member>
+        <member name="T:SignatureService.Models.NonceValidationResult">
+            <summary>
+            Nonce validation result
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.NonceValidationResult.IsValid">
+            <summary>
+            Gets or sets whether the nonce is valid
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.NonceValidationResult.Error">
+            <summary>
+            Gets or sets the error message if validation failed
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.NonceValidationResult.ValidatedAt">
+            <summary>
+            Gets or sets when the validation was performed
+            </summary>
+        </member>
+        <member name="T:SignatureService.Models.ErrorResponse">
+            <summary>
+            Error response model
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.ErrorResponse.Error">
+            <summary>
+            Gets or sets the error code
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.ErrorResponse.ErrorDescription">
+            <summary>
+            Gets or sets the error description
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.ErrorResponse.Timestamp">
+            <summary>
+            Gets or sets when the error occurred
+            </summary>
+        </member>
+        <member name="P:SignatureService.Models.ErrorResponse.Details">
+            <summary>
+            Gets or sets additional error details
+            </summary>
+        </member>
+        <member name="T:SignatureService.Services.NonceTrackingService">
+            <summary>
+            High-performance nonce tracking service for replay attack prevention
+            Uses Redis for distributed nonce storage with optimized performance
+            </summary>
+        </member>
+        <member name="M:SignatureService.Services.NonceTrackingService.ValidateNonceAsync(System.String,System.String,System.Int64,System.DateTime)">
+            <summary>
+            Validates nonce and sequence number for replay protection
+            Target: ≤200ms response time
+            </summary>
+        </member>
+        <member name="M:SignatureService.Services.NonceTrackingService.RecordNonceAsync(System.String,System.String,System.Int64)">
+            <summary>
+            Records a nonce to prevent replay attacks
+            Target: ≤50ms response time (async, non-blocking)
+            </summary>
+        </member>
+        <member name="M:SignatureService.Services.NonceTrackingService.ValidateSequenceNumberAsync(System.String,System.Int64)">
+            <summary>
+            Validates sequence number is monotonically increasing
+            </summary>
+        </member>
+        <member name="M:SignatureService.Services.NonceTrackingService.UpdateLatestSequenceNumberAsync(System.String,System.Int64)">
+            <summary>
+            Updates the latest sequence number for an account
+            </summary>
+        </member>
+        <member name="M:SignatureService.Services.NonceTrackingService.GetNonceKey(System.String,System.String)">
+            <summary>
+            Gets the cache key for a nonce
+            </summary>
+        </member>
+        <member name="M:SignatureService.Services.NonceTrackingService.GetSequenceKey(System.String)">
+            <summary>
+            Gets the cache key for sequence number tracking
+            </summary>
+        </member>
+        <member name="M:SignatureService.Services.NonceTrackingService.GetNonceStatsAsync(System.String)">
+            <summary>
+            Gets nonce statistics for monitoring and debugging
+            </summary>
+        </member>
+        <member name="M:SignatureService.Services.NonceTrackingService.CleanupExpiredNoncesAsync">
+            <summary>
+            Cleans up expired nonces (for maintenance)
+            Note: Redis handles expiration automatically, but this can be used for manual cleanup
+            </summary>
+        </member>
+        <member name="T:SignatureService.Services.SignatureValidationService">
+            <summary>
+            Core signature validation service leveraging QuantumLedger's cryptographic infrastructure
+            </summary>
+        </member>
+        <member name="M:SignatureService.Services.SignatureValidationService.ValidateSignatureAsync(SignatureService.Models.UniversalSignatureValidationRequest,System.Threading.CancellationToken)">
+            <summary>
+            Validates a universal signature request with replay protection
+            Target: ≤1 second response time
+            </summary>
+        </member>
+        <member name="M:SignatureService.Services.SignatureValidationService.ValidateDualSignatureAsync(SignatureService.Models.DualSignatureValidationRequest,System.Threading.CancellationToken)">
+            <summary>
+            Validates a dual signature (classic + quantum) from QuantumLedger
+            Target: ≤1 second response time
+            </summary>
+        </member>
+        <member name="M:SignatureService.Services.SignatureValidationService.ValidateInput(SignatureService.Models.UniversalSignatureValidationRequest)">
+            <summary>
+            Validates input parameters
+            </summary>
+        </member>
+        <member name="M:SignatureService.Services.SignatureValidationService.IsTimestampValid(System.DateTime)">
+            <summary>
+            Validates timestamp is within acceptable window (5 minutes)
+            </summary>
+        </member>
+        <member name="M:SignatureService.Services.SignatureValidationService.GetPublicKeyWithCachingAsync(System.String,System.String)">
+            <summary>
+            Gets public key with multi-layer caching for performance
+            </summary>
+        </member>
+        <member name="M:SignatureService.Services.SignatureValidationService.GetPublicKeyByIdAsync(System.String)">
+            <summary>
+            Gets public key by key ID
+            </summary>
+        </member>
+        <member name="M:SignatureService.Services.SignatureValidationService.GetSignatureProvider(System.String)">
+            <summary>
+            Gets signature provider for algorithm
+            </summary>
+        </member>
+        <member name="M:SignatureService.Services.SignatureValidationService.CreateCanonicalMessage(SignatureService.Models.UniversalSignatureValidationRequest)">
+            <summary>
+            Creates canonical message for signature verification
+            </summary>
+        </member>
+        <member name="T:PlaceholderKeyManager">
+            <summary>
+            Placeholder key manager - would be replaced with QuantumLedger's IKeyManager implementation
+            </summary>
+        </member>
+        <member name="T:IAuditLoggingService">
+            <summary>
+            Placeholder audit logging service - would be replaced with QuantumLedger implementation
+            </summary>
+        </member>
+        <member name="T:SignatureAuditContext">
+            <summary>
+            Placeholder signature audit context - would be replaced with actual EF context
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,1320 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>QuantumLedger.Models</name>
+    </assembly>
+    <members>
+        <member name="T:QuantumLedger.Models.Account.Account">
+            <summary>
+            Represents an account in the multi-cloud account management system.
+            Supports flexible external owner ID mapping for multi-vendor scenarios.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Account.Account.AccountId">
+            <summary>
+            Gets or sets the unique account identifier.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Account.Account.ExternalOwnerId">
+            <summary>
+            Gets or sets the external owner identifier.
+            This can be a Logto ID, email address, or custom vendor format.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Account.Account.OwnerIdType">
+            <summary>
+            Gets or sets the type of external owner ID.
+            Examples: "LogtoId", "Email", "CustomId", etc.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Account.Account.VendorSystem">
+            <summary>
+            Gets or sets the vendor system that owns this account.
+            Examples: "Internal", "VendorA", "VendorB", etc.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Account.Account.InternalReferenceId">
+            <summary>
+            Gets or sets the optional internal reference ID (ULID format).
+            Used for complex mapping scenarios between vendor systems.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Account.Account.OwnerType">
+            <summary>
+            Gets or sets the type of account owner.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Account.Account.CreatedAt">
+            <summary>
+            Gets or sets when the account was created.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Account.Account.Status">
+            <summary>
+            Gets or sets the current status of the account.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Account.Account.LastUpdated">
+            <summary>
+            Gets or sets when the account was last updated.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Account.Account.AccountKeys">
+            <summary>
+            Navigation property for account keys.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Account.Account.PublicKeyEntries">
+            <summary>
+            Navigation property for public key registry entries.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Account.Account.RequestNonces">
+            <summary>
+            Navigation property for request nonces.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Models.Account.Account.IsValid">
+            <summary>
+            Validates that the account has all required fields and valid data.
+            </summary>
+            <returns>True if the account is valid; otherwise, false.</returns>
+        </member>
+        <member name="M:QuantumLedger.Models.Account.Account.Touch">
+            <summary>
+            Updates the account's last updated timestamp.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Models.Account.OwnerType">
+            <summary>
+            Represents the type of account owner.
+            </summary>
+        </member>
+        <member name="F:QuantumLedger.Models.Account.OwnerType.Client">
+            <summary>
+            Client account for end users.
+            </summary>
+        </member>
+        <member name="F:QuantumLedger.Models.Account.OwnerType.System">
+            <summary>
+            System account for internal operations.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Models.Account.AccountKey">
+            <summary>
+            Represents a cryptographic key associated with an account in the multi-cloud system.
+            Supports multiple algorithms (Dilithium, Falcon, EC256) with cloud provider storage.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Account.AccountKey.KeyId">
+            <summary>
+            Gets or sets the unique key identifier.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Account.AccountKey.AccountId">
+            <summary>
+            Gets or sets the account identifier this key belongs to.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Account.AccountKey.Algorithm">
+            <summary>
+            Gets or sets the cryptographic algorithm used for this key.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Account.AccountKey.PublicKey">
+            <summary>
+            Gets or sets the public key in base64 format.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Account.AccountKey.CloudProvider">
+            <summary>
+            Gets or sets the cloud provider where the private key is stored.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Account.AccountKey.StoragePath">
+            <summary>
+            Gets or sets the storage path/identifier for the private key in the cloud provider.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Account.AccountKey.CreatedAt">
+            <summary>
+            Gets or sets when the key was created.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Account.AccountKey.Status">
+            <summary>
+            Gets or sets the current status of the key.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Account.AccountKey.LastRotated">
+            <summary>
+            Gets or sets when the key was last rotated.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Account.AccountKey.ExpiresAt">
+            <summary>
+            Gets or sets when the key expires (optional).
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Account.AccountKey.Account">
+            <summary>
+            Navigation property to the associated account.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Models.Account.AccountKey.IsValid">
+            <summary>
+            Validates that the account key has all required fields and valid data.
+            </summary>
+            <returns>True if the account key is valid; otherwise, false.</returns>
+        </member>
+        <member name="M:QuantumLedger.Models.Account.AccountKey.IsValidAlgorithm(System.String)">
+            <summary>
+            Checks if the algorithm is supported.
+            </summary>
+            <param name="algorithm">The algorithm to validate.</param>
+            <returns>True if the algorithm is supported; otherwise, false.</returns>
+        </member>
+        <member name="M:QuantumLedger.Models.Account.AccountKey.IsValidCloudProvider(System.String)">
+            <summary>
+            Checks if the cloud provider is supported.
+            </summary>
+            <param name="provider">The cloud provider to validate.</param>
+            <returns>True if the cloud provider is supported; otherwise, false.</returns>
+        </member>
+        <member name="M:QuantumLedger.Models.Account.AccountKey.MarkAsRotated">
+            <summary>
+            Marks the key as rotated with the current timestamp.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Models.Account.AccountKey.IsExpired">
+            <summary>
+            Checks if the key is expired.
+            </summary>
+            <returns>True if the key is expired; otherwise, false.</returns>
+        </member>
+        <member name="M:QuantumLedger.Models.Account.AccountKey.IsActive">
+            <summary>
+            Checks if the key is active and not expired.
+            </summary>
+            <returns>True if the key is active and not expired; otherwise, false.</returns>
+        </member>
+        <member name="T:QuantumLedger.Models.Account.SupportedAlgorithms">
+            <summary>
+            Supported cryptographic algorithms for account keys.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Models.Account.SupportedCloudProviders">
+            <summary>
+            Supported cloud providers for key storage.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Models.Account.PublicKeyRegistryEntry">
+            <summary>
+            Represents an entry in the public key registry for high-performance signature verification.
+            Optimized for sub-100ms lookup performance across 1M+ accounts.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Account.PublicKeyRegistryEntry.PublicKeyHash">
+            <summary>
+            Gets or sets the SHA-256 hash of the public key (primary key for fast lookups).
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Account.PublicKeyRegistryEntry.AccountId">
+            <summary>
+            Gets or sets the account identifier this public key belongs to.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Account.PublicKeyRegistryEntry.Algorithm">
+            <summary>
+            Gets or sets the cryptographic algorithm used for this public key.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Account.PublicKeyRegistryEntry.PublicKey">
+            <summary>
+            Gets or sets the public key in base64 format.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Account.PublicKeyRegistryEntry.CreatedAt">
+            <summary>
+            Gets or sets when the public key was registered.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Account.PublicKeyRegistryEntry.Status">
+            <summary>
+            Gets or sets the current status of the public key.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Account.PublicKeyRegistryEntry.LastUsed">
+            <summary>
+            Gets or sets when the public key was last used for verification.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Account.PublicKeyRegistryEntry.UsageCount">
+            <summary>
+            Gets or sets the number of times this public key has been used for verification.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Account.PublicKeyRegistryEntry.Account">
+            <summary>
+            Navigation property to the associated account.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Models.Account.PublicKeyRegistryEntry.IsValid">
+            <summary>
+            Validates that the public key registry entry has all required fields and valid data.
+            </summary>
+            <returns>True if the entry is valid; otherwise, false.</returns>
+        </member>
+        <member name="M:QuantumLedger.Models.Account.PublicKeyRegistryEntry.GeneratePublicKeyHash(System.String)">
+            <summary>
+            Generates the SHA-256 hash of the public key for indexing.
+            </summary>
+            <param name="publicKey">The public key to hash.</param>
+            <returns>The SHA-256 hash as a hexadecimal string.</returns>
+        </member>
+        <member name="M:QuantumLedger.Models.Account.PublicKeyRegistryEntry.UpdateHash">
+            <summary>
+            Updates the public key hash based on the current public key.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Models.Account.PublicKeyRegistryEntry.RecordUsage">
+            <summary>
+            Records usage of this public key for verification.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Models.Account.PublicKeyRegistryEntry.IsActive">
+            <summary>
+            Checks if the public key is active and can be used for verification.
+            </summary>
+            <returns>True if the public key is active; otherwise, false.</returns>
+        </member>
+        <member name="M:QuantumLedger.Models.Account.PublicKeyRegistryEntry.Deactivate">
+            <summary>
+            Deactivates the public key entry.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Models.Account.PublicKeyRegistryEntry.Activate">
+            <summary>
+            Reactivates the public key entry.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Models.Account.PublicKeyRegistryExtensions">
+            <summary>
+            Extension methods for public key registry operations.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Models.Account.PublicKeyRegistryExtensions.ToRegistryEntry(QuantumLedger.Models.Account.AccountKey)">
+            <summary>
+            Creates a new public key registry entry from an account key.
+            </summary>
+            <param name="accountKey">The account key to create the registry entry from.</param>
+            <returns>A new public key registry entry.</returns>
+        </member>
+        <member name="M:QuantumLedger.Models.Account.PublicKeyRegistryExtensions.ValidateHash(QuantumLedger.Models.Account.PublicKeyRegistryEntry)">
+            <summary>
+            Validates that a public key matches its hash.
+            </summary>
+            <param name="entry">The registry entry to validate.</param>
+            <returns>True if the public key matches its hash; otherwise, false.</returns>
+        </member>
+        <member name="T:QuantumLedger.Models.Account.RequestNonce">
+            <summary>
+            Represents a request nonce for replay attack prevention in signature verification.
+            Implements time-based expiration with uniqueness validation.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Account.RequestNonce.NonceHash">
+            <summary>
+            Gets or sets the SHA-256 hash of the nonce (primary key for fast lookups).
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Account.RequestNonce.AccountId">
+            <summary>
+            Gets or sets the account identifier this nonce belongs to.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Account.RequestNonce.OriginalNonce">
+            <summary>
+            Gets or sets the original nonce value.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Account.RequestNonce.Timestamp">
+            <summary>
+            Gets or sets when the nonce was created/used.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Account.RequestNonce.ExpiresAt">
+            <summary>
+            Gets or sets when the nonce expires and can be cleaned up.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Account.RequestNonce.RequestType">
+            <summary>
+            Gets or sets the request type or operation this nonce was used for.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Account.RequestNonce.IpAddress">
+            <summary>
+            Gets or sets the IP address of the request (for audit purposes).
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Account.RequestNonce.UserAgent">
+            <summary>
+            Gets or sets the user agent of the request (for audit purposes).
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Account.RequestNonce.Account">
+            <summary>
+            Navigation property to the associated account.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Models.Account.RequestNonce.IsValid">
+            <summary>
+            Validates that the request nonce has all required fields and valid data.
+            </summary>
+            <returns>True if the nonce is valid; otherwise, false.</returns>
+        </member>
+        <member name="M:QuantumLedger.Models.Account.RequestNonce.GenerateNonceHash(System.String)">
+            <summary>
+            Generates the SHA-256 hash of the nonce for indexing.
+            </summary>
+            <param name="nonce">The nonce to hash.</param>
+            <returns>The SHA-256 hash as a hexadecimal string.</returns>
+        </member>
+        <member name="M:QuantumLedger.Models.Account.RequestNonce.UpdateHash">
+            <summary>
+            Updates the nonce hash based on the current original nonce.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Models.Account.RequestNonce.IsExpired">
+            <summary>
+            Checks if the nonce is expired.
+            </summary>
+            <returns>True if the nonce is expired; otherwise, false.</returns>
+        </member>
+        <member name="M:QuantumLedger.Models.Account.RequestNonce.IsStillValid">
+            <summary>
+            Checks if the nonce is still valid (not expired).
+            </summary>
+            <returns>True if the nonce is still valid; otherwise, false.</returns>
+        </member>
+        <member name="M:QuantumLedger.Models.Account.RequestNonce.Create(System.Guid,System.String,System.Int32,System.String,System.String,System.String)">
+            <summary>
+            Creates a new request nonce with the specified parameters.
+            </summary>
+            <param name="accountId">The account ID.</param>
+            <param name="nonce">The original nonce value.</param>
+            <param name="expirationMinutes">The expiration time in minutes (default: 15 minutes).</param>
+            <param name="requestType">The optional request type.</param>
+            <param name="ipAddress">The optional IP address.</param>
+            <param name="userAgent">The optional user agent.</param>
+            <returns>A new request nonce.</returns>
+        </member>
+        <member name="T:QuantumLedger.Models.Account.RequestNonceExtensions">
+            <summary>
+            Extension methods for request nonce operations.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Models.Account.RequestNonceExtensions.ValidateHash(QuantumLedger.Models.Account.RequestNonce)">
+            <summary>
+            Validates that a nonce matches its hash.
+            </summary>
+            <param name="requestNonce">The request nonce to validate.</param>
+            <returns>True if the nonce matches its hash; otherwise, false.</returns>
+        </member>
+        <member name="M:QuantumLedger.Models.Account.RequestNonceExtensions.GetRemainingTime(QuantumLedger.Models.Account.RequestNonce)">
+            <summary>
+            Gets the remaining time until the nonce expires.
+            </summary>
+            <param name="requestNonce">The request nonce.</param>
+            <returns>The remaining time until expiration, or TimeSpan.Zero if already expired.</returns>
+        </member>
+        <member name="M:QuantumLedger.Models.Account.RequestNonceExtensions.GetAge(QuantumLedger.Models.Account.RequestNonce)">
+            <summary>
+            Gets the age of the nonce since it was created.
+            </summary>
+            <param name="requestNonce">The request nonce.</param>
+            <returns>The age of the nonce.</returns>
+        </member>
+        <member name="T:QuantumLedger.Models.Account.NonceConfiguration">
+            <summary>
+            Configuration constants for nonce management.
+            </summary>
+        </member>
+        <member name="F:QuantumLedger.Models.Account.NonceConfiguration.DefaultExpirationMinutes">
+            <summary>
+            Default expiration time for nonces in minutes.
+            </summary>
+        </member>
+        <member name="F:QuantumLedger.Models.Account.NonceConfiguration.MaxExpirationMinutes">
+            <summary>
+            Maximum expiration time for nonces in minutes.
+            </summary>
+        </member>
+        <member name="F:QuantumLedger.Models.Account.NonceConfiguration.MinExpirationMinutes">
+            <summary>
+            Minimum expiration time for nonces in minutes.
+            </summary>
+        </member>
+        <member name="F:QuantumLedger.Models.Account.NonceConfiguration.CleanupIntervalMinutes">
+            <summary>
+            Cleanup interval for expired nonces in minutes.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Models.AccountBalance">
+            <summary>
+            Represents an account balance in the Quantum Ledger system.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.AccountBalance.Id">
+            <summary>
+            Gets or sets the unique identifier for this entity (same as Address)
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.AccountBalance.TableName">
+            <summary>
+            Gets the table name for SurrealDB
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.AccountBalance.Namespace">
+            <summary>
+            Gets the namespace for SurrealDB
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.AccountBalance.Address">
+            <summary>
+            Gets or sets the blockchain address of the account.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.AccountBalance.Balance">
+            <summary>
+            Gets or sets the current balance of the account.
+            The balance is stored with decimal precision to handle financial transactions accurately.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.AccountBalance.LastUpdated">
+            <summary>
+            Gets or sets the last update timestamp of the balance.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.AccountBalance.SolidState">
+            <summary>
+            Validates that the account balance has all required fields and valid data.
+            </summary>
+            <returns>True if the account balance is valid; otherwise, false.</returns>
+        </member>
+        <member name="M:QuantumLedger.Models.AccountBalance.UpdateBalance(System.Decimal)">
+            <summary>
+            Updates the balance by adding the specified amount.
+            </summary>
+            <param name="amount">The amount to add to the balance. Can be negative for deductions.</param>
+            <returns>True if the update was successful; false if it would result in a negative balance.</returns>
+        </member>
+        <member name="T:QuantumLedger.Models.AuditLog">
+            <summary>
+            Represents an audit log entry in the Quantum Ledger system.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.AuditLog.RequestId">
+            <summary>
+            Gets or sets the ID of the request associated with this audit log.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.AuditLog.Timestamp">
+            <summary>
+            Gets or sets the timestamp when the audit log was created.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.AuditLog.Status">
+            <summary>
+            Gets or sets the status of the request processing.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.AuditLog.Message">
+            <summary>
+            Gets or sets additional information or details about the request processing.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Models.AuditLog.IsValid">
+            <summary>
+            Validates that the audit log has all required fields and valid data.
+            </summary>
+            <returns>True if the audit log is valid; otherwise, false.</returns>
+        </member>
+        <member name="T:QuantumLedger.Models.AuditLog.Statuses">
+            <summary>
+            Common status values for audit logs.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Models.Blockchain.BlockchainEvent">
+            <summary>
+            Base class for all blockchain events.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Blockchain.BlockchainEvent.Id">
+            <summary>
+            Gets or sets the event ID.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Blockchain.BlockchainEvent.Timestamp">
+            <summary>
+            Gets or sets the timestamp when the event occurred.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Blockchain.BlockchainEvent.EventType">
+            <summary>
+            Gets or sets the event type.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Models.Blockchain.TransactionSubmittedEvent">
+            <summary>
+            Event raised when a transaction is submitted.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Blockchain.TransactionSubmittedEvent.Transaction">
+            <summary>
+            Gets or sets the submitted transaction.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Models.Blockchain.TransactionStatusChangedEvent">
+            <summary>
+            Event raised when a transaction status changes.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Blockchain.TransactionStatusChangedEvent.TransactionId">
+            <summary>
+            Gets or sets the transaction ID.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Blockchain.TransactionStatusChangedEvent.PreviousStatus">
+            <summary>
+            Gets or sets the previous status.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Blockchain.TransactionStatusChangedEvent.NewStatus">
+            <summary>
+            Gets or sets the new status.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Blockchain.TransactionStatusChangedEvent.BlockNumber">
+            <summary>
+            Gets or sets the block number if the transaction was included in a block.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Models.Blockchain.BlockCreatedEvent">
+            <summary>
+            Event raised when a new block is created.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Blockchain.BlockCreatedEvent.Block">
+            <summary>
+            Gets or sets the created block.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Models.Blockchain.AccountStateChangedEvent">
+            <summary>
+            Event raised when an account state changes.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Blockchain.AccountStateChangedEvent.Address">
+            <summary>
+            Gets or sets the account address.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Blockchain.AccountStateChangedEvent.PreviousBalance">
+            <summary>
+            Gets or sets the previous balance.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Blockchain.AccountStateChangedEvent.NewBalance">
+            <summary>
+            Gets or sets the new balance.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Blockchain.AccountStateChangedEvent.TransactionId">
+            <summary>
+            Gets or sets the transaction ID that caused the change.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Models.Blockchain.BlockchainErrorEvent">
+            <summary>
+            Event raised when an error occurs in the blockchain.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Blockchain.BlockchainErrorEvent.ErrorCode">
+            <summary>
+            Gets or sets the error code.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Blockchain.BlockchainErrorEvent.ErrorMessage">
+            <summary>
+            Gets or sets the error message.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Blockchain.BlockchainErrorEvent.RelatedTransactionId">
+            <summary>
+            Gets or sets the related transaction ID if applicable.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Models.Blockchain.Transaction">
+            <summary>
+            Represents a transaction in the blockchain.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Blockchain.Transaction.Id">
+            <summary>
+            Gets or sets the unique identifier for the transaction.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Blockchain.Transaction.FromAddress">
+            <summary>
+            Gets or sets the sender's address.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Blockchain.Transaction.ToAddress">
+            <summary>
+            Gets or sets the recipient's address.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Blockchain.Transaction.Amount">
+            <summary>
+            Gets or sets the transaction amount.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Blockchain.Transaction.Timestamp">
+            <summary>
+            Gets or sets the timestamp of the transaction.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Blockchain.Transaction.Metadata">
+            <summary>
+            Gets or sets additional metadata for the transaction.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Models.Blockchain.TransactionStatus">
+            <summary>
+            Represents the status of a transaction.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Blockchain.TransactionStatus.TransactionId">
+            <summary>
+            Gets or sets the transaction ID.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Blockchain.TransactionStatus.Status">
+            <summary>
+            Gets or sets the current status.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Blockchain.TransactionStatus.BlockNumber">
+            <summary>
+            Gets or sets the block number where the transaction was included.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Blockchain.TransactionStatus.LastUpdated">
+            <summary>
+            Gets or sets the timestamp of the last status update.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Blockchain.TransactionStatus.ErrorMessage">
+            <summary>
+            Gets or sets any error message if the transaction failed.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Models.Blockchain.BlockInfo">
+            <summary>
+            Represents information about a block in the blockchain.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Blockchain.BlockInfo.Number">
+            <summary>
+            Gets or sets the block number.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Blockchain.BlockInfo.Hash">
+            <summary>
+            Gets or sets the block's hash.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Blockchain.BlockInfo.PreviousHash">
+            <summary>
+            Gets or sets the previous block's hash.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Blockchain.BlockInfo.Timestamp">
+            <summary>
+            Gets or sets the timestamp when the block was created.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Blockchain.BlockInfo.TransactionIds">
+            <summary>
+            Gets or sets the list of transaction IDs in this block.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Models.Blockchain.AccountState">
+            <summary>
+            Represents the current state of an account.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Blockchain.AccountState.Address">
+            <summary>
+            Gets or sets the account's address.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Blockchain.AccountState.Balance">
+            <summary>
+            Gets or sets the current balance.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Blockchain.AccountState.Nonce">
+            <summary>
+            Gets or sets the account's nonce (transaction count).
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Blockchain.AccountState.Metadata">
+            <summary>
+            Gets or sets additional metadata for the account.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Blockchain.AccountState.LastUpdated">
+            <summary>
+            Gets or sets the last update timestamp.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Models.Blockchain.TransactionStatuses">
+            <summary>
+            Represents common status values for transactions.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Models.Blockchain.IBlockchainEventHandler">
+            <summary>
+            Defines the contract for handling blockchain events.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Models.Blockchain.IBlockchainEventHandler.HandleTransactionSubmittedAsync(QuantumLedger.Models.Blockchain.TransactionSubmittedEvent)">
+            <summary>
+            Handles a transaction submitted event.
+            </summary>
+            <param name="evt">The event to handle.</param>
+        </member>
+        <member name="M:QuantumLedger.Models.Blockchain.IBlockchainEventHandler.HandleTransactionStatusChangedAsync(QuantumLedger.Models.Blockchain.TransactionStatusChangedEvent)">
+            <summary>
+            Handles a transaction status changed event.
+            </summary>
+            <param name="evt">The event to handle.</param>
+        </member>
+        <member name="M:QuantumLedger.Models.Blockchain.IBlockchainEventHandler.HandleBlockCreatedAsync(QuantumLedger.Models.Blockchain.BlockCreatedEvent)">
+            <summary>
+            Handles a block created event.
+            </summary>
+            <param name="evt">The event to handle.</param>
+        </member>
+        <member name="M:QuantumLedger.Models.Blockchain.IBlockchainEventHandler.HandleAccountStateChangedAsync(QuantumLedger.Models.Blockchain.AccountStateChangedEvent)">
+            <summary>
+            Handles an account state changed event.
+            </summary>
+            <param name="evt">The event to handle.</param>
+        </member>
+        <member name="M:QuantumLedger.Models.Blockchain.IBlockchainEventHandler.HandleBlockchainErrorAsync(QuantumLedger.Models.Blockchain.BlockchainErrorEvent)">
+            <summary>
+            Handles a blockchain error event.
+            </summary>
+            <param name="evt">The event to handle.</param>
+        </member>
+        <member name="T:QuantumLedger.Models.Blockchain.Repositories.IAccountStateEventRepository">
+            <summary>
+            Repository interface for account state events.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Models.Blockchain.Repositories.IAccountStateEventRepository.GetByAddressAsync(System.String)">
+            <summary>
+            Gets account state events by address.
+            </summary>
+            <param name="address">The blockchain address to query.</param>
+            <returns>A collection of account state events for the specified address.</returns>
+        </member>
+        <member name="M:QuantumLedger.Models.Blockchain.Repositories.IAccountStateEventRepository.GetLatestByAddressAsync(System.String)">
+            <summary>
+            Gets the latest account state event for an address.
+            </summary>
+            <param name="address">The blockchain address to query.</param>
+            <returns>The latest account state event for the specified address, or null if not found.</returns>
+        </member>
+        <member name="T:QuantumLedger.Models.Blockchain.Repositories.IBlockchainEventRepository">
+            <summary>
+            Repository interface for blockchain events.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Models.Blockchain.Repositories.IBlockchainEventRepository.GetByTypeAsync(System.String)">
+            <summary>
+            Gets events by their type.
+            </summary>
+            <param name="eventType">The type of events to retrieve.</param>
+            <returns>A collection of events of the specified type.</returns>
+        </member>
+        <member name="M:QuantumLedger.Models.Blockchain.Repositories.IBlockchainEventRepository.GetByTimeRangeAsync(System.DateTime,System.DateTime)">
+            <summary>
+            Gets events within a specific time range.
+            </summary>
+            <param name="start">The start of the time range.</param>
+            <param name="end">The end of the time range.</param>
+            <returns>A collection of events within the specified time range.</returns>
+        </member>
+        <member name="M:QuantumLedger.Models.Blockchain.Repositories.IBlockchainEventRepository.GetByTypeAsync``1(System.Nullable{System.DateTime})">
+            <summary>
+            Gets events of a specific type T.
+            </summary>
+            <typeparam name="T">The type of events to retrieve.</typeparam>
+            <param name="since">Optional timestamp to filter events after a specific time.</param>
+            <returns>A collection of events of type T.</returns>
+        </member>
+        <member name="T:QuantumLedger.Models.Blockchain.Repositories.IBlockEventRepository">
+            <summary>
+            Repository interface for block events.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Models.Blockchain.Repositories.IBlockEventRepository.GetByBlockNumberAsync(System.Int64)">
+            <summary>
+            Gets a block event by its block number.
+            </summary>
+            <param name="blockNumber">The block number to query.</param>
+            <returns>The block event with the specified block number, or null if not found.</returns>
+        </member>
+        <member name="M:QuantumLedger.Models.Blockchain.Repositories.IBlockEventRepository.GetByBlockHashAsync(System.String)">
+            <summary>
+            Gets a block event by its block hash.
+            </summary>
+            <param name="blockHash">The block hash to query.</param>
+            <returns>The block event with the specified block hash, or null if not found.</returns>
+        </member>
+        <member name="T:QuantumLedger.Models.Blockchain.Repositories.ITransactionEventRepository">
+            <summary>
+            Repository interface for transaction events.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Models.Blockchain.Repositories.ITransactionEventRepository.GetByAddressAsync(System.String)">
+            <summary>
+            Gets transaction events by address (sender or recipient).
+            </summary>
+            <param name="address">The blockchain address to query.</param>
+            <returns>A collection of transaction events involving the specified address.</returns>
+        </member>
+        <member name="T:QuantumLedger.Models.Interfaces.IRepository`1">
+            <summary>
+            Defines the base repository operations for Quantum Ledger entities.
+            </summary>
+            <typeparam name="T">The type of entity this repository handles.</typeparam>
+        </member>
+        <member name="M:QuantumLedger.Models.Interfaces.IRepository`1.GetByIdAsync(System.String)">
+            <summary>
+            Gets an entity by its identifier.
+            </summary>
+            <param name="id">The identifier of the entity to retrieve.</param>
+            <returns>The entity if found; otherwise, null.</returns>
+        </member>
+        <member name="M:QuantumLedger.Models.Interfaces.IRepository`1.GetAllAsync">
+            <summary>
+            Gets all entities of type T.
+            </summary>
+            <returns>A collection of all entities.</returns>
+        </member>
+        <member name="M:QuantumLedger.Models.Interfaces.IRepository`1.AddAsync(`0)">
+            <summary>
+            Adds a new entity.
+            </summary>
+            <param name="entity">The entity to add.</param>
+            <returns>The added entity.</returns>
+        </member>
+        <member name="M:QuantumLedger.Models.Interfaces.IRepository`1.UpdateAsync(`0)">
+            <summary>
+            Updates an existing entity.
+            </summary>
+            <param name="entity">The entity to update.</param>
+            <returns>True if the update was successful; otherwise, false.</returns>
+        </member>
+        <member name="T:QuantumLedger.Models.Interfaces.IRequestRepository">
+            <summary>
+            Defines specific repository operations for Request entities.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Models.Interfaces.IRequestRepository.GetByTimeRangeAsync(System.DateTime,System.DateTime)">
+            <summary>
+            Gets requests within a specific time range.
+            </summary>
+            <param name="startTime">The start of the time range.</param>
+            <param name="endTime">The end of the time range.</param>
+            <returns>A collection of requests within the specified time range.</returns>
+        </member>
+        <member name="T:QuantumLedger.Models.Interfaces.IAuditLogRepository">
+            <summary>
+            Defines specific repository operations for AuditLog entities.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Models.Interfaces.IAuditLogRepository.GetByRequestIdAsync(System.String)">
+            <summary>
+            Gets all audit logs for a specific request.
+            </summary>
+            <param name="requestId">The ID of the request.</param>
+            <returns>A collection of audit logs for the specified request.</returns>
+        </member>
+        <member name="T:QuantumLedger.Models.Interfaces.IAccountBalanceRepository">
+            <summary>
+            Defines specific repository operations for AccountBalance entities.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Models.Interfaces.IAccountBalanceRepository.GetByAddressAsync(System.String)">
+            <summary>
+            Gets an account balance by its blockchain address.
+            </summary>
+            <param name="address">The blockchain address.</param>
+            <returns>The account balance if found; otherwise, null.</returns>
+        </member>
+        <member name="M:QuantumLedger.Models.Interfaces.IAccountBalanceRepository.UpdateBalanceAsync(System.String,System.Decimal)">
+            <summary>
+            Updates the balance for a specific account.
+            </summary>
+            <param name="address">The blockchain address.</param>
+            <param name="amount">The amount to add (or subtract if negative).</param>
+            <returns>True if the update was successful; otherwise, false.</returns>
+        </member>
+        <member name="T:QuantumLedger.Models.Interfaces.ISurrealEntity">
+            <summary>
+            Temporary interface to replace LiquidStorageCloud.Core.Database.ISurrealEntity
+            until the dependency is properly resolved.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Interfaces.ISurrealEntity.Id">
+            <summary>
+            Gets or sets the unique identifier for this entity.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Interfaces.ISurrealEntity.TableName">
+            <summary>
+            Gets the table name for the database.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Interfaces.ISurrealEntity.Namespace">
+            <summary>
+            Gets the namespace for the database.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Interfaces.ISurrealEntity.SolidState">
+            <summary>
+            Gets or sets whether the entity is in a solid state.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Interfaces.ISurrealEntity.LastModified">
+            <summary>
+            Gets or sets the last modified timestamp.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Models.Request">
+            <summary>
+            Represents a request in the system
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Request.Id">
+            <summary>
+            Gets or sets the unique identifier for this request
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Request.Address">
+            <summary>
+            Gets or sets the address associated with this request
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Request.Type">
+            <summary>
+            Gets or sets the type of request
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Request.Data">
+            <summary>
+            Gets or sets the request data
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Request.CreatedAt">
+            <summary>
+            Gets or sets when this request was created
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Request.ClassicSignature">
+            <summary>
+            Gets or sets the classical signature as a base64 string
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Request.QuantumSignature">
+            <summary>
+            Gets or sets the quantum-resistant signature as a base64 string
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Request.ClassicKeyId">
+            <summary>
+            Gets or sets the ID of the classical key used
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Request.QuantumKeyId">
+            <summary>
+            Gets or sets the ID of the quantum key used
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Request.SolidState">
+            <summary>
+            Gets the classical signature as a byte array
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Models.Request.GetQuantumSignatureBytes">
+            <summary>
+            Gets the quantum signature as a byte array
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Models.Request.GetSignedContent">
+            <summary>
+            Gets the content that is signed
+            </summary>
+            <returns>The signed content as bytes</returns>
+        </member>
+        <member name="T:QuantumLedger.Models.SecurityAuditLog">
+            <summary>
+            Represents a security audit log entry for compliance and monitoring
+            Designed for SOC2 compliance and security event tracking
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.SecurityAuditLog.Id">
+            <summary>
+            Gets or sets the unique identifier for this audit log entry.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.SecurityAuditLog.Timestamp">
+            <summary>
+            Gets or sets the timestamp when the event occurred.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.SecurityAuditLog.EventType">
+            <summary>
+            Gets or sets the type of security event.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.SecurityAuditLog.Category">
+            <summary>
+            Gets or sets the category of the event (Security, Authentication, DataAccess, etc.).
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.SecurityAuditLog.Description">
+            <summary>
+            Gets or sets a human-readable description of the event.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.SecurityAuditLog.Details">
+            <summary>
+            Gets or sets additional details about the event in JSON format.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.SecurityAuditLog.UserId">
+            <summary>
+            Gets or sets the user ID associated with the event.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.SecurityAuditLog.IpAddress">
+            <summary>
+            Gets or sets the IP address from which the event originated.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.SecurityAuditLog.UserAgent">
+            <summary>
+            Gets or sets the user agent string from the request.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.SecurityAuditLog.RequestId">
+            <summary>
+            Gets or sets the request ID for correlation with application logs.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.SecurityAuditLog.Severity">
+            <summary>
+            Gets or sets the severity level of the event.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.SecurityAuditLog.RequiresAttention">
+            <summary>
+            Gets or sets whether this event requires immediate attention.
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.SecurityAuditLog.CreatedAt">
+            <summary>
+            Gets or sets when this audit log entry was created.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Models.SecurityAuditLog.IsValid">
+            <summary>
+            Validates that the security audit log has all required fields and valid data.
+            </summary>
+            <returns>True if the audit log is valid; otherwise, false.</returns>
+        </member>
+        <member name="M:QuantumLedger.Models.SecurityAuditLog.SetSeverityFromEventType">
+            <summary>
+            Sets the severity level based on the event type.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Models.SecurityAuditLog.Categories">
+            <summary>
+            Common event categories for security audit logs.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Models.SecurityAuditLog.SeverityLevels">
+            <summary>
+            Common severity levels for security audit logs.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Models.SecurityAuditLogExtensions">
+            <summary>
+            Extension methods for SecurityAuditLog operations.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Models.SecurityAuditLogExtensions.CreateAuthenticationEvent(System.String,System.String,System.String,System.Object)">
+            <summary>
+            Creates a security audit log entry for authentication events.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Models.SecurityAuditLogExtensions.CreateSubstitutionKeyEvent(System.String,System.String,System.String,System.Object,System.String)">
+            <summary>
+            Creates a security audit log entry for substitution key events.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Models.SecurityAuditLogExtensions.CreateDataAccessEvent(System.String,System.String,System.String,System.Object,System.String)">
+            <summary>
+            Creates a security audit log entry for data access events.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Models.SecurityAuditLogExtensions.IsCriticalEvent(QuantumLedger.Models.SecurityAuditLog)">
+            <summary>
+            Checks if the audit log represents a critical security event.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Models.SecurityAuditLogExtensions.GetSummary(QuantumLedger.Models.SecurityAuditLog)">
+            <summary>
+            Gets a summary of the audit log for reporting.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Models.Validation.DefaultRequestValidator">
+            <summary>
+            Default implementation of request validation for the Quantum Ledger system.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Models.Validation.DefaultRequestValidator.ValidateAsync(QuantumLedger.Models.Request)">
+            <summary>
+            Validates a request including its basic properties and signature.
+            </summary>
+            <param name="request">The request to validate.</param>
+            <returns>A validation result indicating success or failure with details.</returns>
+        </member>
+        <member name="M:QuantumLedger.Models.Validation.DefaultRequestValidator.ValidateSignatureAsync(QuantumLedger.Models.Request)">
+            <summary>
+            Validates only the signature portion of a request.
+            For MVP, this is a simplified implementation that will be replaced by the QSP module.
+            </summary>
+            <param name="request">The request whose signature should be validated.</param>
+            <returns>A signature validation result indicating success or failure with details.</returns>
+        </member>
+        <member name="M:QuantumLedger.Models.Validation.DefaultRequestValidator.IsValidJson(System.String)">
+            <summary>
+            Checks if a string is valid JSON.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Models.Validation.DefaultRequestValidator.IsValidBase64(System.String)">
+            <summary>
+            Checks if a string is valid base64.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Models.Validation.DefaultRequestValidator.ContainsAddress(System.String)">
+            <summary>
+            Checks if the payload contains any blockchain addresses.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Models.Validation.DefaultRequestValidator.HasValidAddresses(System.String)">
+            <summary>
+            Validates all blockchain addresses in the payload.
+            </summary>
+        </member>
+        <member name="T:QuantumLedger.Models.Validation.IRequestValidator">
+            <summary>
+            Defines the contract for request validation in the Quantum Ledger system.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Models.Validation.IRequestValidator.ValidateAsync(QuantumLedger.Models.Request)">
+            <summary>
+            Validates a request including its basic properties and signature.
+            </summary>
+            <param name="request">The request to validate.</param>
+            <returns>A validation result indicating success or failure with details.</returns>
+        </member>
+        <member name="M:QuantumLedger.Models.Validation.IRequestValidator.ValidateSignatureAsync(QuantumLedger.Models.Request)">
+            <summary>
+            Validates only the signature portion of a request.
+            </summary>
+            <param name="request">The request whose signature should be validated.</param>
+            <returns>A signature validation result indicating success or failure with details.</returns>
+        </member>
+        <member name="T:QuantumLedger.Models.Validation.RequestValidationResult">
+            <summary>
+            Represents the result of validating a request in the Quantum Ledger system.
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Models.Validation.RequestValidationResult.Success">
+            <summary>
+            Creates a successful validation result.
+            </summary>
+            <returns>A validation result indicating success.</returns>
+        </member>
+        <member name="M:QuantumLedger.Models.Validation.RequestValidationResult.Failure(System.String)">
+            <summary>
+            Creates a failed validation result with specified errors.
+            </summary>
+            <param name="message">The validation failure message.</param>
+            <returns>A validation result indicating failure with the specified message.</returns>
+        </member>
+        <member name="T:QuantumLedger.Models.Validation.SignatureValidationResult">
+            <summary>
+            Represents the result of a signature validation operation
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Validation.SignatureValidationResult.IsEccValid">
+            <summary>
+            Gets or sets whether the ECC (EC-256) signature is valid
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Validation.SignatureValidationResult.IsPqcValid">
+            <summary>
+            Gets or sets whether the PQC (Dilithium) signature is valid
+            </summary>
+        </member>
+        <member name="M:QuantumLedger.Models.Validation.SignatureValidationResult.Create(System.Boolean,System.Boolean)">
+            <summary>
+            Creates a successful signature validation result.
+            </summary>
+            <param name="eccValid">Whether the ECC signature is valid.</param>
+            <param name="pqcValid">Whether the PQC signature is valid.</param>
+            <returns>A validation result indicating the signature validation status.</returns>
+        </member>
+        <member name="T:QuantumLedger.Models.Validation.ValidationResultBase">
+            <summary>
+            Base class for validation results
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Validation.ValidationResultBase.IsValid">
+            <summary>
+            Gets or sets whether the validation was successful
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Validation.ValidationResultBase.Message">
+            <summary>
+            Gets or sets the validation message
+            </summary>
+        </member>
+        <member name="P:QuantumLedger.Models.Validation.ValidationResultBase.Errors">
+            <summary>
+            Gets or sets any validation errors
+            </summary>
+        </member>
+    </members>
+</doc>

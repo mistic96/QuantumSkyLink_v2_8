@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "yv2NpnRC3mneczVugLcrpNsGHU7RHhPaKFpqnb9bMz0=",
+  "Source": "SignatureService",
+  "BasePath": "_content/SignatureService",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

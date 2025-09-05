@@ -1,0 +1,8 @@
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/OrchestrationService/obj/Release/net9.0/OrchestrationService.csproj.AssemblyReference.cache
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/OrchestrationService/obj/Release/net9.0/OrchestrationService.GeneratedMSBuildEditorConfig.editorconfig
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/OrchestrationService/obj/Release/net9.0/OrchestrationService.AssemblyInfoInputs.cache
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/OrchestrationService/obj/Release/net9.0/OrchestrationService.AssemblyInfo.cs
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/OrchestrationService/obj/Release/net9.0/OrchestrationService.csproj.CoreCompileInputs.cache
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/OrchestrationService/obj/Release/net9.0/OrchestrationService.MvcApplicationPartsAssemblyInfo.cs
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/OrchestrationService/obj/Release/net9.0/OrchestrationService.MvcApplicationPartsAssemblyInfo.cache
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/OrchestrationService/obj/Release/net9.0/OrchestrationService.sourcelink.json

@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	  <Title>LiquidStorageCloud Datamanagement  Core</Title>
+	  <Description>For CQRS management and utilization.</Description>
+	  <Authors>Quantum CDS</Authors>
+	  <Version>1.0.3</Version>
+	  <!--<PackageReadmeFile>README.md</PackageReadmeFile>-->
+	  <PackageTags>cqrs;surrealdb;</PackageTags>
+	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LiquidStorageCloud.Services.EventPublishing\LiquidStorageCloud.Services.EventPublishing.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "WZFPcKOeqOLyMX/TmNlxgAJwsPCTrF2fq+pPV4I5QVY=",
+  "Source": "QuantumLedger.Hub",
+  "BasePath": "_content/QuantumLedger.Hub",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "XXlUh1QT8Q6ivHJS3EsVrOXNr/7z14nGTwfyn1GVEb8=",
+  "Source": "FeeService",
+  "BasePath": "_content/FeeService",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

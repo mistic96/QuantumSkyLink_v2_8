@@ -1,0 +1,236 @@
+@OrchestrationService_HostAddress = https://localhost:7001
+
+### Get OrchestrationService Health
+GET {{OrchestrationService_HostAddress}}/health
+
+### Get OrchestrationService Status
+GET {{OrchestrationService_HostAddress}}/status
+
+### Get OrchestrationService Metrics
+GET {{OrchestrationService_HostAddress}}/metrics
+
+### Get Available Workflow Definitions
+GET {{OrchestrationService_HostAddress}}/api/orchestration/workflows
+
+### Execute Payment Processing Workflow
+POST {{OrchestrationService_HostAddress}}/api/orchestration/workflows/payment-processing-zero-trust/execute
+Content-Type: application/json
+
+{
+  "inputs": {
+    "paymentRequest": {
+      "paymentId": "pay_test_001",
+      "amount": 100.50,
+      "fromAccountId": "acc_sender_001",
+      "toAccountId": "acc_receiver_001",
+      "userId": "user_001",
+      "nonce": "nonce_12345",
+      "sequenceNumber": 1,
+      "timestamp": "2025-12-04T18:21:00Z",
+      "signature": "test_signature_data",
+      "algorithm": "Dilithium"
+    }
+  },
+  "triggeredBy": "API_Test",
+  "context": {
+    "testMode": "true",
+    "source": "http_test"
+  },
+  "description": "Test payment workflow execution",
+  "priority": 8
+}
+
+### Execute User Onboarding Workflow
+POST {{OrchestrationService_HostAddress}}/api/orchestration/workflows/user-onboarding-optimized/execute
+Content-Type: application/json
+
+{
+  "inputs": {
+    "userRegistration": {
+      "userId": "user_new_001",
+      "email": "test@example.com",
+      "userType": "RETAIL",
+      "profile": {
+        "firstName": "John",
+        "lastName": "Doe",
+        "dateOfBirth": "1990-01-01",
+        "country": "US"
+      }
+    }
+  },
+  "triggeredBy": "Registration_API",
+  "context": {
+    "registrationSource": "web",
+    "referralCode": "REF123"
+  },
+  "description": "New user onboarding workflow",
+  "priority": 5
+}
+
+### Execute Treasury Operations Workflow
+POST {{OrchestrationService_HostAddress}}/api/orchestration/workflows/treasury-operations-secure/execute
+Content-Type: application/json
+
+{
+  "inputs": {
+    "treasuryOperation": {
+      "operationId": "treasury_op_001",
+      "operationType": "LIQUIDITY_MANAGEMENT",
+      "amount": 50000.00,
+      "approvers": ["admin_001", "admin_002"],
+      "riskLevel": "HIGH"
+    }
+  },
+  "triggeredBy": "Treasury_Admin",
+  "context": {
+    "approvalRequired": "true",
+    "complianceCheck": "required"
+  },
+  "description": "High-value treasury operation",
+  "priority": 10
+}
+
+### Get Workflow Status (replace {executionId} with actual execution ID)
+GET {{OrchestrationService_HostAddress}}/api/orchestration/executions/{executionId}/status
+
+### Get Workflow Progress (replace {executionId} with actual execution ID)
+GET {{OrchestrationService_HostAddress}}/api/orchestration/executions/{executionId}/progress
+
+### Validate Payment Workflow
+POST {{OrchestrationService_HostAddress}}/api/orchestration/workflows/payment-processing-zero-trust/validate
+Content-Type: application/json
+
+{
+  "inputs": {
+    "paymentRequest": {
+      "paymentId": "pay_validation_test",
+      "amount": 25.00,
+      "fromAccountId": "acc_test_001",
+      "toAccountId": "acc_test_002"
+    }
+  },
+  "validateInputsOnly": true
+}
+
+### Trigger Workflow from Event - Payment Request
+POST {{OrchestrationService_HostAddress}}/api/orchestration/triggers/event
+Content-Type: application/json
+
+{
+  "eventType": "payment_requested",
+  "eventData": {
+    "paymentRequest": {
+      "paymentId": "pay_event_001",
+      "amount": 75.25,
+      "fromAccountId": "acc_event_sender",
+      "toAccountId": "acc_event_receiver",
+      "userId": "user_event_001",
+      "nonce": "event_nonce_001",
+      "sequenceNumber": 1,
+      "timestamp": "2025-12-04T18:21:00Z",
+      "signature": "event_signature_data",
+      "algorithm": "Dilithium"
+    }
+  },
+  "source": "PaymentAPI",
+  "timestamp": "2025-12-04T18:21:00Z",
+  "correlationId": "corr_001",
+  "headers": {
+    "X-Request-ID": "req_001",
+    "X-User-ID": "user_event_001"
+  }
+}
+
+### Trigger Workflow from Event - User Registration
+POST {{OrchestrationService_HostAddress}}/api/orchestration/triggers/event
+Content-Type: application/json
+
+{
+  "eventType": "user_registration",
+  "eventData": {
+    "userRegistration": {
+      "userId": "user_event_reg_001",
+      "email": "event.user@example.com",
+      "userType": "INSTITUTIONAL",
+      "profile": {
+        "companyName": "Test Corp",
+        "businessType": "FINTECH",
+        "country": "US"
+      }
+    }
+  },
+  "source": "RegistrationService",
+  "timestamp": "2025-12-04T18:21:00Z",
+  "correlationId": "reg_corr_001",
+  "headers": {
+    "X-Registration-Source": "web",
+    "X-Campaign-ID": "campaign_001"
+  }
+}
+
+### Trigger Workflow from Event - Treasury Operation
+POST {{OrchestrationService_HostAddress}}/api/orchestration/triggers/event
+Content-Type: application/json
+
+{
+  "eventType": "treasury_operation_requested",
+  "eventData": {
+    "treasuryOperation": {
+      "operationId": "treasury_event_001",
+      "operationType": "RISK_MANAGEMENT",
+      "amount": 100000.00,
+      "urgency": "HIGH",
+      "approvers": ["cfo_001", "risk_manager_001"]
+    }
+  },
+  "source": "TreasurySystem",
+  "timestamp": "2025-12-04T18:21:00Z",
+  "correlationId": "treasury_corr_001",
+  "headers": {
+    "X-Risk-Level": "HIGH",
+    "X-Approval-Required": "true"
+  }
+}
+
+### Test Unknown Event Type (should be ignored)
+POST {{OrchestrationService_HostAddress}}/api/orchestration/triggers/event
+Content-Type: application/json
+
+{
+  "eventType": "unknown_event_type",
+  "eventData": {
+    "someData": "test"
+  },
+  "source": "TestSystem",
+  "timestamp": "2025-12-04T18:21:00Z"
+}
+
+### Performance Test - Multiple Workflow Executions
+# Execute this multiple times to test concurrent workflow handling
+
+POST {{OrchestrationService_HostAddress}}/api/orchestration/workflows/payment-processing-zero-trust/execute
+Content-Type: application/json
+
+{
+  "inputs": {
+    "paymentRequest": {
+      "paymentId": "pay_perf_{{$randomInt}}",
+      "amount": {{$randomInt}}.{{$randomInt}},
+      "fromAccountId": "acc_perf_sender",
+      "toAccountId": "acc_perf_receiver",
+      "userId": "user_perf_test",
+      "nonce": "perf_nonce_{{$randomInt}}",
+      "sequenceNumber": {{$randomInt}},
+      "timestamp": "{{$isoTimestamp}}",
+      "signature": "perf_signature_{{$randomInt}}",
+      "algorithm": "Dilithium"
+    }
+  },
+  "triggeredBy": "Performance_Test",
+  "context": {
+    "testType": "performance",
+    "batchId": "batch_{{$randomInt}}"
+  },
+  "description": "Performance test workflow execution",
+  "priority": 5
+}

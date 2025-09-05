@@ -1,0 +1,295 @@
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using PaymentGatewayService.Services;
+using PaymentGatewayService.Services.Interfaces;
+using System.ComponentModel.DataAnnotations;
+
+namespace PaymentGatewayService.Controllers;
+
+/// <summary>
+/// Controller for accessing deposit code monitoring metrics and dashboard data
+/// Provides endpoints for AdminAPIGateway consumption
+/// </summary>
+[ApiController]
+[Route("api/[controller]")]
+[Authorize] // Require authentication for monitoring endpoints
+public class MonitoringController : ControllerBase
+{
+    private readonly ILogger<MonitoringController> _logger;
+    private readonly IDepositCodeMonitoringService _monitoringService;
+
+    public MonitoringController(
+        ILogger<MonitoringController> logger,
+        IDepositCodeMonitoringService monitoringService)
+    {
+        _logger = logger;
+        _monitoringService = monitoringService;
+    }
+
+    /// <summary>
+    /// Gets deposit code metrics for the specified time range
+    /// </summary>
+    /// <param name="fromDate">Start date for metrics (default: 24 hours ago)</param>
+    /// <param name="toDate">End date for metrics (default: now)</param>
+    /// <returns>Deposit code metrics including validation rates, usage patterns, and failure reasons</returns>
+    [HttpGet("deposit-codes")]
+    public async Task<ActionResult<Interfaces.DepositCodeMetrics>> GetDepositCodeMetrics(
+        [FromQuery] DateTime? fromDate = null,
+        [FromQuery] DateTime? toDate = null)
+    {
+        try
+        {
+            var from = fromDate ?? DateTime.UtcNow.AddDays(-1);
+            var to = toDate ?? DateTime.UtcNow;
+
+            if (from > to)
+            {
+                return BadRequest("fromDate must be earlier than toDate");
+            }
+
+            if (to - from > TimeSpan.FromDays(30))
+            {
+                return BadRequest("Date range cannot exceed 30 days");
+            }
+
+            var metrics = await _monitoringService.GetDepositCodeMetricsAsync(from, to);
+            
+            _logger.LogInformation("Deposit code metrics retrieved for period {FromDate} to {ToDate}", from, to);
+            
+            return Ok(metrics);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error retrieving deposit code metrics");
+            return StatusCode(500, "Internal server error");
+        }
+    }
+
+    /// <summary>
+    /// Gets security metrics for the specified time range
+    /// </summary>
+    /// <param name="fromDate">Start date for metrics (default: 24 hours ago)</param>
+    /// <param name="toDate">End date for metrics (default: now)</param>
+    /// <returns>Security metrics including suspicious activity, duplicate attempts, and incident frequency</returns>
+    [HttpGet("security")]
+    public async Task<ActionResult<Interfaces.SecurityMetrics>> GetSecurityMetrics(
+        [FromQuery] DateTime? fromDate = null,
+        [FromQuery] DateTime? toDate = null)
+    {
+        try
+        {
+            var from = fromDate ?? DateTime.UtcNow.AddDays(-1);
+            var to = toDate ?? DateTime.UtcNow;
+
+            if (from > to)
+            {
+                return BadRequest("fromDate must be earlier than toDate");
+            }
+
+            if (to - from > TimeSpan.FromDays(30))
+            {
+                return BadRequest("Date range cannot exceed 30 days");
+            }
+
+            var metrics = await _monitoringService.GetSecurityMetricsAsync(from, to);
+            
+            _logger.LogInformation("Security metrics retrieved for period {FromDate} to {ToDate}", from, to);
+            
+            return Ok(metrics);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error retrieving security metrics");
+            return StatusCode(500, "Internal server error");
+        }
+    }
+
+    /// <summary>
+    /// Gets performance metrics for the specified time range
+    /// </summary>
+    /// <param name="fromDate">Start date for metrics (default: 24 hours ago)</param>
+    /// <param name="toDate">End date for metrics (default: now)</param>
+    /// <returns>Performance metrics including validation times, service uptime, and error rates</returns>
+    [HttpGet("performance")]
+    public async Task<ActionResult<Interfaces.PerformanceMetrics>> GetPerformanceMetrics(
+        [FromQuery] DateTime? fromDate = null,
+        [FromQuery] DateTime? toDate = null)
+    {
+        try
+        {
+            var from = fromDate ?? DateTime.UtcNow.AddDays(-1);
+            var to = toDate ?? DateTime.UtcNow;
+
+            if (from > to)
+            {
+                return BadRequest("fromDate must be earlier than toDate");
+            }
+
+            if (to - from > TimeSpan.FromDays(30))
+            {
+                return BadRequest("Date range cannot exceed 30 days");
+            }
+
+            var metrics = await _monitoringService.GetPerformanceMetricsAsync(from, to);
+            
+            _logger.LogInformation("Performance metrics retrieved for period {FromDate} to {ToDate}", from, to);
+            
+            return Ok(metrics);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error retrieving performance metrics");
+            return StatusCode(500, "Internal server error");
+        }
+    }
+
+    /// <summary>
+    /// Gets comprehensive dashboard metrics combining all monitoring data
+    /// </summary>
+    /// <param name="fromDate">Start date for metrics (default: 24 hours ago)</param>
+    /// <param name="toDate">End date for metrics (default: now)</param>
+    /// <returns>Combined dashboard metrics for admin console display</returns>
+    [HttpGet("dashboard")]
+    public async Task<ActionResult<DashboardMetrics>> GetDashboardMetrics(
+        [FromQuery] DateTime? fromDate = null,
+        [FromQuery] DateTime? toDate = null)
+    {
+        try
+        {
+            var from = fromDate ?? DateTime.UtcNow.AddDays(-1);
+            var to = toDate ?? DateTime.UtcNow;
+
+            if (from > to)
+            {
+                return BadRequest("fromDate must be earlier than toDate");
+            }
+
+            if (to - from > TimeSpan.FromDays(30))
+            {
+                return BadRequest("Date range cannot exceed 30 days");
+            }
+
+            // Get all metrics in parallel
+            var depositTask = _monitoringService.GetDepositCodeMetricsAsync(from, to);
+            var securityTask = _monitoringService.GetSecurityMetricsAsync(from, to);
+            var performanceTask = _monitoringService.GetPerformanceMetricsAsync(from, to);
+
+            await Task.WhenAll(depositTask, securityTask, performanceTask);
+
+            var dashboardMetrics = new DashboardMetrics
+            {
+                FromDate = from,
+                ToDate = to,
+                DepositCodes = await depositTask,
+                Security = await securityTask,
+                Performance = await performanceTask,
+                LastUpdated = DateTime.UtcNow
+            };
+
+            _logger.LogInformation("Dashboard metrics retrieved for period {FromDate} to {ToDate}", from, to);
+            
+            return Ok(dashboardMetrics);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error retrieving dashboard metrics");
+            return StatusCode(500, "Internal server error");
+        }
+    }
+
+    /// <summary>
+    /// Triggers an immediate alert check (admin function)
+    /// </summary>
+    /// <returns>Result of alert check operation</returns>
+    [HttpPost("alerts/check")]
+    [Authorize(Roles = "Admin")]
+    public async Task<ActionResult> TriggerAlertCheck()
+    {
+        try
+        {
+            await _monitoringService.CheckAndTriggerAlertsAsync();
+            
+            _logger.LogInformation("Manual alert check triggered by admin");
+            
+            return Ok(new { message = "Alert check completed successfully", timestamp = DateTime.UtcNow });
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error during manual alert check");
+            return StatusCode(500, "Internal server error");
+        }
+    }
+
+    /// <summary>
+    /// Gets health status of monitoring services
+    /// </summary>
+    /// <returns>Health status of monitoring infrastructure</returns>
+    [HttpGet("health")]
+    public ActionResult<MonitoringHealthStatus> GetMonitoringHealth()
+    {
+        try
+        {
+            // Basic health check - in a real implementation this would check:
+            // - Database connectivity
+            // - Metrics collection status
+            // - Alert service status
+            // - External integrations
+            
+            var healthStatus = new MonitoringHealthStatus
+            {
+                IsHealthy = true,
+                Components = new Dictionary<string, ComponentHealth>
+                {
+                    ["deposit_code_monitoring"] = new ComponentHealth { IsHealthy = true, LastCheck = DateTime.UtcNow },
+                    ["security_monitoring"] = new ComponentHealth { IsHealthy = true, LastCheck = DateTime.UtcNow },
+                    ["performance_monitoring"] = new ComponentHealth { IsHealthy = true, LastCheck = DateTime.UtcNow },
+                    ["alerting_service"] = new ComponentHealth { IsHealthy = true, LastCheck = DateTime.UtcNow },
+                    ["metrics_collection"] = new ComponentHealth { IsHealthy = true, LastCheck = DateTime.UtcNow }
+                },
+                LastHealthCheck = DateTime.UtcNow,
+                UptimeHours = 24.0 // This would be calculated from actual uptime
+            };
+
+            return Ok(healthStatus);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error retrieving monitoring health status");
+            return StatusCode(500, "Internal server error");
+        }
+    }
+}
+
+/// <summary>
+/// Combined dashboard metrics for admin console
+/// </summary>
+public record DashboardMetrics
+{
+    public DateTime FromDate { get; init; }
+    public DateTime ToDate { get; init; }
+    public DepositCodeMetrics DepositCodes { get; init; } = null!;
+    public SecurityMetrics Security { get; init; } = null!;
+    public PerformanceMetrics Performance { get; init; } = null!;
+    public DateTime LastUpdated { get; init; }
+}
+
+/// <summary>
+/// Health status of monitoring infrastructure
+/// </summary>
+public record MonitoringHealthStatus
+{
+    public bool IsHealthy { get; init; }
+    public Dictionary<string, ComponentHealth> Components { get; init; } = new();
+    public DateTime LastHealthCheck { get; init; }
+    public double UptimeHours { get; init; }
+}
+
+/// <summary>
+/// Health status of individual monitoring component
+/// </summary>
+public record ComponentHealth
+{
+    public bool IsHealthy { get; init; }
+    public DateTime LastCheck { get; init; }
+    public string? ErrorMessage { get; init; }
+}

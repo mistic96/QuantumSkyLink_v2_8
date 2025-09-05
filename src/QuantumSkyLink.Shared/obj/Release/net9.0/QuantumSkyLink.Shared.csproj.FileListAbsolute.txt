@@ -1,0 +1,12 @@
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/QuantumSkyLink.Shared/bin/Release/net9.0/QuantumSkyLink.Shared.deps.json
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/QuantumSkyLink.Shared/bin/Release/net9.0/QuantumSkyLink.Shared.dll
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/QuantumSkyLink.Shared/bin/Release/net9.0/QuantumSkyLink.Shared.pdb
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/QuantumSkyLink.Shared/obj/Release/net9.0/QuantumSkyLink.Shared.GeneratedMSBuildEditorConfig.editorconfig
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/QuantumSkyLink.Shared/obj/Release/net9.0/QuantumSkyLink.Shared.AssemblyInfoInputs.cache
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/QuantumSkyLink.Shared/obj/Release/net9.0/QuantumSkyLink.Shared.AssemblyInfo.cs
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/QuantumSkyLink.Shared/obj/Release/net9.0/QuantumSkyLink.Shared.csproj.CoreCompileInputs.cache
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/QuantumSkyLink.Shared/obj/Release/net9.0/QuantumSkyLink.Shared.sourcelink.json
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/QuantumSkyLink.Shared/obj/Release/net9.0/QuantumSkyLink.Shared.dll
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/QuantumSkyLink.Shared/obj/Release/net9.0/refint/QuantumSkyLink.Shared.dll
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/QuantumSkyLink.Shared/obj/Release/net9.0/QuantumSkyLink.Shared.pdb
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/QuantumSkyLink.Shared/obj/Release/net9.0/ref/QuantumSkyLink.Shared.dll

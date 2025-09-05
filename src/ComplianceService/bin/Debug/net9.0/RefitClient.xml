@@ -1,0 +1,254 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RefitClient</name>
+    </assembly>
+    <members>
+        <member name="T:RefitClient.Extensions.ServiceCollectionExtensions">
+            <summary>
+            Extension methods for registering Refit clients in the dependency injection container.
+            </summary>
+        </member>
+        <member name="M:RefitClient.Extensions.ServiceCollectionExtensions.AddRefitClient``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String)">
+            <summary>
+            Adds a Refit client for the specified service interface.
+            </summary>
+            <typeparam name="TClient">The type of the service client interface.</typeparam>
+            <param name="services">The service collection.</param>
+            <param name="serviceName">The name of the service to connect to.</param>
+            <returns>The HTTP client builder for further configuration.</returns>
+        </member>
+        <member name="M:RefitClient.Extensions.ServiceCollectionExtensions.AddRefitClient``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{RefitClient.Models.RefitClientOptions},System.String)">
+            <summary>
+            Adds a Refit client for the specified service interface with custom options.
+            </summary>
+            <typeparam name="TClient">The type of the service client interface.</typeparam>
+            <param name="services">The service collection.</param>
+            <param name="configureOptions">A delegate to configure the client options.</param>
+            <param name="serviceName">The name of the service to connect to.</param>
+            <returns>The HTTP client builder for further configuration.</returns>
+        </member>
+        <member name="T:RefitClient.Implementations.DefaultApiClient`1">
+            <summary>
+            Default implementation of the <see cref="T:RefitClient.Interfaces.IApiClient`1"/> interface.
+            </summary>
+            <typeparam name="T">The type of the service client interface.</typeparam>
+        </member>
+        <member name="M:RefitClient.Implementations.DefaultApiClient`1.#ctor(System.Net.Http.HttpClient)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RefitClient.Implementations.DefaultApiClient`1"/> class.
+            </summary>
+            <param name="httpClient">The HTTP client.</param>
+        </member>
+        <member name="M:RefitClient.Implementations.DefaultApiClient`1.GetAsync``1(System.String,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:RefitClient.Implementations.DefaultApiClient`1.PostAsync``2(System.String,``0,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:RefitClient.Implementations.DefaultApiClient`1.PutAsync``2(System.String,``0,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:RefitClient.Implementations.DefaultApiClient`1.DeleteAsync``1(System.String,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="T:RefitClient.Interfaces.IApiClient`1">
+            <summary>
+            Defines a generic API client interface for making HTTP requests.
+            </summary>
+            <typeparam name="T">The type of the service client interface.</typeparam>
+        </member>
+        <member name="M:RefitClient.Interfaces.IApiClient`1.GetAsync``1(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Sends a GET request to the specified endpoint.
+            </summary>
+            <typeparam name="TResponse">The type of the response.</typeparam>
+            <param name="endpoint">The API endpoint.</param>
+            <param name="cancellationToken">A token to cancel the operation.</param>
+            <returns>A task representing the asynchronous operation with the response.</returns>
+        </member>
+        <member name="M:RefitClient.Interfaces.IApiClient`1.PostAsync``2(System.String,``0,System.Threading.CancellationToken)">
+            <summary>
+            Sends a POST request to the specified endpoint with the provided data.
+            </summary>
+            <typeparam name="TRequest">The type of the request data.</typeparam>
+            <typeparam name="TResponse">The type of the response.</typeparam>
+            <param name="endpoint">The API endpoint.</param>
+            <param name="data">The data to send.</param>
+            <param name="cancellationToken">A token to cancel the operation.</param>
+            <returns>A task representing the asynchronous operation with the response.</returns>
+        </member>
+        <member name="M:RefitClient.Interfaces.IApiClient`1.PutAsync``2(System.String,``0,System.Threading.CancellationToken)">
+            <summary>
+            Sends a PUT request to the specified endpoint with the provided data.
+            </summary>
+            <typeparam name="TRequest">The type of the request data.</typeparam>
+            <typeparam name="TResponse">The type of the response.</typeparam>
+            <param name="endpoint">The API endpoint.</param>
+            <param name="data">The data to send.</param>
+            <param name="cancellationToken">A token to cancel the operation.</param>
+            <returns>A task representing the asynchronous operation with the response.</returns>
+        </member>
+        <member name="M:RefitClient.Interfaces.IApiClient`1.DeleteAsync``1(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Sends a DELETE request to the specified endpoint.
+            </summary>
+            <typeparam name="TResponse">The type of the response.</typeparam>
+            <param name="endpoint">The API endpoint.</param>
+            <param name="cancellationToken">A token to cancel the operation.</param>
+            <returns>A task representing the asynchronous operation with the response.</returns>
+        </member>
+        <member name="T:RefitClient.Interfaces.IServiceClient">
+            <summary>
+            Marker interface for service clients.
+            Implement this interface and add Refit attributes to define your API endpoints.
+            </summary>
+            <example>
+            <code>
+            public interface IUserServiceClient : IServiceClient
+            {
+                [Get("/users")]
+                Task&lt;List&lt;User&gt;&gt; GetUsersAsync();
+                
+                [Get("/users/{id}")]
+                Task&lt;User&gt; GetUserAsync(int id);
+                
+                [Post("/users")]
+                Task&lt;User&gt; CreateUserAsync([Body] User user);
+            }
+            </code>
+            </example>
+        </member>
+        <member name="T:RefitClient.Models.RefitClientOptions">
+            <summary>
+            Configuration options for Refit clients.
+            </summary>
+        </member>
+        <member name="P:RefitClient.Models.RefitClientOptions.BaseUrl">
+            <summary>
+            Gets or sets the base URL for the API.
+            If not specified, service discovery will be used with the service name.
+            </summary>
+        </member>
+        <member name="P:RefitClient.Models.RefitClientOptions.Timeout">
+            <summary>
+            Gets or sets the timeout for HTTP requests.
+            Default is 30 seconds.
+            </summary>
+        </member>
+        <member name="P:RefitClient.Models.RefitClientOptions.UseAuthentication">
+            <summary>
+            Gets or sets whether to use authentication.
+            </summary>
+        </member>
+        <member name="P:RefitClient.Models.RefitClientOptions.AuthenticationScheme">
+            <summary>
+            Gets or sets the authentication scheme to use when UseAuthentication is true.
+            Default is "Bearer".
+            </summary>
+        </member>
+        <member name="P:RefitClient.Models.RefitClientOptions.UseResiliencePolicies">
+            <summary>
+            Gets or sets whether to use standard resilience policies.
+            Default is true.
+            </summary>
+        </member>
+        <member name="P:RefitClient.Models.RefitClientOptions.UseServiceDiscovery">
+            <summary>
+            Gets or sets whether to use service discovery.
+            Default is true.
+            </summary>
+        </member>
+        <member name="P:RefitClient.Models.RefitClientOptions.DefaultHeaders">
+            <summary>
+            Gets or sets additional headers to include with every request.
+            </summary>
+        </member>
+        <member name="T:RefitClient.Models.ResilienceOptions">
+            <summary>
+            Configuration options for HTTP client resilience policies.
+            </summary>
+        </member>
+        <member name="P:RefitClient.Models.ResilienceOptions.MaxRetryCount">
+            <summary>
+            Gets or sets the maximum number of retry attempts.
+            Default is 3.
+            </summary>
+        </member>
+        <member name="P:RefitClient.Models.ResilienceOptions.InitialBackoff">
+            <summary>
+            Gets or sets the initial backoff delay for retries.
+            Default is 1 second.
+            </summary>
+        </member>
+        <member name="P:RefitClient.Models.ResilienceOptions.MaxBackoff">
+            <summary>
+            Gets or sets the maximum backoff delay for retries.
+            Default is 30 seconds.
+            </summary>
+        </member>
+        <member name="P:RefitClient.Models.ResilienceOptions.CircuitBreakerTimeout">
+            <summary>
+            Gets or sets the timeout for circuit breaker to trip.
+            Default is 30 seconds.
+            </summary>
+        </member>
+        <member name="P:RefitClient.Models.ResilienceOptions.FailureThreshold">
+            <summary>
+            Gets or sets the failure threshold for the circuit breaker.
+            Default is 0.5 (50%).
+            </summary>
+        </member>
+        <member name="P:RefitClient.Models.ResilienceOptions.MinimumThroughput">
+            <summary>
+            Gets or sets the minimum throughput before circuit breaker activates.
+            Default is 10 requests.
+            </summary>
+        </member>
+        <member name="P:RefitClient.Models.ResilienceOptions.SamplingDuration">
+            <summary>
+            Gets or sets the sampling duration for circuit breaker.
+            Default is 100 seconds.
+            </summary>
+        </member>
+        <member name="P:RefitClient.Models.ResilienceOptions.EnableTimeoutHandling">
+            <summary>
+            Gets or sets whether to enable timeout handling.
+            Default is true.
+            </summary>
+        </member>
+        <member name="P:RefitClient.Models.ResilienceOptions.EnableCircuitBreaker">
+            <summary>
+            Gets or sets whether to enable circuit breaker.
+            Default is true.
+            </summary>
+        </member>
+        <member name="P:RefitClient.Models.ResilienceOptions.EnableRetryHandling">
+            <summary>
+            Gets or sets whether to enable retry handling.
+            Default is true.
+            </summary>
+        </member>
+        <member name="T:RefitClient.Resilience.ResiliencePolicies">
+            <summary>
+            Provides extension methods for configuring resilience policies for HTTP clients.
+            </summary>
+        </member>
+        <member name="M:RefitClient.Resilience.ResiliencePolicies.AddStandardResilienceHandler(Microsoft.Extensions.DependencyInjection.IHttpClientBuilder,RefitClient.Models.ResilienceOptions)">
+            <summary>
+            Adds standard resilience policies to the HTTP client builder.
+            </summary>
+            <param name="builder">The HTTP client builder.</param>
+            <param name="options">The resilience options.</param>
+            <returns>The HTTP client builder with resilience policies configured.</returns>
+        </member>
+        <member name="M:RefitClient.Resilience.ResiliencePolicies.AddCustomResilienceHandler(Microsoft.Extensions.DependencyInjection.IHttpClientBuilder,System.Action{RefitClient.Models.ResilienceOptions})">
+            <summary>
+            Adds custom resilience policies to the HTTP client builder.
+            </summary>
+            <param name="builder">The HTTP client builder.</param>
+            <param name="configureOptions">A delegate to configure the resilience options.</param>
+            <returns>The HTTP client builder with resilience policies configured.</returns>
+        </member>
+    </members>
+</doc>

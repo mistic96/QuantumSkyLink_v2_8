@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "MZABwWoWFhdvqKmeZbmqC3sj9i8CueYGYC65zgBthYo=",
+  "Source": "GovernanceService",
+  "BasePath": "_content/GovernanceService",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

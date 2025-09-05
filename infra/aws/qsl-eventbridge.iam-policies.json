@@ -1,0 +1,55 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowPutEventsToEventBridge",
+      "Effect": "Allow",
+      "Action": [
+        "events:PutEvents",
+        "events:PutPartnerEvents"
+      ],
+      "Resource": [
+        "arn:aws:events:*:*:event-bus/*"
+      ]
+    },
+    {
+      "Sid": "AllowSqsSendAndReceive",
+      "Effect": "Allow",
+      "Action": [
+        "sqs:SendMessage",
+        "sqs:SendMessageBatch",
+        "sqs:ReceiveMessage",
+        "sqs:DeleteMessage",
+        "sqs:GetQueueAttributes",
+        "sqs:GetQueueUrl"
+      ],
+      "Resource": [
+        "arn:aws:sqs:*:*:*"
+      ]
+    },
+    {
+      "Sid": "AllowCloudWatchPutMetricsAndLogs",
+      "Effect": "Allow",
+      "Action": [
+        "cloudwatch:PutMetricData",
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents",
+        "logs:DescribeLogStreams"
+      ],
+      "Resource": [
+        "*"
+      ]
+    },
+    {
+      "Sid": "AllowIamPassRoleForEventBridgeTargets",
+      "Effect": "Allow",
+      "Action": [
+        "iam:PassRole"
+      ],
+      "Resource": [
+        "arn:aws:iam::*:role/*"
+      ]
+    }
+  ]
+}

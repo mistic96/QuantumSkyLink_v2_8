@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "SFvW4i2tPSUBsMoOGVDK+1psxirkaDpDwKbi+go85hY=",
+  "Source": "LiquidationService",
+  "BasePath": "_content/LiquidationService",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

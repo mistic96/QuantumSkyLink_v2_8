@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.8" />
+    <PackageReference Include="Aspire.Hosting.AppHost" Version="9.4.1" />
+    <PackageReference Include="Aspire.StackExchange.Redis" Version="9.4.1" />
+    <PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.8" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="9.0.8" />
+    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="9.0.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.1.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.3" />
+    <PackageReference Include="AWSSDK.S3" Version="4.0.6.7" />
+    <PackageReference Include="AWSSDK.KeyManagementService" Version="4.0.3.13" />
+    <PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="4.0.2.1" />
+    <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\QuantumLedger.Blockchain\QuantumLedger.Blockchain.csproj" />
+    <ProjectReference Include="..\..\QuantunSkyLink_v2.ServiceDefaults\QuantunSkyLink_v2.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\QuantumLedger.Cryptography\QuantumLedger.Cryptography.csproj" />
+    <ProjectReference Include="..\QuantumLedger.Data\QuantumLedger.Data.csproj" />
+    <ProjectReference Include="..\QuantumSkyLink.Shared\QuantumSkyLink.Shared.csproj" />
+    <ProjectReference Include="..\RefitClient\RefitClient.csproj" />
+    <ProjectReference Include="..\LiquidStorageCloud.Backup.Core\LiquidStorageCloud.Backup.Core.csproj" />
+    <ProjectReference Include="..\LiquidStorageCloud.DataManagement.EntityFramework\LiquidStorageCloud.DataManagement.EntityFramework.csproj" />
+  </ItemGroup>
+
+ 
+
+</Project>

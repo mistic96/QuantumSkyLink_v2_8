@@ -1,0 +1,6 @@
+@QuantumLedger.Hub_HostAddress = http://localhost:5071
+
+GET {{QuantumLedger.Hub_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

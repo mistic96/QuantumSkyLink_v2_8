@@ -1,0 +1,6 @@
+@LiquidationService_HostAddress = http://localhost:5063
+
+GET {{LiquidationService_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

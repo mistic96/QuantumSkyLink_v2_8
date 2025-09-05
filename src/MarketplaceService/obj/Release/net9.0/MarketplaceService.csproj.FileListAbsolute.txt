@@ -1,0 +1,8 @@
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/MarketplaceService/obj/Release/net9.0/MarketplaceService.csproj.AssemblyReference.cache
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/MarketplaceService/obj/Release/net9.0/MarketplaceService.GeneratedMSBuildEditorConfig.editorconfig
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/MarketplaceService/obj/Release/net9.0/MarketplaceService.AssemblyInfoInputs.cache
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/MarketplaceService/obj/Release/net9.0/MarketplaceService.AssemblyInfo.cs
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/MarketplaceService/obj/Release/net9.0/MarketplaceService.csproj.CoreCompileInputs.cache
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/MarketplaceService/obj/Release/net9.0/MarketplaceService.MvcApplicationPartsAssemblyInfo.cs
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/MarketplaceService/obj/Release/net9.0/MarketplaceService.MvcApplicationPartsAssemblyInfo.cache
+/Users/creefinnikin/Desktop/Remote-Work/QuantumSkyLink_v2_5/QuantumSkyLink_v2/src/MarketplaceService/obj/Release/net9.0/MarketplaceService.sourcelink.json
