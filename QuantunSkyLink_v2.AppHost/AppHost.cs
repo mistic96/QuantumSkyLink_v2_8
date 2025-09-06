@@ -210,6 +210,16 @@ var marketplaceService = builder.AddProject<Projects.MarketplaceService>("market
     .WithReference(notificationService)
     .WithReference(complianceService);
 
+// Unified Cart Service - High-performance cart management with SurrealDB
+var unifiedCartService = builder.AddProject<Projects.UnifiedCartService>("unifiedcartservice")
+    .WithReference(surrealdb)
+    .WithReference(marketplaceService)
+    .WithReference(paymentGatewayService)
+    .WithReference(eventBridgeStack)
+    .WithEnvironment("AWS__EventBridge__Enabled", "true")
+    .WithEnvironment("SURREALDB_NS", "quantumskylink")
+    .WithEnvironment("SURREALDB_DB", "carts");
+
 // API Gateways
 var webApiGateway = builder.AddProject<Projects.WebAPIGateway>("webapigateway")
     .WithReference(userService)
@@ -230,6 +240,8 @@ var mobileApiGateway = builder.AddProject<Projects.MobileAPIGateway>("mobileapig
     .WithReference(accountService)
     .WithReference(tokenService)
     .WithReference(paymentGatewayService)
+    .WithReference(unifiedCartService)
+    .WithReference(marketplaceService)
     .WithExternalHttpEndpoints();
 
 

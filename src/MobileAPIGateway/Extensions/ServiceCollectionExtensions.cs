@@ -53,9 +53,9 @@ public static class ServiceCollectionExtensions
         services.AddRefitClient<ISecondaryMarketsClient>()
             .ConfigureHttpClient(c => c.BaseAddress = new Uri(configuration["Services:SecondaryMarkets:BaseUrl"] ?? "https://secondary-markets-api"));
 
-        // Add Tokenized Cart client
+        // Add Unified Cart client (connects to UnifiedCartService backend)
         services.AddRefitClient<ITokenizedCartClient>()
-            .ConfigureHttpClient(c => c.BaseAddress = new Uri(configuration["ServiceUrls:TokenService"] ?? "http://localhost:5005"));
+            .ConfigureHttpClient(c => c.BaseAddress = new Uri(configuration["ServiceUrls:UnifiedCartService"] ?? "https+http://unifiedcartservice"));
 
         // Add Card Management client
         services.AddRefitClient<ICardManagementClient>()
@@ -121,8 +121,8 @@ public static class ServiceCollectionExtensions
         // Add Wallet service
         services.AddScoped<IWalletService, WalletService>();
 
-        // Add Markets service
-        services.AddScoped<IMarketsService, MarketsService>();
+        // Add Unified Markets service (replaces old Markets and SecondaryMarkets services)
+        services.AddScoped<IUnifiedMarketsService, UnifiedMarketsService>();
 
         // Add Customer Markets service
         services.AddScoped<ICustomerMarketsService, CustomerMarketsService>();
@@ -130,10 +130,7 @@ public static class ServiceCollectionExtensions
         // Add Dashboard service
         services.AddScoped<IDashboardService, DashboardService>();
 
-        // Add Secondary Markets service
-        services.AddScoped<ISecondaryMarketsService, SecondaryMarketsService>();
-
-        // Add Tokenized Cart service
+        // Add Unified Cart service (handles both Primary and Secondary markets)
         services.AddScoped<ITokenizedCartService, TokenizedCartService>();
 
         // Add Card Management service
@@ -229,13 +226,14 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ListingSaleValidator>();
         services.AddScoped<MarketListingValidator>();
 
-        // Add Tokenized Cart validators
+        // Add Unified Cart validators (supports both market types)
         services.AddScoped<TokenizedCartValidator>();
         services.AddScoped<TokenizedCartItemValidator>();
         services.AddScoped<CartCreationRequestValidator>();
         services.AddScoped<CartUpdateRequestValidator>();
         services.AddScoped<CartCheckoutRequestValidator>();
         services.AddScoped<CartResponseValidator>();
+        services.AddScoped<Validators.TokenizedCart.CartItemRequestValidator>();
 
         // Add Card Management validators
         services.AddScoped<PaymentCardValidator>();

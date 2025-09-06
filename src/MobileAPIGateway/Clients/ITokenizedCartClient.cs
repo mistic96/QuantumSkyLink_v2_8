@@ -7,12 +7,13 @@ using MobileAPIGateway.Models.TokenizedCart;
 namespace MobileAPIGateway.Clients;
 
 /// <summary>
-/// Client interface for tokenized cart operations
+/// Client interface for unified cart operations
+/// Connects to UnifiedCartService backend for both Primary and Secondary market carts
 /// </summary>
 public interface ITokenizedCartClient
 {
     /// <summary>
-    /// Gets all tokenized carts for a user
+    /// Gets all unified carts for a user
     /// </summary>
     /// <param name="userId">User ID</param>
     /// <param name="cancellationToken">Cancellation token</param>
@@ -21,7 +22,7 @@ public interface ITokenizedCartClient
     Task<IEnumerable<TokenizedCart>> GetUserCartsAsync(string userId, CancellationToken cancellationToken = default);
     
     /// <summary>
-    /// Gets a tokenized cart by ID
+    /// Gets a unified cart by ID
     /// </summary>
     /// <param name="userId">User ID</param>
     /// <param name="cartId">Cart ID</param>
@@ -31,7 +32,7 @@ public interface ITokenizedCartClient
     Task<TokenizedCart> GetCartByIdAsync(string userId, string cartId, CancellationToken cancellationToken = default);
     
     /// <summary>
-    /// Creates a new tokenized cart
+    /// Creates a new unified cart
     /// </summary>
     /// <param name="userId">User ID</param>
     /// <param name="request">Cart creation request</param>
@@ -41,7 +42,7 @@ public interface ITokenizedCartClient
     Task<CartResponse> CreateCartAsync(string userId, [Body] CartCreationRequest request, CancellationToken cancellationToken = default);
     
     /// <summary>
-    /// Updates a tokenized cart
+    /// Updates a unified cart
     /// </summary>
     /// <param name="userId">User ID</param>
     /// <param name="cartId">Cart ID</param>
@@ -52,7 +53,7 @@ public interface ITokenizedCartClient
     Task<CartResponse> UpdateCartAsync(string userId, string cartId, [Body] CartUpdateRequest request, CancellationToken cancellationToken = default);
     
     /// <summary>
-    /// Adds an item to a tokenized cart
+    /// Adds an item to a unified cart (supports both market types)
     /// </summary>
     /// <param name="userId">User ID</param>
     /// <param name="cartId">Cart ID</param>
@@ -63,7 +64,7 @@ public interface ITokenizedCartClient
     Task<CartResponse> AddItemToCartAsync(string userId, string cartId, [Body] CartItemRequest request, CancellationToken cancellationToken = default);
     
     /// <summary>
-    /// Removes an item from a tokenized cart
+    /// Removes an item from a unified cart
     /// </summary>
     /// <param name="userId">User ID</param>
     /// <param name="cartId">Cart ID</param>
@@ -74,7 +75,7 @@ public interface ITokenizedCartClient
     Task<CartResponse> RemoveItemFromCartAsync(string userId, string cartId, string itemId, CancellationToken cancellationToken = default);
     
     /// <summary>
-    /// Checks out a tokenized cart
+    /// Checks out a unified cart (processes both Primary and Secondary market items)
     /// </summary>
     /// <param name="userId">User ID</param>
     /// <param name="cartId">Cart ID</param>
@@ -85,7 +86,7 @@ public interface ITokenizedCartClient
     Task<CartResponse> CheckoutCartAsync(string userId, string cartId, [Body] CartCheckoutRequest request, CancellationToken cancellationToken = default);
     
     /// <summary>
-    /// Abandons a tokenized cart
+    /// Abandons a unified cart
     /// </summary>
     /// <param name="userId">User ID</param>
     /// <param name="cartId">Cart ID</param>

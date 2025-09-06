@@ -1,17 +1,26 @@
-using System;
+using LiquidStorageCloud.Core.Database;
 
-namespace MobileAPIGateway.Models.TokenizedCart;
+namespace UnifiedCartService.Models.Entities;
 
 /// <summary>
 /// Represents an item in a unified cart
-/// Supports both Primary Market (company products) and Secondary Market (P2P listings)
 /// </summary>
-public class TokenizedCartItem
+public class UnifiedCartItem : ISurrealEntity
 {
-    /// <summary>
-    /// Gets or sets the item ID
-    /// </summary>
-    public string Id { get; set; }
+    /// <inheritdoc/>
+    public string Namespace => "quantumskylink";
+    
+    /// <inheritdoc/>
+    public string TableName => "cart_items";
+    
+    /// <inheritdoc/>
+    public string Id { get; set; } = Guid.NewGuid().ToString();
+    
+    /// <inheritdoc/>
+    public bool SolidState { get; set; }
+    
+    /// <inheritdoc/>
+    public DateTimeOffset LastModified { get; set; } = DateTimeOffset.UtcNow;
     
     /// <summary>
     /// Gets or sets the cart ID this item belongs to
@@ -49,49 +58,49 @@ public class TokenizedCartItem
     public string AssetType { get; set; }
     
     /// <summary>
-    /// Gets or sets the token quantity
+    /// Gets or sets the quantity
     /// </summary>
     public decimal Quantity { get; set; }
     
     /// <summary>
-    /// Gets or sets the token price per unit
+    /// Gets or sets the price per unit at time of adding
     /// </summary>
     public decimal PricePerUnit { get; set; }
     
     /// <summary>
-    /// Gets or sets the currency of the price
+    /// Gets or sets the currency for the price
     /// </summary>
-    public string Currency { get; set; }
+    public string Currency { get; set; } = "USD";
     
     /// <summary>
     /// Gets or sets the total value of this item
     /// </summary>
-    public decimal TotalValue { get; set; }
+    public decimal TotalValue => Quantity * PricePerUnit;
     
     /// <summary>
-    /// Gets or sets the item added date
+    /// Gets or sets the seller ID (for Secondary Market items)
     /// </summary>
-    public DateTime AddedAt { get; set; }
+    public Guid? SellerId { get; set; }
     
     /// <summary>
-    /// Gets or sets the item last update date
+    /// Gets or sets the seller name (for Secondary Market items)
     /// </summary>
-    public DateTime UpdatedAt { get; set; }
+    public string? SellerName { get; set; }
     
     /// <summary>
-    /// Gets or sets the seller information (for Secondary Market items)
+    /// Gets or sets whether the seller is verified (Secondary Market)
     /// </summary>
-    public SellerInfo? Seller { get; set; }
+    public bool? SellerIsVerified { get; set; }
     
     /// <summary>
-    /// Gets or sets whether escrow is used (Secondary Market only)
+    /// Gets or sets whether to use escrow (Secondary Market only)
     /// </summary>
     public bool UseEscrow { get; set; }
     
     /// <summary>
-    /// Gets or sets the escrow status if applicable
+    /// Gets or sets when the item was added to cart
     /// </summary>
-    public string? EscrowStatus { get; set; }
+    public DateTimeOffset AddedAt { get; set; } = DateTimeOffset.UtcNow;
     
     /// <summary>
     /// Gets or sets any special instructions or notes
@@ -99,38 +108,33 @@ public class TokenizedCartItem
     public string? Notes { get; set; }
     
     /// <summary>
-    /// Gets or sets the token/asset metadata
+    /// Gets or sets additional metadata as JSON
     /// </summary>
-    public string Metadata { get; set; }
+    public string? Metadata { get; set; }
+    
+    /// <summary>
+    /// Gets or sets whether this item has been validated
+    /// </summary>
+    public bool IsValidated { get; set; }
+    
+    /// <summary>
+    /// Gets or sets the last validation timestamp
+    /// </summary>
+    public DateTimeOffset? LastValidatedAt { get; set; }
 }
 
 /// <summary>
-/// Seller information for Secondary Market items
+/// Market type enumeration
 /// </summary>
-public class SellerInfo
+public enum MarketType
 {
     /// <summary>
-    /// Gets or sets the seller ID
+    /// Primary market - Company direct sales
     /// </summary>
-    public Guid Id { get; set; }
+    Primary = 1,
     
     /// <summary>
-    /// Gets or sets the seller name
+    /// Secondary market - Peer-to-peer trading
     /// </summary>
-    public string Name { get; set; }
-    
-    /// <summary>
-    /// Gets or sets whether the seller is verified
-    /// </summary>
-    public bool IsVerified { get; set; }
-    
-    /// <summary>
-    /// Gets or sets the seller's rating
-    /// </summary>
-    public decimal? Rating { get; set; }
-    
-    /// <summary>
-    /// Gets or sets the seller's total transactions
-    /// </summary>
-    public int TotalTransactions { get; set; }
+    Secondary = 2
 }

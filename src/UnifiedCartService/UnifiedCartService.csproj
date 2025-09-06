@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.AppHost" Version="9.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="7.2.0" />
+    <PackageReference Include="SurrealDb.Net" Version="0.5.2" />
+    <PackageReference Include="Refit" Version="8.0.0" />
+    <PackageReference Include="Refit.HttpClientFactory" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\QuantunSkyLink_v2.ServiceDefaults\QuantunSkyLink_v2.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\LiquidStorageCloud.Core\LiquidStorageCloud.Core.csproj" />
+    <ProjectReference Include="..\LiquidStorageCloud.DataManagement.Core\LiquidStorageCloud.DataManagement.Core.csproj" />
+  </ItemGroup>
+
+</Project>
