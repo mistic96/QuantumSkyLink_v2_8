@@ -6,4 +6,16 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <!-- AWS SDK packages required by the new EventBridge/SQS implementation -->
+    <!-- Align versions with other projects (4.x) to avoid NU1608 dependency constraint warnings -->
+    <PackageReference Include="AWSSDK.EventBridge" Version="4.0.4.1" />
+    <PackageReference Include="AWSSDK.SQS" Version="4.0.0.21" />
+
+    <!-- Microsoft extensions used by BackgroundService, IConfiguration, ILogger, etc. -->
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.8" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.8" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.8" />
+  </ItemGroup>
+
 </Project>

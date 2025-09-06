@@ -67,7 +67,7 @@ public DepositCodeAdminController(
                     ReviewReason = ExtractReviewReason(dc.Metadata),
                     Amount = dc.Amount ?? 0m, // Handle nullable decimal
                     Currency = dc.Currency,
-                    UserId = string.IsNullOrEmpty(dc.UserId) ? (Guid?)null : ParseGuidFromString(dc.UserId),
+                    UserId = dc.UserId, //string.IsNullOrEmpty(dc.UserId) ? (Guid?)null : ParseGuidFromString(dc.UserId),
                     UserEmail = dc.User != null ? dc.User.Email : null,
                     CreatedAt = dc.CreatedAt,
                     HeldSince = dc.UpdatedAt,
@@ -117,7 +117,7 @@ public DepositCodeAdminController(
                 {
                     Id = Guid.NewGuid(), // Convert int Id to Guid for API compatibility
                     Code = dc.Code,
-                    UserId = string.IsNullOrEmpty(dc.UserId) ? (Guid?)null : ParseGuidFromString(dc.UserId),
+                    UserId = dc.UserId,
                     UserEmail = dc.User != null ? dc.User.Email : null,
                     CreatedAt = dc.CreatedAt,
                     Status = dc.Status.ToString()
@@ -132,7 +132,7 @@ public DepositCodeAdminController(
                 ReviewReason = ExtractReviewReason(depositCode.Metadata),
                 Amount = depositCode.Amount ?? 0m, // Handle nullable decimal
                 Currency = depositCode.Currency,
-                UserId = string.IsNullOrEmpty(depositCode.UserId) ? (Guid?)null : ParseGuidFromString(depositCode.UserId),
+                UserId = depositCode.UserId,
                 User = depositCode.User != null ? new UserInfo
                 {
                     Id = depositCode.User.Id,
@@ -495,7 +495,7 @@ public DepositCodeAdminController(
 
             if (request.UserId.HasValue)
             {
-                query = query.Where(dc => dc.UserId == request.UserId.Value.ToString());
+                query = query.Where(dc => dc.UserId == request.UserId.Value);
             }
 
             if (request.StartDate.HasValue)
@@ -556,7 +556,7 @@ public DepositCodeAdminController(
                     Status = dc.Status.ToString(),
                     Amount = dc.Amount ?? 0m, // Handle nullable decimal
                     Currency = dc.Currency,
-                    UserId = string.IsNullOrEmpty(dc.UserId) ? (Guid?)null : ParseGuidFromString(dc.UserId),
+                    UserId = dc.UserId,
                     UserEmail = dc.User != null ? dc.User.Email : null,
                     CreatedAt = dc.CreatedAt,
                     UsedAt = dc.Status == DepositCodeStatus.Used ? dc.UpdatedAt : null,
@@ -598,7 +598,7 @@ public DepositCodeAdminController(
                 Id = Guid.NewGuid(),
                 Timestamp = depositCode.CreatedAt,
                 Action = "Created",
-                PerformedBy = depositCode.UserId ?? "System",
+                PerformedBy = depositCode.UserId != Guid.Empty ? depositCode.UserId.ToString() : "System",
                 Details = $"Deposit code {depositCode.Code} created"
             });
 
@@ -649,7 +649,7 @@ public DepositCodeAdminController(
                     Id = Guid.NewGuid(),
                     Timestamp = depositCode.UpdatedAt ?? depositCode.CreatedAt, // Handle nullable UpdatedAt
                     Action = "Used",
-                    PerformedBy = depositCode.UserId ?? "System",
+                    PerformedBy = depositCode.UserId != Guid.Empty ? depositCode.UserId.ToString() : "System",
                     Details = "Deposit code was used for a transaction"
                 });
             }
@@ -688,7 +688,7 @@ public DepositCodeAdminController(
 
             if (searchRequest.UserId.HasValue)
             {
-                query = query.Where(dc => dc.UserId == searchRequest.UserId.Value.ToString());
+                query = query.Where(dc => dc.UserId == searchRequest.UserId.Value);
             }
 
             // Get all results (no pagination for export)
@@ -823,7 +823,7 @@ public DepositCodeAdminController(
                     "Status" => dc.Status.ToString(),
                     "Amount" => (dc.Amount ?? 0m).ToString(),
                     "Currency" => dc.Currency,
-                    "UserId" => dc.UserId ?? "",
+                    "UserId" => dc.UserId != Guid.Empty ? dc.UserId.ToString() : "",
                     "CreatedAt" => dc.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss"),
                     "UpdatedAt" => (dc.UpdatedAt ?? dc.CreatedAt).ToString("yyyy-MM-dd HH:mm:ss"),
                     "ExpiresAt" => (dc.ExpiresAt ?? DateTime.MinValue).ToString("yyyy-MM-dd HH:mm:ss"),

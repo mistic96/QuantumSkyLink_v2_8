@@ -35,7 +35,8 @@ public static class ServiceExtensions
             });
 
             options.EnableAnnotations();
-            options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "OrchestrationService.xml"), true);
+            // XML documentation is optional - commented out to prevent startup errors
+            // options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "OrchestrationService.xml"), true);
         });
 
         return services;

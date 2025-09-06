@@ -501,10 +501,10 @@ public class PaymentValidationService : IPaymentValidationService
             }
 
             // Validate user authorization (if userId is provided and deposit code has a specific user)
-            if (userId.HasValue && !string.IsNullOrEmpty(depositCodeEntity.UserId) && Guid.TryParse(depositCodeEntity.UserId, out var authorizedUserGuid) && authorizedUserGuid != userId.Value)
+            if (userId.HasValue && depositCodeEntity.UserId != Guid.Empty && depositCodeEntity.UserId != userId.Value)
             {
                 _logger.LogWarning("Unauthorized deposit code usage attempted. CorrelationId: {CorrelationId}, DepositCode: {DepositCode}, RequestingUserId: {RequestingUserId}, AuthorizedUserId: {AuthorizedUserId}", 
-                    correlationId, depositCode, userId.Value, authorizedUserGuid);
+                    correlationId, depositCode, userId.Value, depositCodeEntity.UserId);
                 throw new ValidationException("You are not authorized to use this deposit code");
             }
 
@@ -590,7 +590,7 @@ public class PaymentValidationService : IPaymentValidationService
             {
                 // Id left to DB (int)
                 Code = depositCode.ToUpper(), // Store in uppercase for consistency
-                UserId = userId?.ToString() ?? string.Empty,
+                UserId = userId ?? Guid.Empty,
                 Status = DepositCodeStatus.Active,
                 Amount = 0, // Amount will be validated when used
                 Currency = "USD", // Default currency, can be overridden

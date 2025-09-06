@@ -10,19 +10,18 @@ var awsConfig = builder.AddAWSSDKConfig()
     .WithRegion(Amazon.RegionEndpoint.GetBySystemName(builder.Configuration["AWS:Region"] ?? "us-east-1"));
 
 // Register IAM deployment role stack (creates qsl-deploy-role) via CloudFormation template
-var roleStack = builder.AddAWSCloudFormationTemplate("QSLDeployRoleStack", "infra/aws/qsl-deploy-role.template.json")
-    .WithParameter("Environment", builder.Configuration["Deployment:Environment"] ?? "mvp")
+var roleStack = builder.AddAWSCloudFormationTemplate("QSLDeployRoleStack", "../infra/aws/qsl-deploy-role.template.json")
+    .WithParameter("Environment", builder.Configuration["AWS:Deployment:Environment"] ?? "staging")
+    .WithParameter("ProjectName", builder.Configuration["AWS:ProjectName"] ?? "qsl")
     .WithReference(awsConfig);
 
 // Register EventBridge messaging infrastructure via CloudFormation template
 // Creates 5 event buses (core, financial, blockchain, business, system)
 // 8 SQS queues with DLQs for service consumption
 // 3 FIFO queues for financial services requiring strict ordering
-var eventBridgeStack = builder.AddAWSCloudFormationTemplate("QSLEventBridge", "infra/aws/aws-eventbridge-messaging.template.json")
+var eventBridgeStack = builder.AddAWSCloudFormationTemplate("QSLEventBridge", "../infra/aws/aws-eventbridge-messaging.template.json")
     .WithParameter("ProjectName", builder.Configuration["AWS:ProjectName"] ?? "qsl")
-    .WithParameter("Environment", builder.Configuration["AWS:Deployment:Environment"] ?? "development")
-    .WithParameter("MaxReceiveCount", "3")
-    .WithParameter("VisibilityTimeout", "30")
+    .WithParameter("Environment", builder.Configuration["AWS:Deployment:Environment"] ?? "staging")
     .WithReference(awsConfig);
 
 // AWS Integration - Configuration for AWS deployment
@@ -135,14 +134,14 @@ var paymentGatewayService = builder.AddProject<Projects.PaymentGatewayService>("
     .WithReference(postgresPaymentGatewayService)
     .WithReference(eventBridgeStack)
     .WithReference(treasuryService)
-    .WithEnvironment("AWS__SQS__QueueUrl", eventBridgeStack.GetOutput("PaymentGatewayFifoQueueUrl"))
+    .WithEnvironment("AWS__SQS__QueueUrl", eventBridgeStack.GetOutput("PaymentQueueUrl"))
     .WithEnvironment("AWS__EventBridge__Enabled", "true");
 
 var liquidationService = builder.AddProject<Projects.LiquidationService>("liquidationservice")
     .WithReference(postgresLiquidationService)
     .WithReference(eventBridgeStack)
     .WithReference(tokenService)
-    .WithEnvironment("AWS__SQS__QueueUrl", eventBridgeStack.GetOutput("LiquidationFifoQueueUrl"))
+    .WithEnvironment("AWS__SQS__QueueUrl", eventBridgeStack.GetOutput("LiquidationQueueUrl"))
     .WithEnvironment("AWS__EventBridge__Enabled", "true");
 
 // Infrastructure Services - Enhanced with 6-Network Blockchain Support
@@ -166,7 +165,7 @@ var identityVerificationService = builder
 var aiReviewService = builder.AddProject<Projects.AIReviewService>("aireviewservice")
     .WithReference(postgresAiReviewService)
     .WithReference(eventBridgeStack)
-    .WithEnvironment("AWS__SQS__QueueUrl", eventBridgeStack.GetOutput("AiReviewQueueUrl"))
+    .WithEnvironment("AWS__SQS__QueueUrl", eventBridgeStack.GetOutput("AIReviewQueueUrl"))
     .WithEnvironment("AWS__EventBridge__Enabled", "true");
 
 var notificationService = builder.AddProject<Projects.NotificationService>("notificationservice")

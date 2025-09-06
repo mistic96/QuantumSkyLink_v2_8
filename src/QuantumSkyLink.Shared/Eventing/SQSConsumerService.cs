@@ -156,8 +156,8 @@ namespace QuantumSkyLink.Shared.Eventing
                 }
 
                 // Deserialize the event detail
-                var eventData = messageBody.Detail != null 
-                    ? JsonSerializer.Deserialize(messageBody.Detail.GetRawText(), eventType, _jsonOptions)
+                var eventData = messageBody.Detail.HasValue
+                    ? JsonSerializer.Deserialize(messageBody.Detail.Value.GetRawText(), eventType, _jsonOptions)
                     : JsonSerializer.Deserialize(messageBody.DetailJson, eventType, _jsonOptions);
 
                 // Create scope for dependency injection

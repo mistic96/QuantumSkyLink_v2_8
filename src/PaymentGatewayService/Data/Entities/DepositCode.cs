@@ -14,8 +14,7 @@ public class DepositCode
     public string Code { get; set; } = string.Empty;
 
     [Required]
-    [StringLength(50)]
-    public string UserId { get; set; } = string.Empty;
+    public Guid UserId { get; set; }
 
     [Column(TypeName = "decimal(18,8)")]
     public decimal? Amount { get; set; }
