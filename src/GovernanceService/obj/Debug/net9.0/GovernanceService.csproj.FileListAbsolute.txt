@@ -601,3 +601,4 @@ C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_
 C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\GovernanceService\obj\Debug\net9.0\GovernanceService.pdb
 C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\GovernanceService\obj\Debug\net9.0\GovernanceService.genruntimeconfig.cache
 C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\GovernanceService\obj\Debug\net9.0\ref\GovernanceService.dll
+C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\GovernanceService\obj\Debug\net9.0\GovernanceService.sourcelink.json

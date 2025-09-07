@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyDescriptionAttribute("For managing automated messages between SQS, SurrealDb and SQL.")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.1.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.1+17a5eb4274f9c5ef9a2aef8564c81a022dce9911")]
 [assembly: System.Reflection.AssemblyProductAttribute("LiquidStorageCloud.DataManagement.EntityFramework")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LiquidStorageCloud.DataManagement.EntityFramework")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.1.0")]

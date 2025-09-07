@@ -589,3 +589,4 @@ C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_
 C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\NotificationService\obj\Debug\net9.0\NotificationService.pdb
 C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\NotificationService\obj\Debug\net9.0\NotificationService.genruntimeconfig.cache
 C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\NotificationService\obj\Debug\net9.0\ref\NotificationService.dll
+C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\NotificationService\obj\Debug\net9.0\NotificationService.sourcelink.json

@@ -56,3 +56,4 @@ C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_
 C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\QuantumLedger.Models\obj\Debug\net9.0\QuantumLedger.Models.xml
 C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\QuantumLedger.Models\obj\Debug\net9.0\QuantumLedger.Models.pdb
 C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\QuantumLedger.Models\obj\Debug\net9.0\ref\QuantumLedger.Models.dll
+C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\QuantumLedger.Models\obj\Debug\net9.0\QuantumLedger.Models.sourcelink.json

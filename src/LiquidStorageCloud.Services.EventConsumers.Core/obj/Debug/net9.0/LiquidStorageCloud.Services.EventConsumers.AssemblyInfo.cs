@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyDescriptionAttribute("Auto process that manages sqs ingestion and data persistance between all layers")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.3.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.3+17a5eb4274f9c5ef9a2aef8564c81a022dce9911")]
 [assembly: System.Reflection.AssemblyProductAttribute("LiquidStorageCloud.Services.EventConsumers")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LiquidStorageCloud.Services.EventConsumers")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.3.0")]

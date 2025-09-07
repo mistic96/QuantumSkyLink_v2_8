@@ -574,3 +574,4 @@ C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_
 C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\ComplianceService\obj\Debug\net9.0\ComplianceService.pdb
 C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\ComplianceService\obj\Debug\net9.0\ComplianceService.genruntimeconfig.cache
 C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\ComplianceService\obj\Debug\net9.0\ref\ComplianceService.dll
+C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\ComplianceService\obj\Debug\net9.0\ComplianceService.sourcelink.json

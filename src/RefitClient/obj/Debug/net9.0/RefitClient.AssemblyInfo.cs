@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyDescriptionAttribute(("A Refit client library for communication between microservices in .NET Aspire app" +
     "lications"))]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+17a5eb4274f9c5ef9a2aef8564c81a022dce9911")]
 [assembly: System.Reflection.AssemblyProductAttribute("RefitClient")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RefitClient")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

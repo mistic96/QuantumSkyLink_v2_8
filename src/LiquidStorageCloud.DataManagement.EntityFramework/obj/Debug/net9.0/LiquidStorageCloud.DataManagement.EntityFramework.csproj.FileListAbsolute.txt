@@ -50,3 +50,4 @@ C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_
 C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\LiquidStorageCloud.DataManagement.EntityFramework\obj\Debug\net9.0\LiquidStorageCloud.DataManagement.EntityFramework.pdb
 C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\LiquidStorageCloud.DataManagement.EntityFramework\obj\Debug\net9.0\LiquidStorageCloud.DataManagement.EntityFramework.genruntimeconfig.cache
 C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\LiquidStorageCloud.DataManagement.EntityFramework\obj\Debug\net9.0\ref\LiquidStorageCloud.DataManagement.EntityFramework.dll
+C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\LiquidStorageCloud.DataManagement.EntityFramework\obj\Debug\net9.0\LiquidStorageCloud.DataManagement.EntityFramework.sourcelink.json

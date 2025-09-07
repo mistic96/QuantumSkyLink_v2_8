@@ -50,3 +50,4 @@ C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_
 C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\LiquidStorageCloud.DataManagement.Core\obj\Debug\net9.0\refint\LiquidStorageCloud.DataManagement.Core.dll
 C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\LiquidStorageCloud.DataManagement.Core\obj\Debug\net9.0\LiquidStorageCloud.DataManagement.Core.pdb
 C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\LiquidStorageCloud.DataManagement.Core\obj\Debug\net9.0\ref\LiquidStorageCloud.DataManagement.Core.dll
+C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\LiquidStorageCloud.DataManagement.Core\obj\Debug\net9.0\LiquidStorageCloud.DataManagement.Core.sourcelink.json

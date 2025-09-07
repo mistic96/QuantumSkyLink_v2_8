@@ -15,13 +15,52 @@ var roleStack = builder.AddAWSCloudFormationTemplate("QSLDeployRoleStack", "../i
     .WithParameter("ProjectName", builder.Configuration["AWS:ProjectName"] ?? "qsl")
     .WithReference(awsConfig);
 
+// Register network infrastructure via CloudFormation template
+// Creates VPC, subnets, NAT gateway, security groups, and VPC endpoints
+var networkStack = builder.AddAWSCloudFormationTemplate("QSLNetworkStack", "../infra/aws/network-stack.template.json")
+    .WithParameter("Environment", builder.Configuration["AWS:Deployment:Environment"] ?? "staging")
+    .WithParameter("ProjectName", builder.Configuration["AWS:ProjectName"] ?? "quantumskylink-v2")
+    .WithReference(awsConfig);
+
+// Register secrets manager for secure credential storage
+var secretsStack = builder.AddAWSCloudFormationTemplate("QSLSecretsStack", "../infra/aws/secrets-manager.template.json")
+    .WithParameter("Environment", builder.Configuration["AWS:Deployment:Environment"] ?? "staging")
+    .WithParameter("ProjectName", builder.Configuration["AWS:ProjectName"] ?? "quantumskylink-v2")
+    .WithReference(awsConfig);
+
 // Register EventBridge messaging infrastructure via CloudFormation template
 // Creates 5 event buses (core, financial, blockchain, business, system)
 // 8 SQS queues with DLQs for service consumption
 // 3 FIFO queues for financial services requiring strict ordering
 var eventBridgeStack = builder.AddAWSCloudFormationTemplate("QSLEventBridge", "../infra/aws/aws-eventbridge-messaging.template.json")
-    .WithParameter("ProjectName", builder.Configuration["AWS:ProjectName"] ?? "qsl")
+    .WithParameter("ProjectName", builder.Configuration["AWS:ProjectName"] ?? "quantumskylink-v2")
     .WithParameter("Environment", builder.Configuration["AWS:Deployment:Environment"] ?? "staging")
+    .WithReference(awsConfig);
+
+// Register ECS cluster with Fargate configuration
+var ecsClusterStack = builder.AddAWSCloudFormationTemplate("QSLECSCluster", "../infra/aws/ecs-cluster.template.json")
+    .WithParameter("Environment", builder.Configuration["AWS:Deployment:Environment"] ?? "staging")
+    .WithParameter("ProjectName", builder.Configuration["AWS:ProjectName"] ?? "quantumskylink-v2")
+    .WithParameter("VpcId", networkStack.GetOutput("VpcId"))
+    .WithParameter("PrivateSubnet1Id", networkStack.GetOutput("PrivateSubnet1Id"))
+    .WithParameter("PrivateSubnet2Id", networkStack.GetOutput("PrivateSubnet2Id"))
+    .WithParameter("ServiceSecurityGroupId", networkStack.GetOutput("ServiceSecurityGroupId"))
+    .WithReference(awsConfig);
+
+// Register storage infrastructure (S3 buckets and CloudFront)
+var storageStack = builder.AddAWSCloudFormationTemplate("QSLStorageStack", "../infra/aws/storage-stack.template.json")
+    .WithParameter("Environment", builder.Configuration["AWS:Deployment:Environment"] ?? "staging")
+    .WithParameter("ProjectName", builder.Configuration["AWS:ProjectName"] ?? "quantumskylink-v2")
+    .WithReference(awsConfig);
+
+// Register Application Load Balancer for API gateways
+var albStack = builder.AddAWSCloudFormationTemplate("QSLALBStack", "../infra/aws/alb-stack.template.json")
+    .WithParameter("Environment", builder.Configuration["AWS:Deployment:Environment"] ?? "staging")
+    .WithParameter("ProjectName", builder.Configuration["AWS:ProjectName"] ?? "quantumskylink-v2")
+    .WithParameter("VpcId", networkStack.GetOutput("VpcId"))
+    .WithParameter("PublicSubnet1Id", networkStack.GetOutput("PublicSubnet1Id"))
+    .WithParameter("PublicSubnet2Id", networkStack.GetOutput("PublicSubnet2Id"))
+    .WithParameter("ALBSecurityGroupId", networkStack.GetOutput("ALBSecurityGroupId"))
     .WithReference(awsConfig);
 
 // AWS Integration - Configuration for AWS deployment

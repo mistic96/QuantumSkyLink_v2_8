@@ -240,3 +240,4 @@ C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_
 C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\IdentityVerificationService\obj\Debug\net9.0\IdentityVerificationService.pdb
 C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\IdentityVerificationService\obj\Debug\net9.0\IdentityVerificationService.genruntimeconfig.cache
 C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\IdentityVerificationService\obj\Debug\net9.0\ref\IdentityVerificationService.dll
+C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\IdentityVerificationService\obj\Debug\net9.0\IdentityVerificationService.sourcelink.json

@@ -240,3 +240,4 @@ C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_
 C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\WebAPIGateway\obj\Debug\net9.0\WebAPIGateway.pdb
 C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\WebAPIGateway\obj\Debug\net9.0\WebAPIGateway.genruntimeconfig.cache
 C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\WebAPIGateway\obj\Debug\net9.0\ref\WebAPIGateway.dll
+C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\WebAPIGateway\obj\Debug\net9.0\WebAPIGateway.sourcelink.json

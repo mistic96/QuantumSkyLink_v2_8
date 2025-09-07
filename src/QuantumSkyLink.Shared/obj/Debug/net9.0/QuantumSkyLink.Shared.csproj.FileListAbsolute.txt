@@ -32,3 +32,5 @@ C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_
 C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\QuantumSkyLink.Shared\obj\Debug\net9.0\refint\QuantumSkyLink.Shared.dll
 C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\QuantumSkyLink.Shared\obj\Debug\net9.0\QuantumSkyLink.Shared.pdb
 C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\QuantumSkyLink.Shared\obj\Debug\net9.0\ref\QuantumSkyLink.Shared.dll
+C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\QuantumSkyLink.Shared\obj\Debug\net9.0\QuantumSkyLink.Shared.csproj.AssemblyReference.cache
+C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\QuantumSkyLink.Shared\obj\Debug\net9.0\QuantumSkyLink.Shared.sourcelink.json

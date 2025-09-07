@@ -65,3 +65,4 @@ C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_
 C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\QuantumLedger.Blockchain\obj\Debug\net9.0\refint\QuantumLedger.Blockchain.dll
 C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\QuantumLedger.Blockchain\obj\Debug\net9.0\QuantumLedger.Blockchain.pdb
 C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\QuantumLedger.Blockchain\obj\Debug\net9.0\ref\QuantumLedger.Blockchain.dll
+C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\QuantumLedger.Blockchain\obj\Debug\net9.0\QuantumLedger.Blockchain.sourcelink.json

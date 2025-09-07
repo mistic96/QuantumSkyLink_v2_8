@@ -62,3 +62,4 @@ C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_
 C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\LiquidStorageCloud.Services.EventConsumers.Core\obj\Debug\net9.0\refint\LiquidStorageCloud.Services.EventConsumers.dll
 C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\LiquidStorageCloud.Services.EventConsumers.Core\obj\Debug\net9.0\LiquidStorageCloud.Services.EventConsumers.pdb
 C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\LiquidStorageCloud.Services.EventConsumers.Core\obj\Debug\net9.0\ref\LiquidStorageCloud.Services.EventConsumers.dll
+C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\LiquidStorageCloud.Services.EventConsumers.Core\obj\Debug\net9.0\LiquidStorageCloud.Services.EventConsumers.sourcelink.json

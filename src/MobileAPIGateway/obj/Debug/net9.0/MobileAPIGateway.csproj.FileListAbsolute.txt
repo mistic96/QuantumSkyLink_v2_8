@@ -613,3 +613,4 @@ C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_
 C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\MobileAPIGateway\obj\Debug\net9.0\MobileAPIGateway.pdb
 C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\MobileAPIGateway\obj\Debug\net9.0\MobileAPIGateway.genruntimeconfig.cache
 C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\MobileAPIGateway\obj\Debug\net9.0\ref\MobileAPIGateway.dll
+C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\MobileAPIGateway\obj\Debug\net9.0\MobileAPIGateway.sourcelink.json

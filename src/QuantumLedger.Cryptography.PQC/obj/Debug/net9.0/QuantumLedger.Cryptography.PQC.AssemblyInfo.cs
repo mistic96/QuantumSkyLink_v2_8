@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("QuantumLedger.Cryptography.PQC")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+17a5eb4274f9c5ef9a2aef8564c81a022dce9911")]
 [assembly: System.Reflection.AssemblyProductAttribute("QuantumLedger.Cryptography.PQC")]
 [assembly: System.Reflection.AssemblyTitleAttribute("QuantumLedger.Cryptography.PQC")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

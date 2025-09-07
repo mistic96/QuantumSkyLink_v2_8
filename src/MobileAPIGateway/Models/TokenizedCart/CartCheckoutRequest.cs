@@ -29,12 +29,12 @@ public class CartCheckoutRequest
     /// </summary>
     [Required]
     public string WalletAddress { get; set; }
-    
+
     /// <summary>
     /// Gets or sets the payment currency for the transaction
     /// </summary>
     [Required]
-    public string PaymentCurrency { get; set; } = "USD"
+    public string PaymentCurrency { get; set; } = "USD";
     
     /// <summary>
     /// Gets or sets any additional notes for the checkout

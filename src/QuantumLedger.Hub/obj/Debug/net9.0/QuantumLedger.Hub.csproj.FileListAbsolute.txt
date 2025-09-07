@@ -935,3 +935,4 @@ C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_
 C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\QuantumLedger.Hub\obj\Debug\net9.0\QuantumLedger.Hub.pdb
 C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\QuantumLedger.Hub\obj\Debug\net9.0\QuantumLedger.Hub.genruntimeconfig.cache
 C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\QuantumLedger.Hub\obj\Debug\net9.0\ref\QuantumLedger.Hub.dll
+C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\QuantumLedger.Hub\obj\Debug\net9.0\QuantumLedger.Hub.sourcelink.json

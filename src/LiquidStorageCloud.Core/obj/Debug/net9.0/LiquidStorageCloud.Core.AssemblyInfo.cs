@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyDescriptionAttribute(("A comprehensive library providing authentication middleware, cryptography service" +
     "s, and SurrealDB LINQ extensions."))]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.1.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.1+17a5eb4274f9c5ef9a2aef8564c81a022dce9911")]
 [assembly: System.Reflection.AssemblyProductAttribute("LiquidStorageCloud.Core")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LiquidStorageCloud.Core")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.1.0")]

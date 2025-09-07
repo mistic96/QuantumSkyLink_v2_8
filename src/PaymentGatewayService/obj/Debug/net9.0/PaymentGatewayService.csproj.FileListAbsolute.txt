@@ -659,3 +659,4 @@ C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_
 C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\PaymentGatewayService\obj\Debug\net9.0\PaymentGatewayService.pdb
 C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\PaymentGatewayService\obj\Debug\net9.0\PaymentGatewayService.genruntimeconfig.cache
 C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\PaymentGatewayService\obj\Debug\net9.0\ref\PaymentGatewayService.dll
+C:\Users\finni\Downloads\QuantumSkyLink_v2_7\QuantumSkyLink_v2_7\QuantumSkyLink_v2\src\PaymentGatewayService\obj\Debug\net9.0\PaymentGatewayService.sourcelink.json
