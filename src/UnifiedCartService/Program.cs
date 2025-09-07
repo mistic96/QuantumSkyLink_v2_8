@@ -14,21 +14,40 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Configure SurrealDB connection
-builder.Services.AddSingleton<ISurrealDbClient>(sp =>
-{
-    var configuration = sp.GetRequiredService<IConfiguration>();
-    var endpoint = configuration["SURREALDB_URL"] ?? "http://surrealdb:8000";
-    var ns = configuration["SURREALDB_NS"] ?? "quantumskylink";
-    var db = configuration["SURREALDB_DB"] ?? "carts";
-    var user = configuration["SURREALDB_USER"] ?? "root";
-    var pass = configuration["SURREALDB_PASS"] ?? "surrealpass";
-    
-    var client = new SurrealDbClient(endpoint);
-    client.SignIn(new { user, pass }).GetAwaiter().GetResult();
-    client.Use(ns, db).GetAwaiter().GetResult();
-    
-    return client;
-});
+
+
+// Incorrect implementation see examples at: https://www.nuget.org/packages/SurrealDb.Net
+////builder.Services.AddSingleton<ISurrealDbClient>(sp =>
+////{
+////    var configuration = sp.GetRequiredService<IConfiguration>();
+////    var endpoint = configuration["SURREALDB_URL"] ?? "http://surrealdb:8000";
+////    var ns = configuration["SURREALDB_NS"] ?? "quantumskylink";
+////    var db = configuration["SURREALDB_DB"] ?? "carts";
+////    var user = configuration["SURREALDB_USER"] ?? "root";
+////    var pass = configuration["SURREALDB_PASS"] ?? "surrealpass";
+//
+////    var client = new SurrealDbClient(endpoint);
+////    client.SignIn(new { user, pass }).GetAwaiter().GetResult();
+////    client.Use(ns, db).GetAwaiter().GetResult();
+//
+////    return client;
+////});
+///
+// Correct implementation with async factory method
+
+
+var configuration = builder.Configuration;
+
+var options = SurrealDbOptions
+  .Create()
+  .WithEndpoint(configuration["SURREALDB_URL"] ?? "http://surrealdb:8000")
+  .WithNamespace(configuration["SURREALDB_NS"] ?? "quantumskylink")
+  .WithDatabase(configuration["SURREALDB_DB"] ?? "carts")
+  .WithUsername(configuration["SURREALDB_USER"] ?? "root")
+  .WithPassword(configuration["SURREALDB_PASS"] ?? "surrealpass")
+  .Build();
+
+builder.Services.AddSurreal(options);
 
 // Register repositories
 builder.Services.AddScoped<IUnifiedCartRepository, UnifiedCartRepository>();
@@ -53,13 +72,9 @@ builder.Services.AddHttpClient("OrderService", client =>
     client.BaseAddress = new Uri("https+http://orderservice");
 });
 
-// Add health checks
-builder.Services.AddHealthChecks()
-    .AddCheck("self", () => Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult.Healthy());
-
 var app = builder.Build();
 
-// Map Aspire default endpoints
+// Map Aspire default endpoints (health checks are already configured by AddServiceDefaults)
 app.MapDefaultEndpoints();
 
 // Configure the HTTP request pipeline

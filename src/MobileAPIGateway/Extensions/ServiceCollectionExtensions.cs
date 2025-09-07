@@ -1,13 +1,10 @@
 using Refit;
 using MobileAPIGateway.Clients;
 using MobileAPIGateway.Services;
-using MobileAPIGateway.Services.Compatibility;
 using MobileAPIGateway.Validators.CardManagement;
 using MobileAPIGateway.Validators.Dashboard;
 using MobileAPIGateway.Validators.SecondaryMarkets;
 using MobileAPIGateway.Validators.TokenizedCart;
-using MobileAPIGateway.Clients;
-using MobileAPIGateway.Services;
 using MobileAPIGateway.Authentication;
 
 namespace MobileAPIGateway.Extensions;

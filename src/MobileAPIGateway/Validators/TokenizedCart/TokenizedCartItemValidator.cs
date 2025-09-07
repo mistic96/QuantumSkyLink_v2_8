@@ -30,8 +30,8 @@ public class TokenizedCartItemValidator : AbstractValidator<TokenizedCartItem>
             .NotEmpty().WithMessage("Token symbol is required")
             .MaximumLength(10).WithMessage("Token symbol cannot exceed 10 characters");
         
-        RuleFor(x => x.TokenType)
-            .NotEmpty().WithMessage("Token type is required");
+        RuleFor(x => x.AssetType)
+            .NotEmpty().WithMessage("Asset type is required");
         
         RuleFor(x => x.Quantity)
             .GreaterThan(0).WithMessage("Quantity must be greater than 0");

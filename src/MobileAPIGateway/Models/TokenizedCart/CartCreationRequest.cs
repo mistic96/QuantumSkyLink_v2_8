@@ -27,24 +27,3 @@ public class CartCreationRequest
     /// </summary>
     public string Currency { get; set; }
 }
-
-/// <summary>
-/// Represents a request to add an item to a cart
-/// </summary>
-public class CartItemRequest
-{
-    /// <summary>
-    /// Gets or sets the token ID
-    /// </summary>
-    public string TokenId { get; set; }
-    
-    /// <summary>
-    /// Gets or sets the token quantity
-    /// </summary>
-    public decimal Quantity { get; set; }
-    
-    /// <summary>
-    /// Gets or sets the token metadata
-    /// </summary>
-    public string Metadata { get; set; }
-}

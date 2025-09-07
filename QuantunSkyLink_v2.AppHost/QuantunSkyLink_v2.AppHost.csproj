@@ -44,6 +44,7 @@
     <ProjectReference Include="..\src\AIReviewService\AIReviewService.csproj" />
     <ProjectReference Include="..\src\NotificationService\NotificationService.csproj" />
     <ProjectReference Include="..\src\MarketplaceService\MarketplaceService.csproj" />
+    <ProjectReference Include="..\src\UnifiedCartService\UnifiedCartService.csproj" />
     <ProjectReference Include="..\src\SignatureService\SignatureService.csproj" />
     <ProjectReference Include="..\src\OrchestrationService\OrchestrationService.csproj" />
     

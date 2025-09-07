@@ -41,10 +41,6 @@ var eventBridgeStack = builder.AddAWSCloudFormationTemplate("QSLEventBridge", ".
 var ecsClusterStack = builder.AddAWSCloudFormationTemplate("QSLECSCluster", "../infra/aws/ecs-cluster.template.json")
     .WithParameter("Environment", builder.Configuration["AWS:Deployment:Environment"] ?? "staging")
     .WithParameter("ProjectName", builder.Configuration["AWS:ProjectName"] ?? "quantumskylink-v2")
-    .WithParameter("VpcId", networkStack.GetOutput("VpcId"))
-    .WithParameter("PrivateSubnet1Id", networkStack.GetOutput("PrivateSubnet1Id"))
-    .WithParameter("PrivateSubnet2Id", networkStack.GetOutput("PrivateSubnet2Id"))
-    .WithParameter("ServiceSecurityGroupId", networkStack.GetOutput("ServiceSecurityGroupId"))
     .WithReference(awsConfig);
 
 // Register storage infrastructure (S3 buckets and CloudFront)
@@ -57,10 +53,10 @@ var storageStack = builder.AddAWSCloudFormationTemplate("QSLStorageStack", "../i
 var albStack = builder.AddAWSCloudFormationTemplate("QSLALBStack", "../infra/aws/alb-stack.template.json")
     .WithParameter("Environment", builder.Configuration["AWS:Deployment:Environment"] ?? "staging")
     .WithParameter("ProjectName", builder.Configuration["AWS:ProjectName"] ?? "quantumskylink-v2")
-    .WithParameter("VpcId", networkStack.GetOutput("VpcId"))
-    .WithParameter("PublicSubnet1Id", networkStack.GetOutput("PublicSubnet1Id"))
-    .WithParameter("PublicSubnet2Id", networkStack.GetOutput("PublicSubnet2Id"))
-    .WithParameter("ALBSecurityGroupId", networkStack.GetOutput("ALBSecurityGroupId"))
+    .WithParameter("VpcId", builder.Configuration["AWS:Network:VpcId"] ?? "vpc-placeholder")
+    .WithParameter("PublicSubnet1Id", builder.Configuration["AWS:Network:PublicSubnet1Id"] ?? "subnet-placeholder-public-1")
+    .WithParameter("PublicSubnet2Id", builder.Configuration["AWS:Network:PublicSubnet2Id"] ?? "subnet-placeholder-public-2")
+    .WithParameter("ALBSecurityGroupId", builder.Configuration["AWS:Network:ALBSecurityGroupId"] ?? "sg-alb-placeholder")
     .WithReference(awsConfig);
 
 // AWS Integration - Configuration for AWS deployment
@@ -77,6 +73,8 @@ var surrealdb = builder.AddContainer("surrealdb", "surrealdb/surrealdb")
     .WithEnvironment("SURREAL_USER", "root")
     .WithEnvironment("SURREAL_PASS", "surrealpass")
     .WithEnvironment("SURREAL_LOG", "trace");
+
+var surrealdbConn = builder.AddConnectionString("surrealdb-connection", "http://localhost:8000");
 
 // Neon PostgreSQL Cloud Database - Database-per-Service Architecture
 // Each service gets its own dedicated database following quantumskylink_{service} naming convention
@@ -251,11 +249,12 @@ var marketplaceService = builder.AddProject<Projects.MarketplaceService>("market
 
 // Unified Cart Service - High-performance cart management with SurrealDB
 var unifiedCartService = builder.AddProject<Projects.UnifiedCartService>("unifiedcartservice")
-    .WithReference(surrealdb)
+    .WithReference(surrealdbConn)
     .WithReference(marketplaceService)
     .WithReference(paymentGatewayService)
     .WithReference(eventBridgeStack)
     .WithEnvironment("AWS__EventBridge__Enabled", "true")
+    .WithEnvironment("SURREALDB_URL", surrealdb.GetEndpoint("surrealdb-http"))
     .WithEnvironment("SURREALDB_NS", "quantumskylink")
     .WithEnvironment("SURREALDB_DB", "carts");
 

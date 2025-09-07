@@ -21,7 +21,7 @@ public class UnifiedCartRepository : IUnifiedCartRepository
     {
         try
         {
-            var result = await _surrealDb.Create("unified_carts", cart);
+            var result = await _surrealDb.Create<UnifiedCart>("unified_carts", cart);
             _logger.LogInformation("Created cart {CartId} for user {UserId}", cart.Id, cart.UserId);
             return result;
         }
@@ -37,7 +37,7 @@ public class UnifiedCartRepository : IUnifiedCartRepository
         try
         {
             var result = await _surrealDb.Select<UnifiedCart>($"unified_carts:{cartId}");
-            return result;
+            return result.FirstOrDefault();
         }
         catch (Exception ex)
         {
@@ -51,15 +51,15 @@ public class UnifiedCartRepository : IUnifiedCartRepository
         try
         {
             var query = "SELECT * FROM unified_carts WHERE user_id = $userId AND status = 'Active' ORDER BY updated_at DESC";
-            var result = await _surrealDb.RawQuery(query, new { userId });
+            var result = await _surrealDb.RawQuery(query, new Dictionary<string, object?> { { "userId", userId } });
             
-            var carts = result.FirstOrDefault()?.GetValue<List<UnifiedCart>>() ?? new List<UnifiedCart>();
+            var carts = result.GetValue<List<UnifiedCart>>(0) ?? [];
             return carts;
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to get carts for user {UserId}", userId);
-            return new List<UnifiedCart>();
+            return [];
         }
     }
 
@@ -70,9 +70,9 @@ public class UnifiedCartRepository : IUnifiedCartRepository
             cart.UpdatedAt = DateTimeOffset.UtcNow;
             cart.LastModified = DateTimeOffset.UtcNow;
             
-            var result = await _surrealDb.Update($"unified_carts:{cart.Id}", cart);
+            var result = await _surrealDb.Update<UnifiedCart>($"unified_carts:{cart.Id}", cart);
             _logger.LogInformation("Updated cart {CartId}", cart.Id);
-            return result;
+            return result.FirstOrDefault() ?? cart;
         }
         catch (Exception ex)
         {
@@ -86,7 +86,7 @@ public class UnifiedCartRepository : IUnifiedCartRepository
         try
         {
             // Delete all items first
-            await _surrealDb.RawQuery("DELETE cart_items WHERE cart_id = $cartId", new { cartId });
+            await _surrealDb.RawQuery("DELETE cart_items WHERE cart_id = $cartId", new Dictionary<string, object?> { { "cartId", cartId } });
             
             // Delete the cart
             await _surrealDb.Delete($"unified_carts:{cartId}");
@@ -104,7 +104,7 @@ public class UnifiedCartRepository : IUnifiedCartRepository
     {
         try
         {
-            var result = await _surrealDb.Create("cart_items", item);
+            var result = await _surrealDb.Create<UnifiedCartItem>("cart_items", item);
             _logger.LogInformation("Added item {ItemId} to cart {CartId}", item.Id, item.CartId);
             return result;
         }
@@ -120,15 +120,15 @@ public class UnifiedCartRepository : IUnifiedCartRepository
         try
         {
             var query = "SELECT * FROM cart_items WHERE cart_id = $cartId ORDER BY added_at ASC";
-            var result = await _surrealDb.RawQuery(query, new { cartId });
+            var result = await _surrealDb.RawQuery(query, new Dictionary<string, object?> { { "cartId", cartId } });
             
-            var items = result.FirstOrDefault()?.GetValue<List<UnifiedCartItem>>() ?? new List<UnifiedCartItem>();
+            var items = result.GetValue<List<UnifiedCartItem>>(0) ?? [];
             return items;
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to get items for cart {CartId}", cartId);
-            return new List<UnifiedCartItem>();
+            return [];
         }
     }
 
@@ -137,7 +137,7 @@ public class UnifiedCartRepository : IUnifiedCartRepository
         try
         {
             var result = await _surrealDb.Select<UnifiedCartItem>($"cart_items:{itemId}");
-            return result;
+            return result.FirstOrDefault();
         }
         catch (Exception ex)
         {
@@ -152,9 +152,9 @@ public class UnifiedCartRepository : IUnifiedCartRepository
         {
             item.LastModified = DateTimeOffset.UtcNow;
             
-            var result = await _surrealDb.Update($"cart_items:{item.Id}", item);
+            var result = await _surrealDb.Upsert<UnifiedCartItem>($"cart_items:{item.Id}", item);
             _logger.LogInformation("Updated item {ItemId} in cart {CartId}", item.Id, item.CartId);
-            return result;
+            return result.FirstOrDefault() ?? item;
         }
         catch (Exception ex)
         {
@@ -190,13 +190,13 @@ public class UnifiedCartRepository : IUnifiedCartRepository
                 WHERE is_locked = false AND status = 'Active'
                 RETURN AFTER";
             
-            var result = await _surrealDb.RawQuery(query.Replace("{cartId}", cartId), new 
+            var result = await _surrealDb.RawQuery(query.Replace("{cartId}", cartId), new Dictionary<string, object?> 
             { 
-                sessionId, 
-                now = DateTimeOffset.UtcNow 
+                { "sessionId", sessionId }, 
+                { "now", DateTimeOffset.UtcNow } 
             });
             
-            var updatedCart = result.FirstOrDefault()?.GetValue<UnifiedCart>();
+            var updatedCart = result.GetValue<UnifiedCart>(0);
             return updatedCart != null;
         }
         catch (Exception ex)
@@ -217,9 +217,9 @@ public class UnifiedCartRepository : IUnifiedCartRepository
                     status = 'Active',
                     updated_at = $now";
             
-            await _surrealDb.RawQuery(query.Replace("{cartId}", cartId), new 
+            await _surrealDb.RawQuery(query.Replace("{cartId}", cartId), new Dictionary<string, object?> 
             { 
-                now = DateTimeOffset.UtcNow 
+                { "now", DateTimeOffset.UtcNow } 
             });
             
             _logger.LogInformation("Unlocked cart {CartId}", cartId);
@@ -241,8 +241,8 @@ public class UnifiedCartRepository : IUnifiedCartRepository
                 DELETE unified_carts WHERE id IN $expired_carts;
                 RETURN count($expired_carts)";
             
-            var result = await _surrealDb.RawQuery(query, new { now = DateTimeOffset.UtcNow });
-            var count = result.LastOrDefault()?.GetValue<int>() ?? 0;
+            var result = await _surrealDb.RawQuery(query, new Dictionary<string, object?> { { "now", DateTimeOffset.UtcNow } });
+            var count = result.GetValue<int>(0);
             
             if (count > 0)
             {

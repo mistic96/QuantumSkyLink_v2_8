@@ -28,21 +28,3 @@ public class CartCreationRequestValidator : AbstractValidator<CartCreationReques
             .SetValidator(new CartItemRequestValidator());
     }
 }
-
-/// <summary>
-/// Validator for the CartItemRequest model
-/// </summary>
-public class CartItemRequestValidator : AbstractValidator<CartItemRequest>
-{
-    /// <summary>
-    /// Initializes a new instance of the <see cref="CartItemRequestValidator"/> class
-    /// </summary>
-    public CartItemRequestValidator()
-    {
-        RuleFor(x => x.TokenId)
-            .NotEmpty().WithMessage("Token ID is required");
-        
-        RuleFor(x => x.Quantity)
-            .GreaterThan(0).WithMessage("Quantity must be greater than 0");
-    }
-}
